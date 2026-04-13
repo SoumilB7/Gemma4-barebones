@@ -11,25 +11,16 @@
 
 ## 1. What is Gemma 4 E2B?
 
-**Gemma 4** is Google's open-weights LLM family. It ships in several sizes:
+**Gemma 4 E2B** is an open-weights, multimodal, decoder-only language model from
+Google. The **"E" stands for Effective**: the model stores a chunk of its weights
+(per-layer embeddings, PLE) in **flash memory** and streams them in layer by layer
+instead of keeping them in VRAM. So the math per token feels like a **2 B dense
+model**, even though the file on disk is bigger.
 
-| variant       | type             | total params | active / token |
-|---------------|------------------|--------------|----------------|
-| **E2B**       | dense + PLE      | ~5B on disk  | **2B** effective |
-| E4B           | dense + PLE      | larger       | 4B effective   |
-| 31B           | dense            | 31B          | 31B            |
-| 26B-A4B       | **MoE**          | 26B          | 4B             |
+That flash-backed trick is the single most important thing to remember about E2B.
+Everything else is standard-ish transformer machinery tuned for speed.
 
-**"E" = Effective.** E2B stores a chunk of its weights (per-layer embeddings, PLE)
-in flash memory — they get *streamed in* per layer instead of being counted as
-"active" compute. So the model on disk is bigger than 2B, but the math per token
-feels like a 2B dense model. That's the trick.
-
-> **Heads up**: the file [gemma4_moe.py](../../gemma4_moe.py) in this repo describes
-> the **26B-A4B MoE** variant, *not* E2B. E2B itself is **not MoE**. We'll come back
-> to MoE later when we want it; the main build target is dense E2B.
-
-### The headline numbers (E2B)
+### The headline numbers
 
 | property                    | value          |
 |-----------------------------|----------------|
@@ -44,14 +35,14 @@ feels like a 2B dense model. That's the trick.
 | p-RoPE (global only)        | p = 0.25       |
 | K = V optimization          | global layers only |
 | vision encoder              | 150 M params, SigLIP-style, 2D RoPE |
-| vision resolution budget    | 70 / 140 / 280 / 560 / 1120 soft tokens |
+| vision token budgets        | 70 / 140 / 280 / 560 / 1120 |
 | audio encoder               | Conformer-based |
 
 ---
 
 ## 2. The 10,000-foot view
 
-A decoder-only transformer. Tokens go in, next-token distribution comes out.
+Decoder-only transformer. Tokens go in, next-token distribution comes out.
 Everything in between is a stack of **identical decoder layers**.
 
 ```
@@ -70,8 +61,8 @@ audio ──►  Audio Encoder (waveform → audio tokens)
        Decoder Layer × N
          ├── RMSNorm
          ├── Self-Attention   (RoPE, KV cache, GQA)
-         │     · 4 layers local (window=512)
-         │     · 1 layer global (p-RoPE 0.25, K=V)
+         │     · 4 layers local (window = 512)
+         │     · 1 layer global (p-RoPE 0.25, K = V)
          ├── RMSNorm
          └── FFN (GeGLU)
                │
@@ -88,12 +79,12 @@ Two things to internalize:
 
 ---
 
-## 3. What's unusual about Gemma 4 E2B
+## 3. What's unusual about E2B
 
-### 3a. Per-Layer Embeddings (PLE)
+### 3a. Per-Layer Embeddings (PLE) — the "E" in E2B
 
 Classical transformer: one embedding lookup at the input, done.
-Gemma 4: *every layer also gets its own extra embedding* (256-dim) for each token,
+E2B: *every layer also gets its own extra embedding* (256-dim) for each token,
 **stored in flash** (not VRAM), **streamed in layer by layer**, **gated** into the
 residual stream.
 
@@ -110,8 +101,8 @@ token id ──► main embedding (1536)
         ...
 ```
 
-Why? It lets the model carry ID-specific information *all the way through* without
-paying for it in active compute. It trades VRAM for flash bandwidth.
+It lets the model carry ID-specific information *all the way through* the stack
+without paying for it in active compute. Trades VRAM for flash bandwidth.
 
 ### 3b. 4 : 1 local-to-global attention
 
@@ -129,23 +120,23 @@ of cross-document reasoning. Huge speedup, small quality cost.
 
 ### 3c. Group-Query Attention (GQA), asymmetric
 
-- **Global** layers: **8 Q heads share 1 KV head** (aggressive sharing → small KV cache)
+- **Global** layers: **8 Q heads share 1 KV head** (aggressive sharing → tiny KV cache)
 - **Local** layers:  **2 Q heads share 1 KV head** (less sharing; local KV is already cheap)
 
 ### 3d. K = V on global layers
 
-On the global-attention layers, K and V *are the same tensor*. You only project once.
-Cuts KV cache in half and roughly halves the projection compute on those layers.
+On global-attention layers, K and V *are the same tensor*. You only project once.
+Cuts KV cache in half and halves projection compute on those layers.
 
 ### 3e. p-RoPE on global layers
 
 Normal RoPE rotates every pair of Q/K dimensions by position.
-**p-RoPE with p=0.25** only rotates the first 25% of dimensions — the rest carry
+**p-RoPE with p = 0.25** only rotates the first 25 % of dimensions — the rest carry
 position-invariant content. Gives long-context stability.
 
 ### 3f. Multimodal: vision + audio
 
-- **Vision**: 150M SigLIP-style encoder, 2D RoPE, variable aspect ratios.
+- **Vision**: 150 M SigLIP-style encoder, 2D RoPE, variable aspect ratios.
   Images become a *variable number* of soft tokens (budgets: 70, 140, 280, 560, 1120).
   After a projector, image tokens live in the same 1536-dim residual stream.
 - **Audio**: Conformer-based encoder. Same story — audio tokens are injected into
@@ -160,17 +151,17 @@ residual stream. Unified sequence.
 
 | piece              | what it does                                             |
 |--------------------|----------------------------------------------------------|
-| **Tokenizer**      | text ↔ ids, SentencePiece, 262k vocab                   |
+| **Tokenizer**      | text ↔ ids, SentencePiece, 262 k vocab                   |
 | **Embedding**      | id → 1536-dim vector                                     |
 | **PLE**            | per-layer extra embedding (256-dim), gated, from flash   |
 | **RMSNorm**        | normalize by root-mean-square                            |
 | **RoPE / p-RoPE**  | rotary positions inside Q/K                              |
-| **Sliding Attn**   | local window=512 attention (4 of every 5 layers)         |
-| **Global Attn**    | full attention, GQA 8:1, K=V, p-RoPE (1 of every 5)      |
+| **Sliding Attn**   | local window = 512 attention (4 of every 5 layers)       |
+| **Global Attn**    | full attention, GQA 8:1, K = V, p-RoPE (1 of every 5)    |
 | **GeGLU FFN**      | `down(gelu(gate(x)) * up(x))`                            |
-| **Vision Tower**   | SigLIP-style ViT, 150M, 2D RoPE, variable resolution     |
+| **Vision Tower**   | SigLIP-style ViT, 150 M, 2D RoPE, variable resolution    |
 | **Audio Tower**    | Conformer encoder                                        |
-| **Projector**      | maps vision/audio dim → 1536                             |
+| **Projector**      | maps vision / audio dim → 1536                           |
 | **LM Head**        | hidden → 262,144 logits (tied to embedding)              |
 
 Each gets its own doc as we build it.
@@ -179,7 +170,7 @@ Each gets its own doc as we build it.
 
 ## 5. How one token travels through the model
 
-1. Text is chopped into subword ids by the SentencePiece tokenizer (262k vocab).
+1. Text is chopped into subword ids by the SentencePiece tokenizer (262 k vocab).
 2. Id → **1536-dim vector** via the embedding table.
 3. Vector enters the residual stream.
 4. For each decoder layer:
@@ -190,8 +181,8 @@ Each gets its own doc as we build it.
 6. **LM head** projects 1536 → 262,144 logits.
 7. Softmax → sample → next token.
 
-Every fancy thing (PLE, sliding window, p-RoPE, vision, audio, MoE in the bigger
-variant) is a variation on one of these steps.
+Every fancy thing (PLE, sliding window, p-RoPE, vision, audio) is a variation on
+one of these steps.
 
 ---
 
@@ -204,7 +195,7 @@ Order matches the information flow:
 3. Per-Layer Embeddings (PLE) + gating
 4. RMSNorm
 5. RoPE (and p-RoPE for global layers)
-6. Attention: GQA, KV cache, sliding window, K=V optimization
+6. Attention: GQA, KV cache, sliding window, K = V optimization
 7. GeGLU FFN
 8. Full decoder layer (local variant, global variant)
 9. Stacking layers + final norm + LM head
