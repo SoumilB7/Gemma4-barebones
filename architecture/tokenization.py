@@ -1,48 +1,25 @@
 """
 Gemma 4 E2B · Tokenization
 ──────────────────────────
-Thin PyTorch-style wrapper around the HF processor. We don't reimplement
-SentencePiece — we just expose the parts we need with a clean API that
-returns torch tensors.
+Loads Google's shipped tokenizer.json directly via the `tokenizers` library.
+No HF `transformers` dependency here — just the raw SentencePiece/BPE file
+we saved into `model_weights/`.
 """
 
-from transformers import AutoProcessor
+from tokenizers import Tokenizer
 
 
 class GemmaTokenizer:
 
-    def __init__(self, processor):
-        self.processor = processor
-        self.tokenizer = processor.tokenizer
-        self.vocab_size = self.tokenizer.vocab_size
+    def __init__(self, tokenizer_path):
+        self.tk = Tokenizer.from_file(str(tokenizer_path))
+        self.vocab_size = self.tk.get_vocab_size()
 
-    @classmethod
-    def from_pretrained(cls, model_id="google/gemma-4-E2B-it"):
-        return cls(AutoProcessor.from_pretrained(model_id))
+    def encode(self, text) -> list[int]:
+        return self.tk.encode(text).ids
 
-    def encode(self, text):
-        return self.tokenizer(text, return_tensors="pt")["input_ids"]
+    def decode(self, ids) -> str:
+        return self.tk.decode(list(ids), skip_special_tokens=True)
 
-    def decode(self, ids):
-        return self.tokenizer.decode(ids.tolist(), skip_special_tokens=True)
-
-    def apply_chat_template(self, messages):
-        return self.processor.apply_chat_template(
-            messages, tokenize=True, return_dict=True,
-            return_tensors="pt", add_generation_prompt=True,
-        )
-
-    def pretty(self, ids):
-        flat = ids.flatten().tolist()
-        pieces = self.tokenizer.convert_ids_to_tokens(flat)
-        return list(zip(flat, pieces))
-
-
-if __name__ == "__main__":
-    tok = GemmaTokenizer.from_pretrained()
-    ids = tok.encode("Explain MoE in transformers in 3 sentences.")
-    print(f"vocab_size = {tok.vocab_size:,}")
-    print(f"ids.shape  = {tuple(ids.shape)}")
-    for tid, piece in tok.pretty(ids)[:12]:
-        print(f"  {tid:>6}  {piece!r}")
-    print(f"roundtrip  = {tok.decode(ids[0])!r}")
+    def pretty(self, ids) -> list[tuple[int, str]]:
+        return [(i, self.tk.id_to_token(i)) for i in ids]
