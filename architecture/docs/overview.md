@@ -46,29 +46,61 @@ Decoder-only transformer. Tokens go in, next-token distribution comes out.
 Everything in between is a stack of **identical decoder layers**.
 
 ```
-text  ──►  Tokenizer (text → ids)
-image ──►  Vision Tower (pixels → image tokens)
-audio ──►  Audio Encoder (waveform → audio tokens)
-               │
-               ▼
-       Embedding table (ids → 1536-dim vectors)
-               │
-      ┌────────┴─────────┐
-      │ + PLE (256-dim)  │  ← streamed from flash per layer,
-      │   via gating     │    gated into the residual stream
-      └────────┬─────────┘
-               ▼
-       Decoder Layer × N
-         ├── RMSNorm
-         ├── Self-Attention   (RoPE, KV cache, GQA)
-         │     · 4 layers local (window = 512)
-         │     · 1 layer global (p-RoPE 0.25, K = V)
-         ├── RMSNorm
-         └── FFN (GeGLU)
-               │
-               ▼
-       Final RMSNorm
-       LM Head (tied to embedding) → logits over 262,144 vocab
+   ┌─────────────────┐     ┌─────────────────┐     ┌─────────────────┐
+   │      TEXT       │     │     IMAGE       │     │     AUDIO       │
+   │  "hello world"  │     │   pixels (HWC)  │     │   waveform      │
+   └────────┬────────┘     └────────┬────────┘     └────────┬────────┘
+            │                       │                       │
+            ▼                       ▼                       ▼
+     ┌─────────────┐         ┌─────────────┐         ┌─────────────┐
+     │  Tokenizer  │         │ Vision Tower│         │Audio Encoder│
+     │ SP · 262 k  │         │ SigLIP 150M │         │  Conformer  │
+     └──────┬──────┘         └──────┬──────┘         └──────┬──────┘
+            │ ids                   │ soft tokens           │ soft tokens
+            └───────────────────────┼───────────────────────┘
+                                    │
+                                    ▼
+                        ╔═══════════════════════╗
+                        ║   Embedding Table     ║
+                        ║   id → vec[1536]      ║
+                        ╚═══════════╤═══════════╝
+                                    │
+                                    ▼
+                        ┌───────────────────────┐
+                        │   RESIDUAL STREAM     │  ← working memory, per token
+                        └───────────┬───────────┘
+                                    │
+   ┌────────────────────────────────┼────────────────────────────────┐
+   │ DECODER LAYER × N                                               │
+   │                                 │                               │
+   │    PLE[ℓ](id) ──(gate)─► (+) ◄──┤      ← streamed from flash    │
+   │                                 │                               │
+   │                          RMSNorm│                               │
+   │                                 ▼                               │
+   │                   ┌──────────────────────────┐                  │
+   │                   │   Self-Attention (GQA)   │                  │
+   │                   │   · local  (w = 512) ×4  │                  │
+   │                   │   · global (p-RoPE, K=V) │                  │
+   │                   └─────────────┬────────────┘                  │
+   │                                 │ (+) residual                  │
+   │                          RMSNorm│                               │
+   │                                 ▼                               │
+   │                   ┌──────────────────────────┐                  │
+   │                   │      FFN  (GeGLU)        │                  │
+   │                   └─────────────┬────────────┘                  │
+   │                                 │ (+) residual                  │
+   └─────────────────────────────────┼───────────────────────────────┘
+                                     ▼
+                             ┌───────────────┐
+                             │ Final RMSNorm │
+                             └───────┬───────┘
+                                     ▼
+                        ╔═══════════════════════╗
+                        ║   LM Head  (tied)     ║
+                        ║   1536 → 262,144      ║
+                        ╚═══════════╤═══════════╝
+                                    ▼
+                             next-token logits
 ```
 
 Two things to internalize:
