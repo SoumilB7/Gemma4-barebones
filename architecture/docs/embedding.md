@@ -81,6 +81,29 @@ model.embed_audio .embedding_projection.weight   # (1536, 1536)   bf16
 
 No bias, no norm weight — just the linear map.
 
+### A peek inside the vision tower — ViT-style patches
+
+Gemma's vision tower is a classical ViT, with the patch embedder split across
+the processor/model boundary:
+
+- **Patch size = 16.** Each patch is `3 × 16 × 16 = 768` raw values — that's
+  where the `768` dim comes from.
+- The **processor** does the patchification (split the image into non-overlapping
+  16×16 tiles, flatten each to a 768-vector) *before* the tensor enters the
+  model. That's why `pixel_values` arrives as `(1, 2520, 768)` — already
+  pre-tokenized patches.
+- The model-side `input_proj` is a `Linear(768 → hidden)`.
+
+This is mathematically identical to the textbook ViT `Conv2d(3, hidden,
+kernel=16, stride=16)` patch embedder — a stride=kernel conv over an image is
+exactly a per-patch flatten followed by a linear projection. HF just factored
+the two halves across the processor/model boundary.
+
+One Gemma twist: positions aren't a single learned vector per patch index.
+They use **separable 2D positional embeddings** — one table for x, one for y —
+summed per patch. This handles pan-and-scan tiling and variable-size inputs
+more gracefully than a flat 1D position table.
+
 ## 4. Why we borrow the towers (for now)
 
 The vision and audio towers together are hundreds of MB of custom architecture
