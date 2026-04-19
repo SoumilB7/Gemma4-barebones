@@ -41,7 +41,11 @@ class GemmaEmbedding(nn.Module):
 
     def forward(self, ids):
         hidden = self.embed.weight.shape[1]
-        return self.embed(ids) * (hidden ** 0.5)
+        # Round √hidden into the weight's dtype BEFORE multiplying — HF stores
+        # the scale as a bf16 buffer, so the scalar is 39.25 (not 39.1918…).
+        # Skipping the cast diverges by ~1 bf16 ulp.
+        scale = torch.tensor(hidden ** 0.5, dtype=self.embed.weight.dtype)
+        return self.embed(ids) * scale
 
 
 # ──────────────────────────────────────────────────────────────────────

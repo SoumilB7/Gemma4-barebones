@@ -123,7 +123,29 @@ If parity fails, the usual culprit is the GELU variant
 (`approximate="tanh"` vs `"none"`). The matmul order is unambiguous
 and doesn't drift.
 
-## 8. Where it goes next
+## 8. What about the MoE second route?
+
+HF's `Gemma4TextDecoderLayer` has a conditional second FFN path:
+
+```python
+if self.enable_moe_block:
+    moe_out  = self.experts(x, *self.router(x))
+    hidden   = dense_out + moe_out
+else:
+    hidden   = dense_out
+```
+
+Driven by `enable_moe_block` in the config. For **E2B** this is `False`
+and the checkpoint has no `router.*` or `experts.*` weights at all —
+zero MoE keys in the shard. The second route is compile-time gated off
+for this size; `GemmaFFN` alone is the full FFN.
+
+The MoE route is reserved for larger Gemma 4 variants (E4B / flagship).
+If we ever target those, we'd add a sibling `GemmaMoE` module and the
+`if` in the decoder-layer glue — but for E2B it would be dead code we
+have no weights to populate, so we leave it out.
+
+## 9. Where it goes next
 
 With attention and FFN both parity-checked, a full decoder layer is
 just `attn + ffn` sandwiched in the right norms and residual adds:
