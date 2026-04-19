@@ -72,14 +72,17 @@ class GemmaAttention(nn.Module):
         head_dim=256,
         sliding_window=None,
         rms_norm_eps=1e-6,
+        impl="eager",
         dtype=None,
     ):
         super().__init__()
+        assert impl in ("eager", "sdpa"), f"impl must be 'eager' or 'sdpa', got {impl!r}"
         self.hidden_size = hidden_size
         self.num_q_heads = num_q_heads
         self.num_kv_heads = num_kv_heads
         self.head_dim = head_dim
         self.sliding_window = sliding_window
+        self.impl = impl                                 # "eager" or "sdpa"
         self.kv_groups = num_q_heads // num_kv_heads     # GQA fan-out
 
         self.q_proj = nn.Linear(hidden_size, num_q_heads  * head_dim, bias=False, dtype=dtype)
@@ -96,7 +99,7 @@ class GemmaAttention(nn.Module):
     def from_safetensors(cls, shard_path, layer_idx, layer_type,
                          hidden_size=1536, num_q_heads=8, num_kv_heads=1,
                          local_head_dim=256, global_head_dim=512,
-                         sliding_window=512, rms_norm_eps=1e-6):
+                         sliding_window=512, rms_norm_eps=1e-6, impl="eager"):
         """
         Load one decoder layer's attention from `model.safetensors`.
 
@@ -114,7 +117,8 @@ class GemmaAttention(nn.Module):
         dtype = sd[prefix + "q_proj.weight"].dtype
         m = cls(hidden_size=hidden_size, num_q_heads=num_q_heads,
                 num_kv_heads=num_kv_heads, head_dim=head_dim,
-                sliding_window=window, rms_norm_eps=rms_norm_eps, dtype=dtype)
+                sliding_window=window, rms_norm_eps=rms_norm_eps,
+                impl=impl, dtype=dtype)
 
         m.q_proj.weight.data.copy_(sd[prefix + "q_proj.weight"])
         m.k_proj.weight.data.copy_(sd[prefix + "k_proj.weight"])
@@ -155,12 +159,21 @@ class GemmaAttention(nn.Module):
             k = k.repeat_interleave(self.kv_groups, dim=1)
             v = v.repeat_interleave(self.kv_groups, dim=1)
 
-        # softmax(Q · Kᵀ) · V — scaling=1 because q_norm already normalized Q.
-        attn = q @ k.transpose(-1, -2)                       # (B, H_q, S, S)
-        if attention_mask is not None:
-            attn = attn + attention_mask
-        attn = F.softmax(attn, dim=-1, dtype=torch.float32).to(q.dtype)
-        out  = attn @ v                                      # (B, H_q, S, D)
+        if self.impl == "sdpa":
+            # PyTorch's fused kernel. Bit-equal to a `from_pretrained(...)`
+            # HF model (which defaults to attn_implementation="sdpa").
+            # SDPA's mask must match q's dtype.
+            mask = attention_mask.to(q.dtype) if attention_mask is not None else None
+            out  = F.scaled_dot_product_attention(q, k, v, attn_mask=mask, scale=1.0)
+        else:
+            # Eager: visible math, bit-equal to HF loaded with
+            # attn_implementation="eager". Drifts 1-2 bf16 ulps from sdpa.
+            # Scaling=1.0 because q_norm already normalized Q.
+            attn = q @ k.transpose(-1, -2)                   # (B, H_q, S, S)
+            if attention_mask is not None:
+                attn = attn + attention_mask
+            attn = F.softmax(attn, dim=-1, dtype=torch.float32).to(q.dtype)
+            out  = attn @ v                                  # (B, H_q, S, D)
 
         out = out.transpose(1, 2).contiguous().view(B, S, -1)
         return self.o_proj(out)
@@ -171,14 +184,15 @@ class GemmaAttention(nn.Module):
 # ──────────────────────────────────────────────────────────────────────
 
 def attn_local(hidden_size=1536, num_q_heads=8, num_kv_heads=1,
-               head_dim=256, sliding_window=512, rms_norm_eps=1e-6, dtype=None):
+               head_dim=256, sliding_window=512, rms_norm_eps=1e-6,
+               impl="eager", dtype=None):
     return GemmaAttention(hidden_size, num_q_heads, num_kv_heads, head_dim,
                           sliding_window=sliding_window,
-                          rms_norm_eps=rms_norm_eps, dtype=dtype)
+                          rms_norm_eps=rms_norm_eps, impl=impl, dtype=dtype)
 
 
 def attn_global(hidden_size=1536, num_q_heads=8, num_kv_heads=1,
-                head_dim=512, rms_norm_eps=1e-6, dtype=None):
+                head_dim=512, rms_norm_eps=1e-6, impl="eager", dtype=None):
     return GemmaAttention(hidden_size, num_q_heads, num_kv_heads, head_dim,
                           sliding_window=None,
-                          rms_norm_eps=rms_norm_eps, dtype=dtype)
+                          rms_norm_eps=rms_norm_eps, impl=impl, dtype=dtype)

@@ -186,6 +186,39 @@ output → after `q_norm` → after RoPE → softmax weights → V-weighted outp
 → post-`o_proj`. The most common drift sources are mask shape/dtype, the
 softmax fp32 cast, and forgetting that `scaling=1.0`.
 
+### One trap: HF's SDPA backend
+
+`AutoModelForCausalLM.from_pretrained(MODEL_ID)` defaults to
+`attn_implementation="sdpa"` on most builds. SDPA fuses the
+`softmax(Q·Kᵀ) · V` pipeline into one kernel whose summation order
+differs from a hand-written eager loop. Numerically equivalent in fp32,
+but in **bf16** the two paths drift by 1-3 ulps per token (any token
+that attends to >1 position). The first token always matches because
+its softmax has only one entry — `softmax([0, -∞, …]) = [1, 0, …]` —
+so the output is just `V[0]`, no summation, no precision loss.
+
+Both kernels are correct; they just round in different bits. We expose
+the choice with an `impl=` flag so you can match either:
+
+```python
+GemmaAttention(..., impl="eager")  # default — visible math, matches HF eager
+GemmaAttention(..., impl="sdpa")   # F.scaled_dot_product_attention, matches HF sdpa
+```
+
+So the parity matrix is:
+
+| ours        | HF                              | bit-equal? |
+|-------------|---------------------------------|------------|
+| `impl="eager"` | `attn_implementation="eager"` | yes |
+| `impl="sdpa"`  | `attn_implementation="sdpa"`  | yes |
+| `impl="eager"` | `attn_implementation="sdpa"`  | no, 1-2 bf16 ulps |
+| `impl="sdpa"`  | `attn_implementation="eager"` | no, 1-2 bf16 ulps |
+
+Default is `eager` because the math is visible — you can see `Q · Kᵀ`,
+the mask add, the softmax, and the multiply by V as separate lines, which
+is the whole point of building from scratch. For matching a default-
+loaded HF model (no `attn_implementation` arg), pass `impl="sdpa"`.
+
 ## 8. Where it goes next
 
 Attention is the load-bearing piece. With it pinned down, the remaining
