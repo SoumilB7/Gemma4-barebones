@@ -61,9 +61,9 @@ the same trick on the PLE branch.
 ## 3. The PLE block
 
 Per-layer embeddings inject a *token-specific, layer-specific* signal of
-width 256 into every layer. The signal is built once at the model level
-(`GemmaPerLayerInputs`, see §4) and the i-th 256-dim slice goes into
-layer i.
+width 256 into every layer. The signal is built **once at the model level**
+(`GemmaPerLayerInputs`, see §4 — lives in [`architecture/ple.py`](../ple.py))
+and the i-th 256-dim slice goes into layer i.
 
 Inside the block:
 
@@ -76,6 +76,40 @@ h = per_layer_projection(h)             # 256 → 1536
 h = post_per_layer_input_norm(h)
 hidden = residual + h
 ```
+
+### How the per-layer signal flows in
+
+PLE is built once and *slid into* every layer. The flow at run time:
+
+```
+input_ids (B, S)
+   │
+   ├──► GemmaEmbedding ─────────────────────► inputs_embeds (B, S, 1536)
+   │                                                │
+   └────────┐  ┌────────────────────────────────────┘
+            ▼  ▼
+       GemmaPerLayerInputs  (model-level — runs ONCE)
+            │
+            ▼
+     per_layer_inputs (B, S, 35, 256)         ← shape: one 256-dim row per (token, layer)
+            │
+   ┌────────┼─────────────────── slice along dim 2 ──────────────────┐
+   │        │                                                         │
+   ▼        ▼                                                         ▼
+ [:,:,0,:]  [:,:,1,:]                                              [:,:,34,:]
+   │        │                                                         │
+   ▼        ▼                                                         ▼
+DecoderL0  DecoderL1   ...                                       DecoderL34
+   │        │                                                         │
+   └─► hidden ─► hidden ─►  ...  ─► hidden ─► final norm ─► LM head ─►
+```
+
+So PLE is **not** mixed into the residual stream up front. Each layer
+receives its own 256-dim slice through a side-channel (the `per_layer_input`
+arg of `forward`), gates it through the 1536→256 projection, multiplies
+elementwise, projects back to 1536, then adds. The main residual stream
+never has to "carry" the PLE signal across layers — each layer reads its
+slice fresh.
 
 Why it exists: the residual stream is a 1536-dim shared bus that every
 layer reads and writes. PLE gives each layer a private, low-rank channel
@@ -163,7 +197,7 @@ Model-level PLE:
 
 ## 7. The modules
 
-[`architecture/decoder_layer.py`](../decoder_layer.py):
+[`architecture/ple.py`](../ple.py) — model-level (runs once):
 
 ```python
 class GemmaPerLayerInputs(nn.Module):
@@ -171,18 +205,23 @@ class GemmaPerLayerInputs(nn.Module):
     def from_safetensors(cls, shard_path): ...
     def forward(self, input_ids, inputs_embeds):
         # → (B, S, num_layers, 256)
+```
 
+[`architecture/transformer_block.py`](../transformer_block.py) — per-layer:
+
+```python
 class GemmaDecoderLayer(nn.Module):
     @classmethod
     def from_safetensors(cls, shard_path, layer_idx, layer_type, impl="eager"):
         # layer_type ∈ {"sliding_attention", "full_attention"} — picks
         # head_dim/window. intermediate_size auto-detected from gate_proj.
     def forward(self, hidden, per_layer_input, cos, sin, attention_mask=None):
+        # per_layer_input is per_layer_inputs[:, :, layer_idx, :] — one slice
         # → (B, S, 1536)
 ```
 
-`GemmaDecoderLayer.from_safetensors` does *all* the loading: attention
-nested keys, mlp keys, four norms, PLE gate/projection/norm, and
+`GemmaDecoderLayer.from_safetensors` does *all* the per-layer loading:
+attention nested keys, mlp keys, four norms, PLE gate/projection/norm, and
 `layer_scalar`. One classmethod, one layer.
 
 ## 8. The approver
@@ -192,9 +231,9 @@ against HF's `model.model.language_model.layers[L]`:
 
 ```python
 import torch
-from architecture.decoder_layer import GemmaDecoderLayer
-from architecture.attention     import causal_mask
-from architecture.rope          import rope_local, rope_global
+from architecture.transformer_block import GemmaDecoderLayer
+from architecture.attention         import causal_mask
+from architecture.rope              import rope_local, rope_global
 
 torch.manual_seed(0)
 B, S = 1, 8
