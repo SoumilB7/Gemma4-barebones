@@ -1,102 +1,110 @@
-# Tokenization — Gemma 4 E2B
+# Tokenization - Gemma 4 E2B
 
-> Step 1 in the pipeline. Strings in → integer ids out. Nothing else in the
-> architecture runs until this does.
+> Step 1 in the pipeline. Strings go in, lists of integers come out.
+> Nothing else in the model can run until this does.
 
 ---
 
 ## 1. What tokenization is
 
-Models don't read strings; they read integer ids. A **tokenizer** is a deterministic,
-reversible function:
+Models can't read strings - they only know how to look up rows of a
+table by integer index. A **tokenizer** is the deterministic, reversible
+function that bridges those two worlds:
 
 ```
- text ──► [id, id, id, ...]        (encode)
- [id, id, id, ...] ──► text         (decode)
+ text ──► [id, id, id, ...]    (encode)
+ [id, id, id, ...] ──► text    (decode)
 ```
 
-The choice of tokenizer decides the **vocabulary** — the fixed set of pieces the
-model will ever see. Every other weight in the model (embedding table, LM head)
-is shaped by it.
+The tokenizer also *defines the vocabulary* - the fixed set of pieces
+the model will ever see. Every other weight downstream (the embedding
+table, the LM head) is shaped by it. Change the tokenizer and you've
+changed the model.
 
 ## 2. Gemma 4 E2B's tokenizer
 
-- **Algorithm**: SentencePiece (BPE, byte-fallback).
-- **Vocabulary size**: **262,144** — large. Room for many languages, code, and
-  dedicated special tokens for tools, chat roles, vision, and audio.
-- **Reversible**: every byte a user types can always be encoded; `decode(encode(s)) == s`.
-- **Shared across modalities**: image and audio "tokens" live in the same id space
-  as text via dedicated special tokens (`<start_of_image>`, `<image_soft_token>`,
-  `<end_of_image>`, and audio analogues). Images don't produce normal text tokens —
-  they get *placeholder* ids that the model replaces with soft embeddings from the
-  vision tower.
+- **Algorithm:** SentencePiece, BPE-style, with byte-level fallback for
+  any character it doesn't know a piece for.
+- **Vocabulary size:** **262,144** - large. Big enough to cover many
+  languages, code, and special tokens for chat roles, vision, and audio.
+- **Reversible:** any sequence of bytes the user types can be encoded,
+  and `decode(encode(s)) == s`.
+- **Shared across modalities:** images and audio don't get text tokens.
+  They get *placeholder* ids like `<start_of_image>`,
+  `<image_soft_token>`, `<end_of_image>` (and audio analogues). The
+  model will later swap those placeholders for soft embeddings produced
+  by the vision and audio towers - but as far as the integer stream is
+  concerned, they're just more ids.
 
 ## 3. Why we don't reimplement it
 
-The tokenizer file (`tokenizer.json`, ~32 MB) is part of the release. It encodes
-merges and pieces Google trained. Any reimplementation would be a port with a risk
-of drift — and if our ids differ by even one, every downstream check fails.
-
-**So we wrap it.** The Python class in [tokenization.py](../tokenization.py) is a
-thin shell around HuggingFace's `AutoProcessor`, giving us a consistent
-PyTorch-friendly API (`encode` / `decode` / `apply_chat_template` returning
-`torch.LongTensor`s) that fits with the rest of the architecture.
-
-## 4. What the wrapper gives us
+The shipped `tokenizer.json` (~32 MB) encodes the merges and pieces that
+Google trained. Rebuilding that from scratch would be a port - and if
+even one id came out different, every downstream parity check would
+fail. So we just *load the file* with the lightweight `tokenizers`
+library:
 
 ```python
-tok = GemmaTokenizer.from_pretrained("google/gemma-4-E2B-it")
-
-tok.vocab_size        # 262_144
-tok.special           # SpecialTokens(bos=..., eos=..., pad=..., boi=..., eoi=..., image=...)
-
-ids = tok.encode("hello world")           # torch.LongTensor [1, T]
-tok.decode(ids[0])                        # "hello world"
-tok.pretty(ids)                           # [(id, "▁hello"), (id, "▁world"), ...]
-
-tok.apply_chat_template(messages)         # dict of tensors, multimodal-aware
+from tokenizers import Tokenizer
+self.tk = Tokenizer.from_file("model_weights/tokenizer.json")
 ```
 
-Two design choices:
+No `transformers` dependency, no special-token registry to maintain -
+the file already knows its own specials.
 
-- **Always returns `torch.LongTensor`**. No numpy, no lists at API edges. Keeps
-  the rest of the pipeline typed.
-- **Specials collected eagerly** into a dataclass so the vision-tower code can
-  ask "what's the `<image_soft_token>` id?" without poking into HF internals.
+## 4. The wrapper
 
-## 5. The approver: load_model.ipynb
-
-The notebook is our ground truth. Every time we run an experiment we encode the
-same string both ways and assert the ids match:
+[`architecture/tokenization.py`](../tokenization.py) is intentionally a
+thin shell:
 
 ```python
-# in the notebook
+class GemmaTokenizer:
+    def __init__(self, tokenizer_path):
+        self.tk = Tokenizer.from_file(str(tokenizer_path))
+        self.vocab_size = self.tk.get_vocab_size()
+
+    def encode(self, text)  -> list[int]: ...
+    def decode(self, ids)   -> str:       ...   # skips special tokens
+    def pretty(self, ids)   -> list[tuple[int, str]]:
+        # [(id, "▁hello"), (id, "▁world"), ...]  — handy for debugging
+```
+
+That's the whole API. Full chat-template formatting (with
+`<start_of_turn>user` etc.) is left to HuggingFace's `AutoProcessor`
+when we need it for generation, because reimplementing the chat-template
+DSL adds risk for no real learning.
+
+## 5. The approver
+
+The check is: encode the same string with our wrapper and with HF's
+processor and assert the id lists match.
+
+```python
 from architecture.tokenization import GemmaTokenizer
 
-ours  = GemmaTokenizer(processor)          # reuses the notebook's processor
-their = processor                          # HF directly
+ours  = GemmaTokenizer(WEIGHTS / "tokenizer.json")
+their = processor                          # HF's AutoProcessor
 
 s = "Explain MoE in transformers in 3 sentences."
 
-a = ours.encode(s)[0]
-b = their(s, return_tensors="pt")["input_ids"][0]
+a = ours.encode(s)
+b = their(s, return_tensors="pt")["input_ids"][0].tolist()
 
-assert torch.equal(a, b), "tokenizer drift!"
+assert a == b, "tokenizer drift!"
 ```
 
-If this ever fires, we stop and fix it before moving on. That's the approver
-pattern we'll use through the whole rebuild.
+If this ever fires, we stop and fix it before moving on. That's the
+parity-check pattern we'll use through the whole rebuild: every new
+component is judged against the corresponding HF output.
 
-## 6. What to look at when you open ids
+## 6. Useful things to print once you have ids
 
-Handy things to print once you have token ids:
+| question                          | how                                  |
+|-----------------------------------|--------------------------------------|
+| How many pieces is my string?     | `len(ids)`                           |
+| What are the literal pieces?      | `tok.pretty(ids)`                    |
+| Which ids are specials?           | inspect `tok.tk.get_vocab()` or just the chat template output |
+| Are image tokens where I expect?  | scan for the `<image_soft_token>` id in `tok.pretty(ids)`     |
 
-| question                       | how                                      |
-|--------------------------------|------------------------------------------|
-| How many pieces is my string?  | `ids.shape[-1]`                          |
-| What are the literal pieces?   | `tok.pretty(ids)`                        |
-| Which ids are special?         | `tok.special`                            |
-| Are image tokens where I expect? | scan for `tok.special.boi` / `eoi`    |
-
-That's enough to move on. Next: the **embedding table** — how each of these ids
-becomes a 1536-dim vector and enters the residual stream.
+That's enough to move on. Next: the **embedding table** - how each id
+turns into a 1536-dim vector and enters the residual stream.

@@ -1,10 +1,11 @@
-# Self-Attention — Gemma 4 E2B
+# Self-Attention - Gemma 4 E2B
 
-> The densest block in the model. One residual-stream vector per token goes
-> in; a refined vector per token comes out. Inside, every token gets to
-> *look at* every earlier token (or just the last 512 of them) through the
-> usual `softmax(Q · Kᵀ) · V` lens — but with a handful of E2B-specific
-> twists that you have to get exactly right or nothing downstream matches.
+> The densest block in the model. One residual-stream vector per token
+> goes in; a refined vector per token comes out. Inside, every token
+> gets to *look at* every earlier token (or just the last 512 of them)
+> through the usual `softmax(Q · Kᵀ) · V` lens - but with a handful of
+> E2B-specific twists you have to get exactly right or nothing
+> downstream matches.
 
 ---
 
@@ -13,27 +14,30 @@
 ```
 hidden (B, S, 1536)
    │
-   ├──► q_proj (1536 → H_q · D) ─► reshape ─► q_norm ─► RoPE ─┐
-   │                                                          │
+   ├──► q_proj (1536 → H_q · D)  ─► reshape ─► q_norm ─► RoPE ─┐
+   │                                                            │
    ├──► k_proj (1536 → H_kv · D) ─► reshape ─► k_norm ─► RoPE ─┼─► softmax(Q · Kᵀ + mask) · V ─► reshape ─► o_proj ─► out
-   │                                                          │
+   │                                                            │
    └──► v_proj (1536 → H_kv · D) ─► reshape ─► v_norm ─────────┘
 ```
 
 The reshape splits the projected tensor across heads:
-`(B, S, H · D)` → `(B, S, H, D)` → `(B, H, S, D)` for the attention matmul.
+`(B, S, H · D)` → `(B, S, H, D)` → `(B, H, S, D)` for the attention
+matmul. (We keep the `(B, S, H, D)` layout until *after* RoPE is
+applied - see §3c.)
 
 ## 2. The E2B numbers
 
-E2B has two interleaved layer types. Same kernel, different shape constants:
+E2B has two interleaved layer types. They share a single attention
+kernel - only the shape constants differ:
 
-| layer type        | head_dim | Q heads | KV heads | GQA ratio | sliding window | RoPE        |
-|-------------------|----------|---------|----------|-----------|----------------|-------------|
-| local  (sliding)  | 256      | 8       | 1        | 8 : 1     | 512            | full, θ=10k |
+| layer type        | head_dim | Q heads | KV heads | GQA ratio | sliding window | RoPE             |
+|-------------------|----------|---------|----------|-----------|----------------|------------------|
+| local  (sliding)  | 256      | 8       | 1        | 8 : 1     | 512            | full, θ=10k      |
 | global (full)     | 512      | 8       | 1        | 8 : 1     | —              | p-RoPE 0.25, θ=1M |
 
-So both layer types use **8 : 1 GQA**, contradicting the overview's earlier
-"2 : 1 local" line — the safetensors shapes are the source of truth:
+So both layer types use **8 : 1 GQA** (8 query heads share each KV
+head). The safetensors shapes are the source of truth:
 
 ```
 local  q_proj  (2048, 1536)   = 8 × 256
@@ -43,11 +47,11 @@ global k_proj  ( 512, 1536)   = 1 × 512        ← 8:1
 ```
 
 GQA fan-out is just `K.repeat_interleave(num_q_heads // num_kv_heads, dim=1)`
-— no parameters, just a memory broadcast before the dot product.
+- no parameters, just a memory broadcast right before the dot product.
 
 ## 3. Three details that bite
 
-### 3a. `q_norm`, `k_norm`, **weightless** `v_norm`
+### 3a. `q_norm`, `k_norm`, *weightless* `v_norm`
 
 ```python
 q_norm = GemmaRMSNorm(head_dim, with_scale=True)   # scaled
@@ -57,13 +61,13 @@ v_norm = GemmaRMSNorm(head_dim, with_scale=False)  # weightless!
 
 Q and K get normalized *and* rescaled by a learned per-dim gain. V gets
 normalized but its gain is fixed at 1. That's why the safetensors shard
-has `q_norm.weight` and `k_norm.weight` keys but **no** `v_norm.weight` —
-we don't load anything for v_norm.
+has `q_norm.weight` and `k_norm.weight` keys but **no**
+`v_norm.weight` - we don't load anything for v_norm.
 
 ### 3b. Softmax scaling = 1.0 (not `1/√d`)
 
-The classical attention `softmax(Q · Kᵀ / √d)` divides by `√head_dim` so
-the dot products don't explode. Gemma drops that scale:
+The classical attention formula `softmax(Q · Kᵀ / √d)` divides by
+`√head_dim` so the dot products don't explode. Gemma drops that scale:
 
 ```python
 attn = q @ k.transpose(-1, -2)        # no /√d
@@ -71,11 +75,12 @@ attn = attn + mask
 attn = softmax(attn, dim=-1, dtype=fp32).to(q.dtype)
 ```
 
-Why it's safe: `q_norm` and `k_norm` already RMS-normalize Q and K to unit
-length per head. The dot product magnitude is bounded by construction —
-adding `1/√d` on top would shrink logits twice and flatten the softmax.
+Why it's safe: `q_norm` and `k_norm` have already RMS-normalized Q and
+K to unit length per head. The magnitude of the dot product is bounded
+by construction. Adding `1/√d` on top would shrink the logits *twice*
+and flatten the softmax.
 
-### 3c. Apply RoPE *after* the norms, *before* the transpose
+### 3c. Apply RoPE *after* the norms, *before* the head transpose
 
 ```python
 q = q_proj(hidden).view(B, S, H, D)
@@ -84,10 +89,11 @@ q = apply_rope(q, cos, sin, unsqueeze_dim=2)   # cos, sin: (B, S, D)
 q = q.transpose(1, 2)                          # → (B, H, S, D)
 ```
 
-`unsqueeze_dim=2` matches the `(B, S, H, D)` layout: cos/sin become
-`(B, S, 1, D)` and broadcast over heads. If you transpose first and use
-`unsqueeze_dim=1`, the math is the same — but in this codebase we keep
-`(B, S, H, D)` until after RoPE so the broadcast is the obvious one.
+`unsqueeze_dim=2` matches the `(B, S, H, D)` layout: cos and sin are
+unsqueezed to `(B, S, 1, D)` and broadcast over the head axis. If you
+transpose first and use `unsqueeze_dim=1`, the math is identical - but
+in this codebase we keep `(B, S, H, D)` until after RoPE so the
+broadcast is the obvious one.
 
 ## 4. The mask
 
@@ -101,24 +107,35 @@ def causal_mask(S, device, dtype, window=None):
     return mask[None, None]                         # (1, 1, S, S)
 ```
 
-The mask is *additive*: `attn = q @ kᵀ + mask`, so `0` means "attend"
-and `-inf` means "don't". Sliding adds one extra constraint
-(`i - j < window`). For S ≤ window, sliding equals plain causal — handy,
-because our parity test runs at S = 8 and the local/global mask shapes
-collapse to the same thing.
+The mask is *additive*: `attn = q @ kᵀ + mask`. So `0` means "attend"
+and `-inf` means "don't" (because `softmax(-inf) = 0`). Sliding adds
+one extra constraint (`i - j < window`). For S ≤ window, sliding ==
+plain causal - convenient, because our parity test runs at S = 8 and
+the local/global mask shapes collapse to the same thing.
 
-## 5. KV sharing (deferred to the stack)
+## 5. KV sharing is deferred to the stack
 
-E2B has `num_kv_shared_layers = 20`. For the **last 20 layers** (indices
-15-34 out of 35), K and V are reused from the most recent **earlier
-same-type** layer. The shared layers don't have their own `k_proj`,
-`v_proj`, `k_norm`, or `v_norm` weights at all.
+E2B has `num_kv_shared_layers = 20`. For the **last 20 layers**
+(indices 15-34 out of 35), K and V are *reused* from the most recent
+**earlier same-type** layer. The shared layers don't need their own
+`k_proj`, `v_proj`, `k_norm`, or `v_norm` weights to actually run.
 
-This is a **stack-level** optimization, not a per-layer one. Our
-`GemmaAttention` always projects fresh K/V; the decoder stack will be
-responsible for caching K/V from the source layer and threading it into
-the dependent layers. For now, our parity test uses layers 0 (local) and
-4 (global) — both well before the sharing point.
+But! `GemmaAttention` itself doesn't know which layer it is. The module
+exposes two minimal kwargs and lets the stack do the routing:
+
+| arg          | meaning                                                                                |
+|--------------|----------------------------------------------------------------------------------------|
+| `cached_kv`  | `(k, v)` to use *instead of* projecting; skips k_proj/k_norm/RoPE-K/v_proj/v_norm    |
+| `return_kv`  | also return `(out, k, v)` so the stack can stash them for downstream shared layers     |
+
+K and V are cached **pre-GQA-expand**, shape `(B, H_kv, S, head_dim)`
+- matching the layout HF stores in `shared_kv_states`. K is post-norm
+and post-RoPE; V is post-norm.
+
+Our standalone parity test in this file uses layers 0 (local) and 4
+(global) - both well before the sharing point - so the cache machinery
+isn't exercised here. The full stack walks through it in
+[`text_model.md`](text_model.md).
 
 ## 6. The module
 
@@ -127,24 +144,26 @@ the dependent layers. For now, our parity test uses layers 0 (local) and
 ```python
 class GemmaAttention(nn.Module):
     def __init__(self, hidden_size, num_q_heads, num_kv_heads, head_dim,
-                 sliding_window=None, rms_norm_eps=1e-6, dtype=None): ...
+                 sliding_window=None, rms_norm_eps=1e-6,
+                 impl="eager", dtype=None): ...
     @classmethod
     def from_safetensors(cls, shard_path, layer_idx, layer_type, ...): ...
-    def forward(self, hidden, cos, sin, attention_mask=None): ...
+    def forward(self, hidden, cos, sin, attention_mask=None,
+                cached_kv=None, return_kv=False): ...
 
 # convenience
 attn_local()    # head_dim=256, sliding_window=512
 attn_global()   # head_dim=512, no window
 ```
 
-`from_safetensors(shard, layer_idx, layer_type)` is the load path — pass
-either `"sliding_attention"` or `"full_attention"` and it picks
+`from_safetensors(shard, layer_idx, layer_type)` is the load path -
+pass either `"sliding_attention"` or `"full_attention"` and it picks
 `head_dim` and `sliding_window` for you.
 
 ## 7. The approver
 
-For each layer type, build cos/sin and a causal mask, then compare ours
-against HF's `model.model.language_model.layers[L].self_attn`:
+For each layer type, build cos/sin and a causal mask, then compare
+ours against HF's `model.model.language_model.layers[L].self_attn`:
 
 ```python
 import torch
@@ -181,21 +200,24 @@ hf_out_g, _ = hf_g(hidden, position_embeddings=(cos_g, sin_g),
 assert torch.equal(out_g, hf_out_g)
 ```
 
-If parity fails, narrow the search by intercepting after each step: `q_proj`
-output → after `q_norm` → after RoPE → softmax weights → V-weighted output
-→ post-`o_proj`. The most common drift sources are mask shape/dtype, the
-softmax fp32 cast, and forgetting that `scaling=1.0`.
+If parity fails, narrow the search by intercepting after each step:
+`q_proj` output → after `q_norm` → after RoPE → softmax weights →
+V-weighted output → post-`o_proj`. The most common drift sources are
+mask shape/dtype, the softmax fp32 cast, and forgetting that
+`scaling=1.0`.
 
 ### One trap: HF's SDPA backend
 
 `AutoModelForCausalLM.from_pretrained(MODEL_ID)` defaults to
 `attn_implementation="sdpa"` on most builds. SDPA fuses the
-`softmax(Q·Kᵀ) · V` pipeline into one kernel whose summation order
-differs from a hand-written eager loop. Numerically equivalent in fp32,
-but in **bf16** the two paths drift by 1-3 ulps per token (any token
-that attends to >1 position). The first token always matches because
-its softmax has only one entry — `softmax([0, -∞, …]) = [1, 0, …]` —
-so the output is just `V[0]`, no summation, no precision loss.
+`softmax(Q · Kᵀ) · V` pipeline into a single kernel whose summation
+order differs from a hand-written eager loop. The two are numerically
+equivalent in fp32, but in **bf16** they drift by 1-3 ulps per token
+(any token that attends to >1 position).
+
+The first token always matches because its softmax has only one entry
+- `softmax([0, -∞, …]) = [1, 0, …]` - so the output is just `V[0]`,
+no summation, no precision loss.
 
 Both kernels are correct; they just round in different bits. We expose
 the choice with an `impl=` flag so you can match either:
@@ -205,25 +227,27 @@ GemmaAttention(..., impl="eager")  # default — visible math, matches HF eager
 GemmaAttention(..., impl="sdpa")   # F.scaled_dot_product_attention, matches HF sdpa
 ```
 
-So the parity matrix is:
+Parity matrix:
 
-| ours        | HF                              | bit-equal? |
-|-------------|---------------------------------|------------|
-| `impl="eager"` | `attn_implementation="eager"` | yes |
-| `impl="sdpa"`  | `attn_implementation="sdpa"`  | yes |
-| `impl="eager"` | `attn_implementation="sdpa"`  | no, 1-2 bf16 ulps |
-| `impl="sdpa"`  | `attn_implementation="eager"` | no, 1-2 bf16 ulps |
+| ours           | HF                              | bit-equal?         |
+|----------------|---------------------------------|--------------------|
+| `impl="eager"` | `attn_implementation="eager"`   | yes                |
+| `impl="sdpa"`  | `attn_implementation="sdpa"`    | yes                |
+| `impl="eager"` | `attn_implementation="sdpa"`    | no, 1-2 bf16 ulps  |
+| `impl="sdpa"`  | `attn_implementation="eager"`   | no, 1-2 bf16 ulps  |
 
-Default is `eager` because the math is visible — you can see `Q · Kᵀ`,
-the mask add, the softmax, and the multiply by V as separate lines, which
-is the whole point of building from scratch. For matching a default-
-loaded HF model (no `attn_implementation` arg), pass `impl="sdpa"`.
+We default to `eager` because the math is *visible* - you can see
+`Q · Kᵀ`, the mask add, the softmax, and the multiply by V as separate
+lines, which is the whole point of building from scratch. For matching
+a default-loaded HF model (no `attn_implementation` arg), pass
+`impl="sdpa"`.
 
 ## 8. Where it goes next
 
 Attention is the load-bearing piece. With it pinned down, the remaining
 per-layer block is just **GeGLU FFN** (`down(gelu(gate(x)) * up(x))`),
-two RMSNorms, and the residual adds. After that we stack 35 layers, wire
-the per-layer-embedding (PLE) gate, and we have a full forward pass.
+two RMSNorms, and the residual adds. After that we stack 35 layers,
+wire the per-layer-embedding (PLE) gate, and we have a full forward
+pass.
 
-Next up: **GeGLU FFN** — the simplest of the remaining bricks.
+Next up: **GeGLU FFN** - the simplest of the remaining bricks.

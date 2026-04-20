@@ -1,8 +1,9 @@
-# Feed-Forward Network (GeGLU) — Gemma 4 E2B
+# Feed-Forward Network (GeGLU) - Gemma 4 E2B
 
-> The second sub-block of every decoder layer. Takes a residual-stream
-> vector, runs it through a gated MLP, writes it back. No heads, no
-> positions, no masks — just three matmuls and a multiply.
+> The second sub-block of every decoder layer. It takes a residual-
+> stream vector, runs it through a gated MLP, and writes the result
+> back. No heads, no positions, no masks - just three matmuls and an
+> elementwise multiply.
 
 ---
 
@@ -11,7 +12,7 @@
 ```
 x ──► gate_proj (1536 → inter) ─► GELU(tanh) ─┐
                                               ▼
-                                              ⊙
+                                              ⊙          (elementwise multiply)
                                               ▲
 x ──► up_proj   (1536 → inter) ────────────────┘
                                               │
@@ -22,24 +23,26 @@ x ──► up_proj   (1536 → inter) ─────────────�
 In code, one line:
 
 ```python
-y = down_proj(gelu(gate_proj(x), approximate="tanh") * up_proj(x))
+y = down_proj(F.gelu(gate_proj(x), approximate="tanh") * up_proj(x))
 ```
 
-No biases. No dropout in inference. The only non-linearity is the GELU.
+No biases. No dropout in inference. The only non-linearity is the
+GELU. Compared to attention, this block is structurally trivial - all
+the subtlety is in the activation choice and the width.
 
 ## 2. Why *gated*
 
 A plain MLP is `down(act(up(x)))`. A gated MLP multiplies two parallel
 projections: `down(act(gate(x)) * up(x))`. The `act(gate(x))` term can
-*mask* individual dimensions of `up(x)` — push them toward zero or let
-them through. That multiplicative interaction gives the block much more
-expressive power per parameter than a plain MLP, which is why every
-modern decoder (Llama, Mistral, Gemma) uses it.
+*mask* individual dimensions of `up(x)` - push them toward zero, or
+let them through. That multiplicative interaction gives the block much
+more expressive power per parameter than a plain MLP, which is why
+every modern decoder (Llama, Mistral, Gemma) uses a gated variant.
 
-Historical names:
-- **GLU**: `sigmoid(gate(x)) * up(x)` — the original (Dauphin et al.).
-- **SwiGLU**: `silu(gate(x)) * up(x)` — Llama / Mistral.
-- **GeGLU**: `gelu(gate(x)) * up(x)` — Gemma. What we have here.
+The naming history is just "which activation does the gate use":
+- **GLU**: `sigmoid(gate(x)) * up(x)` - the original (Dauphin et al.).
+- **SwiGLU**: `silu(gate(x)) * up(x)` - Llama / Mistral.
+- **GeGLU**: `gelu(gate(x)) * up(x)` - Gemma. What we have here.
 
 ## 3. The one activation detail that bites
 
@@ -49,27 +52,27 @@ HF uses `gelu_pytorch_tanh`:
 F.gelu(x, approximate="tanh")
 ```
 
-Not the default `approximate="none"` (exact erf-based GELU). The two
-are close numerically but **not bit-equal**. The JAX reference that
-Gemma was trained with uses the tanh approximation, and HF matched it
-for weight parity. So must we.
+Not the default `approximate="none"` (the exact erf-based GELU). The
+two are close numerically but **not bit-equal**. The JAX reference
+that Gemma was trained with uses the tanh approximation, and HF
+matched it for weight parity. So must we.
 
 ## 4. Width varies across the stack
 
 E2B has two FFN widths:
 
-| layers     | intermediate_size | notes                                 |
-|------------|-------------------|---------------------------------------|
-| 0-14       | 6 144             | standard                              |
-| 15-34      | 12 288 (= 2×)     | kv-shared layers, double-wide MLP     |
+| layers     | intermediate_size | notes                             |
+|------------|-------------------|-----------------------------------|
+| 0-14       | 6 144             | standard                          |
+| 15-34      | 12 288 (= 2×)     | kv-shared layers, double-wide MLP |
 
 The last 20 layers reuse K/V from earlier same-type layers (the
-`num_kv_shared_layers=20` setting). Those layers save compute on
-`k_proj`/`v_proj` — the saved budget is spent on a 2× wider FFN
-instead. Same FLOPs overall, different allocation.
+`num_kv_shared_layers = 20` setting). Those layers save compute on
+`k_proj`/`v_proj` - and that saved budget is spent on a 2× wider FFN
+instead. Same total FLOPs, different allocation.
 
 Our `from_safetensors` reads `gate_proj.weight.shape[0]` and picks the
-width automatically; one class handles both.
+width automatically. One class handles both.
 
 ## 5. Shapes for E2B
 
@@ -99,7 +102,7 @@ class GemmaFFN(nn.Module):
 ## 7. The approver
 
 Run one standard-width layer (0) and one double-wide layer (15)
-through ours and HF's, expect bit-equal output.
+through both ours and HF's, expect bit-equal output:
 
 ```python
 import torch
@@ -135,15 +138,15 @@ else:
     hidden   = dense_out
 ```
 
-Driven by `enable_moe_block` in the config. For **E2B** this is `False`
-and the checkpoint has no `router.*` or `experts.*` weights at all —
-zero MoE keys in the shard. The second route is compile-time gated off
-for this size; `GemmaFFN` alone is the full FFN.
+This is driven by `enable_moe_block` in the config. For **E2B** that
+flag is `False`, and the checkpoint has no `router.*` or `experts.*`
+weights at all - zero MoE keys in the shard. The second route is
+compile-time gated off for this size; `GemmaFFN` alone is the full FFN.
 
 The MoE route is reserved for larger Gemma 4 variants (E4B / flagship).
 If we ever target those, we'd add a sibling `GemmaMoE` module and the
-`if` in the decoder-layer glue — but for E2B it would be dead code we
-have no weights to populate, so we leave it out.
+`if` in the decoder-layer glue - but for E2B it would be dead code
+with no weights to populate, so we leave it out.
 
 ## 9. Where it goes next
 
@@ -152,13 +155,13 @@ just `attn + ffn` sandwiched in the right norms and residual adds:
 
 ```python
 x = x + attn(input_layernorm(x))      # but actually: both pre- and
-                                      # post-attn norms, see below
+                                      #               post-attn norms
 x = x + ffn (pre_feedforward_layernorm(x))
 ```
 
 E2B actually has **four** norms per layer (input, post-attention,
-pre-feedforward, post-feedforward) plus PLE gating on top. That's
-the decoder-layer doc.
+pre-feedforward, post-feedforward) plus PLE gating on top of that.
+That's all in the decoder-layer doc.
 
-Next up: the **decoder layer** — wiring attention + FFN with the four
+Next up: the **decoder layer** - wiring attention + FFN with the four
 norms and the PLE gate.
