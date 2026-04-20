@@ -69,8 +69,9 @@ class GemmaPerLayerInputs(nn.Module):
                          hidden_size=1536,
                          hidden_size_per_layer_input=256,
                          num_hidden_layers=35,
-                         rms_norm_eps=1e-6):
-        sd = load_file(str(shard_path))
+                         rms_norm_eps=1e-6,
+                         state_dict=None):
+        sd = state_dict if state_dict is not None else load_file(str(shard_path))
         dtype = sd[cls.EMBED_KEY].dtype
         m = cls(vocab_size_per_layer_input=vocab_size_per_layer_input,
                 hidden_size=hidden_size,

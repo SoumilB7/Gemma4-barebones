@@ -32,8 +32,9 @@ class GemmaEmbedding(nn.Module):
         self.embed = nn.Embedding(vocab_size, hidden_size, dtype=dtype)
 
     @classmethod
-    def from_safetensors(cls, shard_path, key=None):
-        w = _load_weight(shard_path, key or cls.WEIGHT_KEY)
+    def from_safetensors(cls, shard_path, key=None, state_dict=None):
+        k = key or cls.WEIGHT_KEY
+        w = state_dict[k] if state_dict is not None else _load_weight(shard_path, k)
         vocab, hidden = w.shape
         m = cls(vocab, hidden, dtype=w.dtype)
         m.embed.weight.data.copy_(w)

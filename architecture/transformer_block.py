@@ -111,7 +111,8 @@ class GemmaDecoderLayer(nn.Module):
                          hidden_size=1536, hidden_size_per_layer_input=256,
                          num_q_heads=8, num_kv_heads=1,
                          local_head_dim=256, global_head_dim=512,
-                         sliding_window=512, rms_norm_eps=1e-6, impl="eager"):
+                         sliding_window=512, rms_norm_eps=1e-6, impl="eager",
+                         state_dict=None):
         """
         Load layer `layer_idx`. `layer_type` is "sliding_attention" or
         "full_attention". Picks head_dim/window automatically and reads
@@ -121,7 +122,7 @@ class GemmaDecoderLayer(nn.Module):
         head_dim  = global_head_dim if is_global else local_head_dim
         window    = None            if is_global else sliding_window
 
-        sd = load_file(str(shard_path))
+        sd = state_dict if state_dict is not None else load_file(str(shard_path))
         prefix = f"model.language_model.layers.{layer_idx}."
         dtype  = sd[prefix + "input_layernorm.weight"].dtype
         intermediate_size = sd[prefix + "mlp.gate_proj.weight"].shape[0]
@@ -161,19 +162,27 @@ class GemmaDecoderLayer(nn.Module):
         return m
 
     # ──────────────────────────────────────────────────────────────────
-    def forward(self, hidden_states, per_layer_input, cos, sin, attention_mask=None):
+    def forward(self, hidden_states, per_layer_input, cos, sin, attention_mask=None,
+                cached_kv=None, return_kv=False):
         """
         hidden_states   : (B, S, hidden_size)
         per_layer_input : (B, S, hidden_size_per_layer_input)   one layer's slice
         cos, sin        : (B, S, head_dim)                      from GemmaRoPE
         attention_mask  : (1, 1, S, S) additive mask, or None
+        cached_kv       : (k, v) to reuse instead of projecting (KV-share path).
+        return_kv       : if True, also return this layer's (k, v) for caching.
 
-        Returns: (B, S, hidden_size)
+        Returns: (B, S, hidden_size), or (out, k, v) when return_kv=True.
         """
         # 1. Attention block (sandwich norm + residual).
         residual = hidden_states
         h = self.input_layernorm(hidden_states)
-        h = self.self_attn(h, cos, sin, attention_mask=attention_mask)
+        if return_kv:
+            h, k, v = self.self_attn(h, cos, sin, attention_mask=attention_mask,
+                                      cached_kv=cached_kv, return_kv=True)
+        else:
+            h = self.self_attn(h, cos, sin, attention_mask=attention_mask,
+                                cached_kv=cached_kv)
         h = self.post_attention_layernorm(h)
         hidden_states = residual + h
 
@@ -196,4 +205,7 @@ class GemmaDecoderLayer(nn.Module):
 
         # 4. Per-layer scalar (NOT 1.0; it's a learned buffer in the shard).
         hidden_states = hidden_states * self.layer_scalar
+
+        if return_kv:
+            return hidden_states, k, v
         return hidden_states

@@ -130,13 +130,20 @@ class GemmaAttention(nn.Module):
         return m
 
     # ──────────────────────────────────────────────────────────────────
-    def forward(self, hidden, cos, sin, attention_mask=None):
+    def forward(self, hidden, cos, sin, attention_mask=None,
+                cached_kv=None, return_kv=False):
         """
         hidden          : (B, S, hidden_size)         bf16
         cos, sin        : (B, S, head_dim)            from GemmaRoPE
         attention_mask  : (B|1, 1, S, S) additive mask of {0, -inf}, or None
+        cached_kv       : optional (k, v), each (B, H_kv, S, head_dim) — pre-GQA,
+                          post-norm, post-RoPE for K. When provided, this layer's
+                          own k_proj/k_norm/RoPE-on-K and v_proj/v_norm are skipped
+                          (KV-share path: layers 15-34 reuse layer 13/14's K/V).
+        return_kv       : if True, also return the (k, v) computed this call so
+                          the stack can stash them for downstream shared layers.
 
-        Returns: (B, S, hidden_size)
+        Returns: (B, S, hidden_size), or (out, k, v) if return_kv=True.
         """
         B, S, _ = hidden.shape
 
@@ -145,38 +152,47 @@ class GemmaAttention(nn.Module):
         q = apply_rope(q, cos, sin, unsqueeze_dim=2)
         q = q.transpose(1, 2)                                # (B, H_q,  S, D)
 
-        k = self.k_proj(hidden).view(B, S, self.num_kv_heads, self.head_dim)
-        k = self.k_norm(k)
-        k = apply_rope(k, cos, sin, unsqueeze_dim=2)
-        k = k.transpose(1, 2)                                # (B, H_kv, S, D)
+        if cached_kv is None:
+            k = self.k_proj(hidden).view(B, S, self.num_kv_heads, self.head_dim)
+            k = self.k_norm(k)
+            k = apply_rope(k, cos, sin, unsqueeze_dim=2)
+            k = k.transpose(1, 2)                            # (B, H_kv, S, D)
 
-        v = self.v_proj(hidden).view(B, S, self.num_kv_heads, self.head_dim)
-        v = self.v_norm(v)
-        v = v.transpose(1, 2)                                # (B, H_kv, S, D)
+            v = self.v_proj(hidden).view(B, S, self.num_kv_heads, self.head_dim)
+            v = self.v_norm(v)
+            v = v.transpose(1, 2)                            # (B, H_kv, S, D)
+        else:
+            k, v = cached_kv                                 # already (B, H_kv, S, D)
 
-        # GQA: expand K/V heads to match Q heads.
+        # GQA: expand K/V heads to match Q heads. We expand a *copy* so the
+        # cached K/V (pre-expand) can still be returned/reused downstream.
         if self.kv_groups > 1:
-            k = k.repeat_interleave(self.kv_groups, dim=1)
-            v = v.repeat_interleave(self.kv_groups, dim=1)
+            k_use = k.repeat_interleave(self.kv_groups, dim=1)
+            v_use = v.repeat_interleave(self.kv_groups, dim=1)
+        else:
+            k_use, v_use = k, v
 
         if self.impl == "sdpa":
             # PyTorch's fused kernel. Bit-equal to a `from_pretrained(...)`
             # HF model (which defaults to attn_implementation="sdpa").
             # SDPA's mask must match q's dtype.
             mask = attention_mask.to(q.dtype) if attention_mask is not None else None
-            out  = F.scaled_dot_product_attention(q, k, v, attn_mask=mask, scale=1.0)
+            out  = F.scaled_dot_product_attention(q, k_use, v_use, attn_mask=mask, scale=1.0)
         else:
             # Eager: visible math, bit-equal to HF loaded with
             # attn_implementation="eager". Drifts 1-2 bf16 ulps from sdpa.
             # Scaling=1.0 because q_norm already normalized Q.
-            attn = q @ k.transpose(-1, -2)                   # (B, H_q, S, S)
+            attn = q @ k_use.transpose(-1, -2)               # (B, H_q, S, S)
             if attention_mask is not None:
                 attn = attn + attention_mask
             attn = F.softmax(attn, dim=-1, dtype=torch.float32).to(q.dtype)
-            out  = attn @ v                                  # (B, H_q, S, D)
+            out  = attn @ v_use                              # (B, H_q, S, D)
 
         out = out.transpose(1, 2).contiguous().view(B, S, -1)
-        return self.o_proj(out)
+        out = self.o_proj(out)
+        if return_kv:
+            return out, k, v
+        return out
 
 
 # ──────────────────────────────────────────────────────────────────────

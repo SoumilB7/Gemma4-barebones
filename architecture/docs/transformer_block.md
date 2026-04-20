@@ -288,16 +288,84 @@ If parity fails on this layer and didn't fail on the standalone attention
 test, the `layer_scalar` is the next place to look — the 50× scale-down
 makes most other bugs look like sign-flips.
 
-## 10. Where it goes next
+## 10. KV sharing for layers 15-34
 
-With one decoder layer parity-checked, the **stack** is mostly bookkeeping:
+The last 20 layers don't compute their own K/V. They reuse K/V from the
+**last non-shared layer of the same attention type**:
 
-1. Build `GemmaPerLayerInputs` once, get the (B, S, 35, 256) tensor.
-2. Build 35 `GemmaDecoderLayer`s, alternating `sliding_attention` × 4 then
-   `full_attention` × 1, plus the kv-shared routing for layers 15-34.
-3. Loop: `hidden = layer(hidden, pli[:,:,i,:], cos, sin, mask)`.
-4. Final `GemmaRMSNorm` on `hidden`, then the LM head (a tied `nn.Linear`
-   onto the embedding matrix transpose).
+```
+non-shared (0..14)                       shared (15..34)
+  …
+  layer 13 (sliding) ──┐                  layer 15 (sliding) ◀──┐
+  layer 14 (full)   ──┼┐                  layer 16 (sliding) ◀──┤  reuses
+                      ││                  layer 17 (sliding) ◀──┤  layer 13's
+                      ││                  layer 18 (sliding) ◀──┤  K, V
+                      ││                  layer 19 (full)    ◀──┐
+                      ││                  layer 20 (sliding) ◀──┤
+                      ││                  ...                   │
+                      └┴───────────────►  layer 19, 24, 29, 34  reuse layer 14
+                                          layers 15..33 sliding reuse layer 13
+```
 
-Next up: the **stack** — wire 35 layers, the per-layer-type RoPE/mask
-selection, KV-share routing for the last 20, and the final norm + LM head.
+**Why "stack-level"**: a single shared layer can't compute its own K/V — it
+needs K/V that some *earlier* layer in the same forward pass produced. The
+broker has to be the stack.
+
+The routing rule (extracted from `config.text_config`):
+
+```python
+first_kv = num_hidden_layers - num_kv_shared_layers   # 15
+prev     = layer_types[:first_kv]                     # types of layers 0..14
+
+# For shared layer i (i >= first_kv), donor index = last index in `prev`
+# whose type matches layer_types[i]:
+src = len(prev) - 1 - prev[::-1].index(layer_types[i])
+```
+
+For E2B that resolves to: every shared `sliding_attention` layer reuses
+layer 13; every shared `full_attention` layer reuses layer 14.
+
+**API on our side**: `GemmaAttention.forward` takes two optional kwargs:
+
+| arg          | meaning                                                                     |
+|--------------|-----------------------------------------------------------------------------|
+| `cached_kv`  | `(k, v)` to use *instead of* projecting; skips k_proj/k_norm/RoPE-K/v_proj/v_norm |
+| `return_kv`  | also return `(out, k, v)` so the stack can stash them                       |
+
+K/V are cached **pre-GQA-expand** (shape `(B, H_kv, S, head_dim)`) — matching
+HF's `shared_kv_states` storage. K is post-norm + post-RoPE; V is post-norm.
+
+`GemmaDecoderLayer.forward` threads both kwargs through. Defaults preserve
+prior behavior so the per-layer parity tests still pass.
+
+A subtle point: the shard *does* still ship `k_proj`/`v_proj`/`k_norm`
+weights for layers 15-34, even though HF never uses them. They're dead
+weight at inference. Loading via `from_safetensors` doesn't fail; we just
+never call those projections when `cached_kv` is provided.
+
+The stack-level loop (see the "FULL-STACK cumulative through layer N" cell
+in [`load_pytorch_model.ipynb`](../../load_pytorch_model.ipynb)):
+
+```python
+shared_kv = {}
+for i in range(N + 1):
+    src    = kv_source(i)                          # 13, 14, or None
+    cached = shared_kv[src] if src is not None else None
+    if is_donor(i):                                # i ∈ {13, 14}
+        hidden, k, v = layer(hidden, pli[:,:,i,:], cos, sin, mask,
+                              cached_kv=cached, return_kv=True)
+        shared_kv[i] = (k, v)
+    else:
+        hidden = layer(hidden, pli[:,:,i,:], cos, sin, mask, cached_kv=cached)
+```
+
+## 11. Where it goes next
+
+With KV-share routing in place, the cumulative-N cell is bit-equal against
+HF for any N in [0, 34]. Remaining for a full text model:
+
+1. Wrap the loop in a `GemmaTextModel` module so callers don't manage
+   `shared_kv` or `from_safetensors` per layer.
+2. Final `GemmaRMSNorm` on `hidden`.
+3. LM head — tied `nn.Linear` onto the embedding matrix transpose; logits
+   parity against `hf(input_ids).logits`.
