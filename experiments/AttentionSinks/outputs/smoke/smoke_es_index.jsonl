@@ -1,0 +1,1 @@
+{"sample_id": 0, "stratum": "named_entity_recognition/es", "task": "named_entity_recognition", "lang": "es", "source_idx": 324, "source_format": "towerblocks", "seq_len": 517, "num_turns": 2, "split": "dev", "dataset": "multiconer2023"}

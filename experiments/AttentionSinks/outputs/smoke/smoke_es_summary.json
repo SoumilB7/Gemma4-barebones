@@ -1,0 +1,5042 @@
+{
+  "generated_at": "2026-04-25T19:25:27+00:00",
+  "model_id": "google/gemma-4-E2B-it",
+  "source_format": "towerblocks",
+  "data_path": "experiments/AttentionSinks/data/TowerBlocks-v0.1",
+  "device": "mps",
+  "dtype": "bfloat16",
+  "max_length": 640,
+  "target_per_stratum": 1,
+  "sampling_mode": "first",
+  "sample_seed": 0,
+  "num_prompts": 1,
+  "active_strata": [
+    "named_entity_recognition/es"
+  ],
+  "sampling": {
+    "scanned_rows": 325,
+    "matched_rows": 325,
+    "invalid_rows": 0,
+    "skipped_short": 324,
+    "skipped_without_bos_eviction": 0,
+    "stopped_early": true,
+    "sampling_mode": "first",
+    "sample_seed": 0,
+    "target_per_stratum": 1,
+    "eligible_by_stratum": {
+      "named_entity_recognition/es": 1
+    },
+    "selected_by_stratum": {
+      "named_entity_recognition/es": 1
+    },
+    "shortfall_by_stratum": {
+      "named_entity_recognition/es": 0
+    }
+  },
+  "validation": {
+    "capture_shapes": {
+      "attn_weights": [
+        1,
+        8,
+        517,
+        517
+      ],
+      "value_states": [
+        1,
+        1,
+        517,
+        256
+      ],
+      "per_head_output": [
+        1,
+        517,
+        8,
+        256
+      ],
+      "attn_output_pre_norm": [
+        1,
+        517,
+        1536
+      ]
+    },
+    "layer_types_match_config": true,
+    "sliding_bos_visible_for_late_query": [
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false
+    ],
+    "reconstruction_error_l2": 0.08865499496459961,
+    "reconstruction_relative_error": 0.001812075165286814,
+    "anchor_exact_negative_count": 0
+  },
+  "research_sources": [
+    {
+      "title": "Efficient Streaming Language Models with Attention Sinks",
+      "url": "https://arxiv.org/abs/2309.17453",
+      "claim": "Initial sink tokens can stabilize streaming/windowed attention."
+    },
+    {
+      "title": "Why do LLMs attend to the first token?",
+      "url": "https://arxiv.org/abs/2504.02732",
+      "claim": "Attention sinks can help prevent over-mixing and preserve information flow."
+    },
+    {
+      "title": "Attention Sinks Are Functionally Essential in Softmax Transformers: Theoretical Evidence",
+      "url": "https://openreview.net/forum?id=TvG8VtbDLB",
+      "claim": "Softmax normalization can force stable sink-like behavior for default routing."
+    },
+    {
+      "title": "On the Existence and Behavior of Secondary Attention Sinks",
+      "url": "https://openreview.net/forum?id=2DmhKvGLSC",
+      "claim": "Middle-layer activation dynamics can create secondary sinks beyond BOS."
+    }
+  ],
+  "aggregates": {
+    "layer_type": {
+      "sliding": {
+        "query_count": 140,
+        "anchor_count": 84,
+        "pre_overlap_score_mean": {
+          "bos": 0.0,
+          "edge": 0.36221996686820473,
+          "recent": 23.19416151387351,
+          "self": 2.742126863556249,
+          "middle": 42.56525504248483
+        },
+        "pre_position_partition_mean": {
+          "bos": 0.0,
+          "edge": 0.36221996686820473,
+          "self": 2.742126863556249,
+          "recent_nonself": 20.45203470502581,
+          "middle": 42.56525504248483
+        },
+        "pre_position_partition_share_mean": {
+          "bos": 0.0,
+          "edge": 0.0046591884632695936,
+          "self": 0.0413280190080384,
+          "recent_nonself": 0.2833482383641059,
+          "middle": 0.6706645541645861
+        },
+        "pre_token_score_mean": {
+          "special/chat-marker": 2.736729344712304,
+          "punctuation/newline": 35.09437153679984,
+          "content": 28.290535116195677
+        },
+        "pre_token_share_mean": {
+          "special/chat-marker": 0.0398870456386402,
+          "punctuation/newline": 0.5124452226421268,
+          "content": 0.44766773171923263
+        },
+        "attention_overlap_mass_mean": {
+          "bos": 0.0,
+          "edge": 0.005078831610236583,
+          "recent": 0.29772211321230446,
+          "self": 0.03975121985588755,
+          "middle": 0.6972271240183285
+        },
+        "top_position_group_frac": {
+          "bos": 0.0,
+          "edge": 0.0,
+          "self": 0.03571428571428571,
+          "recent_nonself": 0.37142857142857144,
+          "middle": 0.5928571428571429
+        },
+        "top_token_group_frac": {
+          "special/chat-marker": 0.08571428571428572,
+          "punctuation/newline": 0.30714285714285716,
+          "content": 0.6071428571428571
+        },
+        "top_abs_position_hist": {
+          "511": 12,
+          "512": 4,
+          "510": 11,
+          "514": 8,
+          "515": 12,
+          "286": 4,
+          "288": 2,
+          "513": 4,
+          "501": 1,
+          "509": 4,
+          "506": 1,
+          "282": 1,
+          "226": 76
+        },
+        "top_query_offset_hist": {
+          "1": 27,
+          "4": 3,
+          "3": 7,
+          "228": 1,
+          "229": 3,
+          "2": 12,
+          "226": 2,
+          "0": 5,
+          "11": 1,
+          "6": 1,
+          "5": 1,
+          "233": 1,
+          "290": 17,
+          "287": 15,
+          "288": 16,
+          "289": 16,
+          "286": 12
+        },
+        "top_edge_offset_hist": {
+          "510": 27,
+          "507": 3,
+          "508": 7,
+          "283": 1,
+          "282": 3,
+          "509": 12,
+          "285": 2,
+          "511": 5,
+          "500": 1,
+          "505": 1,
+          "506": 1,
+          "278": 1,
+          "221": 17,
+          "224": 15,
+          "223": 16,
+          "222": 16,
+          "225": 12
+        },
+        "anchor_exact_overlap_mean": {
+          "bos": 0.0,
+          "edge": 0.32548705286656815,
+          "recent": 25.068033887162095,
+          "self": 3.0582292291912294,
+          "middle": 28.57447738448779
+        },
+        "anchor_exact_position_partition_mean": {
+          "bos": 0.0,
+          "edge": 0.32548705286656815,
+          "self": 3.0582292291912294,
+          "recent_nonself": 24.75608118055832,
+          "middle": 28.57447738448779
+        },
+        "anchor_exact_position_partition_share_mean": {
+          "bos": 0.0,
+          "edge": 0.006603418766342729,
+          "self": 0.056122441155797856,
+          "recent_nonself": 0.31796250484955024,
+          "middle": 0.6193116352283093
+        },
+        "anchor_exact_token_mean": {
+          "special/chat-marker": 6.671091571295013,
+          "punctuation/newline": 36.89857559544699,
+          "content": 17.41865725318591
+        },
+        "anchor_exact_token_share_mean": {
+          "special/chat-marker": 0.07483266924312278,
+          "punctuation/newline": 0.46259722723023067,
+          "content": 0.46257010352664657
+        }
+      },
+      "full": {
+        "query_count": 35,
+        "anchor_count": 21,
+        "pre_overlap_score_mean": {
+          "bos": 5.874926980904171,
+          "edge": 15.049456078665598,
+          "recent": 9.938734327043806,
+          "self": 1.8175978473254613,
+          "middle": 47.06681623458862
+        },
+        "pre_position_partition_mean": {
+          "bos": 5.874926980904171,
+          "edge": 9.174529341288975,
+          "self": 1.8175978473254613,
+          "recent_nonself": 8.121136621066503,
+          "middle": 47.06681623458862
+        },
+        "pre_position_partition_share_mean": {
+          "bos": 0.09622038002325942,
+          "edge": 0.13324416049423066,
+          "self": 0.02517947357819925,
+          "recent_nonself": 0.10796833583530209,
+          "middle": 0.6373876500690085
+        },
+        "pre_token_score_mean": {
+          "special/chat-marker": 11.473644501822335,
+          "punctuation/newline": 32.52981489726475,
+          "content": 28.051547867911204
+        },
+        "pre_token_share_mean": {
+          "special/chat-marker": 0.18459296470943648,
+          "punctuation/newline": 0.4335044495856504,
+          "content": 0.3819025857049132
+        },
+        "attention_overlap_mass_mean": {
+          "bos": 0.06234659467424665,
+          "edge": 0.32660721710750035,
+          "recent": 0.11830976642668248,
+          "self": 0.024436642442430767,
+          "middle": 0.5550290107727051
+        },
+        "top_position_group_frac": {
+          "bos": 0.2857142857142857,
+          "edge": 0.11428571428571428,
+          "self": 0.02857142857142857,
+          "recent_nonself": 0.08571428571428572,
+          "middle": 0.4857142857142857
+        },
+        "top_token_group_frac": {
+          "special/chat-marker": 0.42857142857142855,
+          "punctuation/newline": 0.2857142857142857,
+          "content": 0.2857142857142857
+        },
+        "top_abs_position_hist": {
+          "509": 1,
+          "0": 10,
+          "2": 1,
+          "258": 1,
+          "278": 2,
+          "136": 2,
+          "515": 2,
+          "293": 2,
+          "510": 1,
+          "288": 2,
+          "286": 4,
+          "1": 3,
+          "282": 2,
+          "289": 2
+        },
+        "top_query_offset_hist": {
+          "3": 2,
+          "513": 2,
+          "514": 5,
+          "515": 4,
+          "254": 1,
+          "235": 1,
+          "378": 1,
+          "0": 1,
+          "1": 1,
+          "219": 2,
+          "226": 1,
+          "229": 1,
+          "228": 3,
+          "511": 1,
+          "377": 1,
+          "233": 1,
+          "234": 2,
+          "224": 2,
+          "230": 1,
+          "512": 1,
+          "516": 1
+        },
+        "top_edge_offset_hist": {
+          "509": 1,
+          "0": 10,
+          "2": 1,
+          "258": 1,
+          "278": 2,
+          "136": 2,
+          "515": 2,
+          "293": 2,
+          "510": 1,
+          "288": 2,
+          "286": 4,
+          "1": 3,
+          "282": 2,
+          "289": 2
+        },
+        "anchor_exact_overlap_mean": {
+          "bos": 12.007815832183475,
+          "edge": 15.213991976919628,
+          "recent": 48.73568401734034,
+          "self": 12.20865597948432,
+          "middle": 89.93256448564075
+        },
+        "anchor_exact_position_partition_mean": {
+          "bos": 12.007815832183475,
+          "edge": 15.213991976919628,
+          "self": 12.20865597948432,
+          "recent_nonself": 39.90248967920031,
+          "middle": 89.93256448564075
+        },
+        "anchor_exact_position_partition_share_mean": {
+          "bos": 0.12426115798509706,
+          "edge": 0.14293411303114487,
+          "self": 0.04331827949237225,
+          "recent_nonself": 0.14927035078195483,
+          "middle": 0.540216098709431
+        },
+        "anchor_exact_token_mean": {
+          "special/chat-marker": 21.104262596084958,
+          "punctuation/newline": 73.04212572461083,
+          "content": 46.36419952483404
+        },
+        "anchor_exact_token_share_mean": {
+          "special/chat-marker": 0.20673898702382032,
+          "punctuation/newline": 0.37940836057485533,
+          "content": 0.4138526524013243
+        }
+      }
+    },
+    "depth_bucket": {
+      "early_sliding": {
+        "query_count": 40,
+        "anchor_count": 24,
+        "pre_overlap_score_mean": {
+          "bos": 0.0,
+          "edge": 0.8276620814576745,
+          "recent": 45.28334653377533,
+          "self": 4.694227442890406,
+          "middle": 51.09911503791809
+        },
+        "pre_position_partition_mean": {
+          "bos": 0.0,
+          "edge": 0.8276620814576745,
+          "self": 4.694227442890406,
+          "recent_nonself": 40.58911890983582,
+          "middle": 51.09911503791809
+        },
+        "pre_position_partition_share_mean": {
+          "bos": 0.0,
+          "edge": 0.008148832143872227,
+          "self": 0.05229637483826601,
+          "recent_nonself": 0.41123422119242525,
+          "middle": 0.5283205718254366
+        },
+        "pre_token_score_mean": {
+          "special/chat-marker": 5.422486601956189,
+          "punctuation/newline": 60.12331590652466,
+          "content": 31.664319944381713
+        },
+        "pre_token_share_mean": {
+          "special/chat-marker": 0.0578084904912704,
+          "punctuation/newline": 0.6174194649203336,
+          "content": 0.324772044588396
+        },
+        "attention_overlap_mass_mean": {
+          "bos": 0.0,
+          "edge": 0.009005814857664518,
+          "recent": 0.47637664191424844,
+          "self": 0.06604959033429622,
+          "middle": 0.5146370612084865
+        },
+        "top_position_group_frac": {
+          "bos": 0.0,
+          "edge": 0.0,
+          "self": 0.1,
+          "recent_nonself": 0.775,
+          "middle": 0.125
+        },
+        "top_token_group_frac": {
+          "special/chat-marker": 0.2,
+          "punctuation/newline": 0.65,
+          "content": 0.15
+        },
+        "top_abs_position_hist": {
+          "511": 8,
+          "512": 2,
+          "510": 5,
+          "514": 7,
+          "515": 8,
+          "286": 3,
+          "288": 2,
+          "513": 3,
+          "501": 1,
+          "509": 1
+        },
+        "top_query_offset_hist": {
+          "1": 19,
+          "4": 2,
+          "3": 3,
+          "228": 1,
+          "229": 2,
+          "2": 6,
+          "226": 2,
+          "0": 4,
+          "11": 1
+        },
+        "top_edge_offset_hist": {
+          "510": 19,
+          "507": 2,
+          "508": 3,
+          "283": 1,
+          "282": 2,
+          "509": 6,
+          "285": 2,
+          "511": 4,
+          "500": 1
+        },
+        "anchor_exact_overlap_mean": {
+          "bos": 0.0,
+          "edge": 0.8568559279665351,
+          "recent": 60.81713417172432,
+          "self": 6.420174295393129,
+          "middle": 54.44954222937425
+        },
+        "anchor_exact_position_partition_mean": {
+          "bos": 0.0,
+          "edge": 0.8568559279665351,
+          "self": 6.420174295393129,
+          "recent_nonself": 62.255164662996926,
+          "middle": 54.44954222937425
+        },
+        "anchor_exact_position_partition_share_mean": {
+          "bos": 0.0,
+          "edge": 0.012474462756371506,
+          "self": 0.0738295579930963,
+          "recent_nonself": 0.4468338153877777,
+          "middle": 0.46686216386275464
+        },
+        "anchor_exact_token_mean": {
+          "special/chat-marker": 18.783456633100286,
+          "punctuation/newline": 102.54545752207439,
+          "content": 33.4519321868817
+        },
+        "anchor_exact_token_share_mean": {
+          "special/chat-marker": 0.10050307635886009,
+          "punctuation/newline": 0.6184492150218821,
+          "content": 0.28104770861925776
+        }
+      },
+      "mid_sliding": {
+        "query_count": 60,
+        "anchor_count": 36,
+        "pre_overlap_score_mean": {
+          "bos": 0.0,
+          "edge": 0.13562962456295888,
+          "recent": 17.87359623114268,
+          "self": 2.32088043615222,
+          "middle": 33.32231569290161
+        },
+        "pre_position_partition_mean": {
+          "bos": 0.0,
+          "edge": 0.13562962456295888,
+          "self": 2.32088043615222,
+          "recent_nonself": 15.552716080347697,
+          "middle": 33.32231569290161
+        },
+        "pre_position_partition_share_mean": {
+          "bos": 0.0,
+          "edge": 0.0026672456738210284,
+          "self": 0.04450085005406669,
+          "recent_nonself": 0.2990124120065351,
+          "middle": 0.6538194922655775
+        },
+        "pre_token_score_mean": {
+          "special/chat-marker": 2.076285191625357,
+          "punctuation/newline": 27.599862988789877,
+          "content": 21.65539377530416
+        },
+        "pre_token_share_mean": {
+          "special/chat-marker": 0.041874969087124465,
+          "punctuation/newline": 0.5372796315002101,
+          "content": 0.4208453994126656
+        },
+        "attention_overlap_mass_mean": {
+          "bos": 0.0,
+          "edge": 0.0027367321541532873,
+          "recent": 0.29558898136019707,
+          "self": 0.03728508949279785,
+          "middle": 0.701667070388794
+        },
+        "top_position_group_frac": {
+          "bos": 0.0,
+          "edge": 0.0,
+          "self": 0.016666666666666666,
+          "recent_nonself": 0.35,
+          "middle": 0.6333333333333333
+        },
+        "top_token_group_frac": {
+          "special/chat-marker": 0.06666666666666667,
+          "punctuation/newline": 0.2833333333333333,
+          "content": 0.65
+        },
+        "top_abs_position_hist": {
+          "509": 3,
+          "512": 2,
+          "511": 4,
+          "515": 4,
+          "506": 1,
+          "282": 1,
+          "513": 1,
+          "514": 1,
+          "510": 6,
+          "286": 1,
+          "226": 36
+        },
+        "top_query_offset_hist": {
+          "3": 4,
+          "1": 8,
+          "0": 1,
+          "6": 1,
+          "2": 6,
+          "5": 1,
+          "233": 1,
+          "4": 1,
+          "229": 1,
+          "290": 9,
+          "287": 7,
+          "288": 8,
+          "289": 8,
+          "286": 4
+        },
+        "top_edge_offset_hist": {
+          "508": 4,
+          "510": 8,
+          "511": 1,
+          "505": 1,
+          "509": 6,
+          "506": 1,
+          "278": 1,
+          "507": 1,
+          "282": 1,
+          "221": 9,
+          "224": 7,
+          "223": 8,
+          "222": 8,
+          "225": 4
+        },
+        "anchor_exact_overlap_mean": {
+          "bos": 0.0,
+          "edge": 0.1271875655899445,
+          "recent": 16.04740466011895,
+          "self": 2.348744568311506,
+          "middle": 19.718132548862034
+        },
+        "anchor_exact_position_partition_mean": {
+          "bos": 0.0,
+          "edge": 0.1271875655899445,
+          "self": 2.348744568311506,
+          "recent_nonself": 14.67769436041514,
+          "middle": 19.718132548862034
+        },
+        "anchor_exact_position_partition_share_mean": {
+          "bos": 0.0,
+          "edge": 0.00367226664265504,
+          "self": 0.056165565027603295,
+          "recent_nonself": 0.36179239019990594,
+          "middle": 0.5783697781298357
+        },
+        "anchor_exact_token_mean": {
+          "special/chat-marker": 2.701275924117201,
+          "punctuation/newline": 15.19419495926963,
+          "content": 11.383978406588236
+        },
+        "anchor_exact_token_share_mean": {
+          "special/chat-marker": 0.08333746072016561,
+          "punctuation/newline": 0.49335301268825915,
+          "content": 0.4233095265915754
+        }
+      },
+      "late_sliding": {
+        "query_count": 40,
+        "anchor_count": 24,
+        "pre_overlap_score_mean": {
+          "bos": 0.0,
+          "edge": 0.23666336573660374,
+          "recent": 9.085824418067933,
+          "self": 1.4218959253281356,
+          "middle": 47.89580407142639
+        },
+        "pre_position_partition_mean": {
+          "bos": 0.0,
+          "edge": 0.23666336573660374,
+          "self": 1.4218959253281356,
+          "recent_nonself": 7.663928437232971,
+          "middle": 47.89580407142639
+        },
+        "pre_position_partition_share_mean": {
+          "bos": 0.0,
+          "edge": 0.004157458966839815,
+          "self": 0.02560041660876839,
+          "recent_nonself": 0.13196599507214285,
+          "middle": 0.838276129352249
+        },
+        "pre_token_score_mean": {
+          "special/chat-marker": 1.041638317098841,
+          "punctuation/newline": 21.307189989089967,
+          "content": 34.86946229934692
+        },
+        "pre_token_share_mean": {
+          "special/chat-marker": 0.01898371561328357,
+          "punctuation/newline": 0.3702193670767959,
+          "content": 0.6107969173099205
+        },
+        "attention_overlap_mass_mean": {
+          "bos": 0.0,
+          "edge": 0.004664997546933591,
+          "recent": 0.12226728228852153,
+          "self": 0.01715204492211342,
+          "middle": 0.8731572672724723
+        },
+        "top_position_group_frac": {
+          "bos": 0.0,
+          "edge": 0.0,
+          "self": 0.0,
+          "recent_nonself": 0.0,
+          "middle": 1.0
+        },
+        "top_token_group_frac": {
+          "special/chat-marker": 0.0,
+          "punctuation/newline": 0.0,
+          "content": 1.0
+        },
+        "top_abs_position_hist": {
+          "226": 40
+        },
+        "top_query_offset_hist": {
+          "286": 8,
+          "287": 8,
+          "288": 8,
+          "289": 8,
+          "290": 8
+        },
+        "top_edge_offset_hist": {
+          "225": 8,
+          "224": 8,
+          "223": 8,
+          "222": 8,
+          "221": 8
+        },
+        "anchor_exact_overlap_mean": {
+          "bos": 0.0,
+          "edge": 0.09156740868153672,
+          "recent": 2.849877443164587,
+          "self": 0.7605111543089151,
+          "middle": 15.983929793039957
+        },
+        "anchor_exact_position_partition_mean": {
+          "bos": 0.0,
+          "edge": 0.09156740868153672,
+          "self": 0.7605111543089151,
+          "recent_nonself": 2.3745779283344746,
+          "middle": 15.983929793039957
+        },
+        "anchor_exact_position_partition_share_mean": {
+          "bos": 0.0,
+          "edge": 0.005129102961845479,
+          "self": 0.038350638510791145,
+          "recent_nonself": 0.1233463662857891,
+          "middle": 0.8331738922415742
+        },
+        "anchor_exact_token_mean": {
+          "special/chat-marker": 0.5134499802564582,
+          "punctuation/newline": 3.8082646230856576,
+          "content": 10.437400589386622
+        },
+        "anchor_exact_token_share_mean": {
+          "special/chat-marker": 0.03640507491182112,
+          "punctuation/newline": 0.26061156125153695,
+          "content": 0.7029833638366422
+        }
+      },
+      "other_sliding": {
+        "query_count": 0,
+        "anchor_count": 0,
+        "pre_overlap_score_mean": {
+          "bos": 0.0,
+          "edge": 0.0,
+          "recent": 0.0,
+          "self": 0.0,
+          "middle": 0.0
+        },
+        "pre_position_partition_mean": {
+          "bos": 0.0,
+          "edge": 0.0,
+          "self": 0.0,
+          "recent_nonself": 0.0,
+          "middle": 0.0
+        },
+        "pre_position_partition_share_mean": {
+          "bos": 0.0,
+          "edge": 0.0,
+          "self": 0.0,
+          "recent_nonself": 0.0,
+          "middle": 0.0
+        },
+        "pre_token_score_mean": {
+          "special/chat-marker": 0.0,
+          "punctuation/newline": 0.0,
+          "content": 0.0
+        },
+        "pre_token_share_mean": {
+          "special/chat-marker": 0.0,
+          "punctuation/newline": 0.0,
+          "content": 0.0
+        },
+        "attention_overlap_mass_mean": {
+          "bos": 0.0,
+          "edge": 0.0,
+          "recent": 0.0,
+          "self": 0.0,
+          "middle": 0.0
+        },
+        "top_position_group_frac": {
+          "bos": 0.0,
+          "edge": 0.0,
+          "self": 0.0,
+          "recent_nonself": 0.0,
+          "middle": 0.0
+        },
+        "top_token_group_frac": {
+          "special/chat-marker": 0.0,
+          "punctuation/newline": 0.0,
+          "content": 0.0
+        },
+        "top_abs_position_hist": {},
+        "top_query_offset_hist": {},
+        "top_edge_offset_hist": {},
+        "anchor_exact_overlap_mean": {
+          "bos": 0.0,
+          "edge": 0.0,
+          "recent": 0.0,
+          "self": 0.0,
+          "middle": 0.0
+        },
+        "anchor_exact_position_partition_mean": {
+          "bos": 0.0,
+          "edge": 0.0,
+          "self": 0.0,
+          "recent_nonself": 0.0,
+          "middle": 0.0
+        },
+        "anchor_exact_position_partition_share_mean": {
+          "bos": 0.0,
+          "edge": 0.0,
+          "self": 0.0,
+          "recent_nonself": 0.0,
+          "middle": 0.0
+        },
+        "anchor_exact_token_mean": {
+          "special/chat-marker": 0.0,
+          "punctuation/newline": 0.0,
+          "content": 0.0
+        },
+        "anchor_exact_token_share_mean": {
+          "special/chat-marker": 0.0,
+          "punctuation/newline": 0.0,
+          "content": 0.0
+        }
+      },
+      "full": {
+        "query_count": 35,
+        "anchor_count": 21,
+        "pre_overlap_score_mean": {
+          "bos": 5.874926980904171,
+          "edge": 15.049456078665598,
+          "recent": 9.938734327043806,
+          "self": 1.8175978473254613,
+          "middle": 47.06681623458862
+        },
+        "pre_position_partition_mean": {
+          "bos": 5.874926980904171,
+          "edge": 9.174529341288975,
+          "self": 1.8175978473254613,
+          "recent_nonself": 8.121136621066503,
+          "middle": 47.06681623458862
+        },
+        "pre_position_partition_share_mean": {
+          "bos": 0.09622038002325942,
+          "edge": 0.13324416049423066,
+          "self": 0.02517947357819925,
+          "recent_nonself": 0.10796833583530209,
+          "middle": 0.6373876500690085
+        },
+        "pre_token_score_mean": {
+          "special/chat-marker": 11.473644501822335,
+          "punctuation/newline": 32.52981489726475,
+          "content": 28.051547867911204
+        },
+        "pre_token_share_mean": {
+          "special/chat-marker": 0.18459296470943648,
+          "punctuation/newline": 0.4335044495856504,
+          "content": 0.3819025857049132
+        },
+        "attention_overlap_mass_mean": {
+          "bos": 0.06234659467424665,
+          "edge": 0.32660721710750035,
+          "recent": 0.11830976642668248,
+          "self": 0.024436642442430767,
+          "middle": 0.5550290107727051
+        },
+        "top_position_group_frac": {
+          "bos": 0.2857142857142857,
+          "edge": 0.11428571428571428,
+          "self": 0.02857142857142857,
+          "recent_nonself": 0.08571428571428572,
+          "middle": 0.4857142857142857
+        },
+        "top_token_group_frac": {
+          "special/chat-marker": 0.42857142857142855,
+          "punctuation/newline": 0.2857142857142857,
+          "content": 0.2857142857142857
+        },
+        "top_abs_position_hist": {
+          "509": 1,
+          "0": 10,
+          "2": 1,
+          "258": 1,
+          "278": 2,
+          "136": 2,
+          "515": 2,
+          "293": 2,
+          "510": 1,
+          "288": 2,
+          "286": 4,
+          "1": 3,
+          "282": 2,
+          "289": 2
+        },
+        "top_query_offset_hist": {
+          "3": 2,
+          "513": 2,
+          "514": 5,
+          "515": 4,
+          "254": 1,
+          "235": 1,
+          "378": 1,
+          "0": 1,
+          "1": 1,
+          "219": 2,
+          "226": 1,
+          "229": 1,
+          "228": 3,
+          "511": 1,
+          "377": 1,
+          "233": 1,
+          "234": 2,
+          "224": 2,
+          "230": 1,
+          "512": 1,
+          "516": 1
+        },
+        "top_edge_offset_hist": {
+          "509": 1,
+          "0": 10,
+          "2": 1,
+          "258": 1,
+          "278": 2,
+          "136": 2,
+          "515": 2,
+          "293": 2,
+          "510": 1,
+          "288": 2,
+          "286": 4,
+          "1": 3,
+          "282": 2,
+          "289": 2
+        },
+        "anchor_exact_overlap_mean": {
+          "bos": 12.007815832183475,
+          "edge": 15.213991976919628,
+          "recent": 48.73568401734034,
+          "self": 12.20865597948432,
+          "middle": 89.93256448564075
+        },
+        "anchor_exact_position_partition_mean": {
+          "bos": 12.007815832183475,
+          "edge": 15.213991976919628,
+          "self": 12.20865597948432,
+          "recent_nonself": 39.90248967920031,
+          "middle": 89.93256448564075
+        },
+        "anchor_exact_position_partition_share_mean": {
+          "bos": 0.12426115798509706,
+          "edge": 0.14293411303114487,
+          "self": 0.04331827949237225,
+          "recent_nonself": 0.14927035078195483,
+          "middle": 0.540216098709431
+        },
+        "anchor_exact_token_mean": {
+          "special/chat-marker": 21.104262596084958,
+          "punctuation/newline": 73.04212572461083,
+          "content": 46.36419952483404
+        },
+        "anchor_exact_token_share_mean": {
+          "special/chat-marker": 0.20673898702382032,
+          "punctuation/newline": 0.37940836057485533,
+          "content": 0.4138526524013243
+        }
+      }
+    },
+    "per_layer": {
+      "0": {
+        "query_count": 5,
+        "anchor_count": 3,
+        "pre_overlap_score_mean": {
+          "bos": 0.0,
+          "edge": 0.40465577244758605,
+          "recent": 65.4061050415039,
+          "self": 2.0266915559768677,
+          "middle": 39.411767578125
+        },
+        "pre_position_partition_mean": {
+          "bos": 0.0,
+          "edge": 0.40465577244758605,
+          "self": 2.0266915559768677,
+          "recent_nonself": 63.37941436767578,
+          "middle": 39.411767578125
+        },
+        "pre_position_partition_share_mean": {
+          "bos": 0.0,
+          "edge": 0.0038762401454600685,
+          "self": 0.020080675885060656,
+          "recent_nonself": 0.6037430821239933,
+          "middle": 0.37230000184548584
+        },
+        "pre_token_score_mean": {
+          "special/chat-marker": 6.32005161345005,
+          "punctuation/newline": 73.73472137451172,
+          "content": 25.167753219604492
+        },
+        "pre_token_share_mean": {
+          "special/chat-marker": 0.05968799795218026,
+          "punctuation/newline": 0.7123512644710492,
+          "content": 0.22796073757677057
+        },
+        "attention_overlap_mass_mean": {
+          "bos": 0.0,
+          "edge": 0.002700095600448549,
+          "recent": 0.6212275147438049,
+          "self": 0.025463199615478514,
+          "middle": 0.37614386677742007
+        },
+        "top_position_group_frac": {
+          "bos": 0.0,
+          "edge": 0.0,
+          "self": 0.0,
+          "recent_nonself": 1.0,
+          "middle": 0.0
+        },
+        "top_token_group_frac": {
+          "special/chat-marker": 0.2,
+          "punctuation/newline": 0.8,
+          "content": 0.0
+        },
+        "top_abs_position_hist": {
+          "511": 1,
+          "512": 1,
+          "510": 1,
+          "514": 1,
+          "515": 1
+        },
+        "top_query_offset_hist": {
+          "1": 4,
+          "4": 1
+        },
+        "top_edge_offset_hist": {
+          "510": 4,
+          "507": 1
+        },
+        "anchor_exact_overlap_mean": {
+          "bos": 0.0,
+          "edge": 3.086047569910685,
+          "recent": 373.73936971028644,
+          "self": 31.556097666422527,
+          "middle": 304.83624267578125
+        },
+        "anchor_exact_position_partition_mean": {
+          "bos": 0.0,
+          "edge": 3.086047569910685,
+          "self": 31.556097666422527,
+          "recent_nonself": 387.82741292317706,
+          "middle": 304.83624267578125
+        },
+        "anchor_exact_position_partition_share_mean": {
+          "bos": 0.0,
+          "edge": 0.004626026321876901,
+          "self": 0.04737961408673826,
+          "recent_nonself": 0.5381862817941488,
+          "middle": 0.40980807779723594
+        },
+        "anchor_exact_token_mean": {
+          "special/chat-marker": 127.30041372776031,
+          "punctuation/newline": 683.2351888020834,
+          "content": 196.7909189860026
+        },
+        "anchor_exact_token_share_mean": {
+          "special/chat-marker": 0.09273221376926825,
+          "punctuation/newline": 0.7069969873795148,
+          "content": 0.20027079885121699
+        }
+      },
+      "1": {
+        "query_count": 5,
+        "anchor_count": 3,
+        "pre_overlap_score_mean": {
+          "bos": 0.0,
+          "edge": 1.428682267665863,
+          "recent": 47.1947135925293,
+          "self": 3.1098633110523224,
+          "middle": 69.06926498413085
+        },
+        "pre_position_partition_mean": {
+          "bos": 0.0,
+          "edge": 1.428682267665863,
+          "self": 3.1098633110523224,
+          "recent_nonself": 44.08484802246094,
+          "middle": 69.06926498413085
+        },
+        "pre_position_partition_share_mean": {
+          "bos": 0.0,
+          "edge": 0.012333392796297537,
+          "self": 0.026818608709460033,
+          "recent_nonself": 0.37366600822035717,
+          "middle": 0.5871819902738853
+        },
+        "pre_token_score_mean": {
+          "special/chat-marker": 6.25935822725296,
+          "punctuation/newline": 64.43145065307617,
+          "content": 47.00184936523438
+        },
+        "pre_token_share_mean": {
+          "special/chat-marker": 0.05462011507596683,
+          "punctuation/newline": 0.5474064963040383,
+          "content": 0.3979733886199949
+        },
+        "attention_overlap_mass_mean": {
+          "bos": 0.0,
+          "edge": 0.010952042788267136,
+          "recent": 0.4364506363868713,
+          "self": 0.046638643741607665,
+          "middle": 0.5525854349136352
+        },
+        "top_position_group_frac": {
+          "bos": 0.0,
+          "edge": 0.0,
+          "self": 0.0,
+          "recent_nonself": 0.6,
+          "middle": 0.4
+        },
+        "top_token_group_frac": {
+          "special/chat-marker": 0.2,
+          "punctuation/newline": 0.4,
+          "content": 0.4
+        },
+        "top_abs_position_hist": {
+          "511": 1,
+          "510": 1,
+          "286": 2,
+          "515": 1
+        },
+        "top_query_offset_hist": {
+          "1": 2,
+          "3": 1,
+          "228": 1,
+          "229": 1
+        },
+        "top_edge_offset_hist": {
+          "510": 2,
+          "508": 1,
+          "283": 1,
+          "282": 1
+        },
+        "anchor_exact_overlap_mean": {
+          "bos": 0.0,
+          "edge": 1.4255407849947612,
+          "recent": 20.2815367380778,
+          "self": 3.44760129849116,
+          "middle": 36.698527018229164
+        },
+        "anchor_exact_position_partition_mean": {
+          "bos": 0.0,
+          "edge": 1.4255407849947612,
+          "self": 3.44760129849116,
+          "recent_nonself": 21.10191059112549,
+          "middle": 36.698527018229164
+        },
+        "anchor_exact_position_partition_share_mean": {
+          "bos": 0.0,
+          "edge": 0.021352622543664504,
+          "self": 0.0536213206262654,
+          "recent_nonself": 0.34509319652601017,
+          "middle": 0.5799328603040599
+        },
+        "anchor_exact_token_mean": {
+          "special/chat-marker": 7.579513847827911,
+          "punctuation/newline": 30.07233174641927,
+          "content": 20.554752031962078
+        },
+        "anchor_exact_token_share_mean": {
+          "special/chat-marker": 0.10040670980344214,
+          "punctuation/newline": 0.544306356306648,
+          "content": 0.35528693388990984
+        }
+      },
+      "2": {
+        "query_count": 5,
+        "anchor_count": 3,
+        "pre_overlap_score_mean": {
+          "bos": 0.0,
+          "edge": 0.8349028706550599,
+          "recent": 46.113838577270506,
+          "self": 4.281563138961792,
+          "middle": 51.68694801330567
+        },
+        "pre_position_partition_mean": {
+          "bos": 0.0,
+          "edge": 0.8349028706550599,
+          "self": 4.281563138961792,
+          "recent_nonself": 41.83227462768555,
+          "middle": 51.68694801330567
+        },
+        "pre_position_partition_share_mean": {
+          "bos": 0.0,
+          "edge": 0.00835938024985405,
+          "self": 0.044450491011192556,
+          "recent_nonself": 0.42432649824804775,
+          "middle": 0.5228636304909056
+        },
+        "pre_token_score_mean": {
+          "special/chat-marker": 8.225928944349288,
+          "punctuation/newline": 65.5552261352539,
+          "content": 24.854532623291014
+        },
+        "pre_token_share_mean": {
+          "special/chat-marker": 0.08852189372459787,
+          "punctuation/newline": 0.6619740150991034,
+          "content": 0.24950409117629885
+        },
+        "attention_overlap_mass_mean": {
+          "bos": 0.0,
+          "edge": 0.010043324530124664,
+          "recent": 0.46861323416233064,
+          "self": 0.07117385864257812,
+          "middle": 0.5214905500411987
+        },
+        "top_position_group_frac": {
+          "bos": 0.0,
+          "edge": 0.0,
+          "self": 0.0,
+          "recent_nonself": 0.6,
+          "middle": 0.4
+        },
+        "top_token_group_frac": {
+          "special/chat-marker": 0.2,
+          "punctuation/newline": 0.6,
+          "content": 0.2
+        },
+        "top_abs_position_hist": {
+          "510": 2,
+          "288": 1,
+          "286": 1,
+          "515": 1
+        },
+        "top_query_offset_hist": {
+          "2": 1,
+          "3": 1,
+          "226": 1,
+          "229": 1,
+          "1": 1
+        },
+        "top_edge_offset_hist": {
+          "509": 1,
+          "508": 1,
+          "285": 1,
+          "282": 1,
+          "510": 1
+        },
+        "anchor_exact_overlap_mean": {
+          "bos": 0.0,
+          "edge": 0.09820369631052017,
+          "recent": 6.397445281346639,
+          "self": 0.9356302047769228,
+          "middle": 4.230155507723491
+        },
+        "anchor_exact_position_partition_mean": {
+          "bos": 0.0,
+          "edge": 0.09820369631052017,
+          "self": 0.9356302047769228,
+          "recent_nonself": 6.108844598134358,
+          "middle": 4.230155507723491
+        },
+        "anchor_exact_position_partition_share_mean": {
+          "bos": 0.0,
+          "edge": 0.008728178016916667,
+          "self": 0.07480837577782834,
+          "recent_nonself": 0.5486473301002448,
+          "middle": 0.36781611610501014
+        },
+        "anchor_exact_token_mean": {
+          "special/chat-marker": 2.3454685378819704,
+          "punctuation/newline": 8.39084800084432,
+          "content": 1.4592998425165813
+        },
+        "anchor_exact_token_share_mean": {
+          "special/chat-marker": 0.17863849450150535,
+          "punctuation/newline": 0.7038989788878895,
+          "content": 0.11746252661060508
+        }
+      },
+      "3": {
+        "query_count": 5,
+        "anchor_count": 3,
+        "pre_overlap_score_mean": {
+          "bos": 0.0,
+          "edge": 1.5329710006713868,
+          "recent": 54.67265853881836,
+          "self": 5.235130000114441,
+          "middle": 69.44934387207032
+        },
+        "pre_position_partition_mean": {
+          "bos": 0.0,
+          "edge": 1.5329710006713868,
+          "self": 5.235130000114441,
+          "recent_nonself": 49.43752937316894,
+          "middle": 69.44934387207032
+        },
+        "pre_position_partition_share_mean": {
+          "bos": 0.0,
+          "edge": 0.0121648867098644,
+          "self": 0.04357812692047802,
+          "recent_nonself": 0.38310103945221174,
+          "middle": 0.5611559469174459
+        },
+        "pre_token_score_mean": {
+          "special/chat-marker": 6.917481672763825,
+          "punctuation/newline": 84.1520751953125,
+          "content": 34.5854133605957
+        },
+        "pre_token_share_mean": {
+          "special/chat-marker": 0.05900762094138077,
+          "punctuation/newline": 0.6687108655480003,
+          "content": 0.2722815135106189
+        },
+        "attention_overlap_mass_mean": {
+          "bos": 0.0,
+          "edge": 0.013483968004584313,
+          "recent": 0.45797088742256165,
+          "self": 0.059603428840637206,
+          "middle": 0.5286882281303406
+        },
+        "top_position_group_frac": {
+          "bos": 0.0,
+          "edge": 0.0,
+          "self": 0.0,
+          "recent_nonself": 1.0,
+          "middle": 0.0
+        },
+        "top_token_group_frac": {
+          "special/chat-marker": 0.2,
+          "punctuation/newline": 0.6,
+          "content": 0.2
+        },
+        "top_abs_position_hist": {
+          "511": 1,
+          "512": 1,
+          "513": 1,
+          "514": 1,
+          "515": 1
+        },
+        "top_query_offset_hist": {
+          "1": 5
+        },
+        "top_edge_offset_hist": {
+          "510": 5
+        },
+        "anchor_exact_overlap_mean": {
+          "bos": 0.0,
+          "edge": 0.8211362361907959,
+          "recent": 23.94602394104004,
+          "self": 2.578394889831543,
+          "middle": 33.40994517008463
+        },
+        "anchor_exact_position_partition_mean": {
+          "bos": 0.0,
+          "edge": 0.8211362361907959,
+          "self": 2.578394889831543,
+          "recent_nonself": 23.116605122884113,
+          "middle": 33.40994517008463
+        },
+        "anchor_exact_position_partition_share_mean": {
+          "bos": 0.0,
+          "edge": 0.013636236662209535,
+          "self": 0.04380812106363131,
+          "recent_nonself": 0.38222893815871406,
+          "middle": 0.560326704115445
+        },
+        "anchor_exact_token_mean": {
+          "special/chat-marker": 4.252466241518657,
+          "punctuation/newline": 30.45391591389974,
+          "content": 11.620348612467447
+        },
+        "anchor_exact_token_share_mean": {
+          "special/chat-marker": 0.09675090896822047,
+          "punctuation/newline": 0.6496384767636743,
+          "content": 0.2536106142681053
+        }
+      },
+      "4": {
+        "query_count": 5,
+        "anchor_count": 3,
+        "pre_overlap_score_mean": {
+          "bos": 12.273908615112305,
+          "edge": 32.337514305114745,
+          "recent": 16.71880760192871,
+          "self": 2.525708317756653,
+          "middle": 105.23071899414063
+        },
+        "pre_position_partition_mean": {
+          "bos": 12.273908615112305,
+          "edge": 20.063606929779052,
+          "self": 2.525708317756653,
+          "recent_nonself": 14.193099975585938,
+          "middle": 105.23071899414063
+        },
+        "pre_position_partition_share_mean": {
+          "bos": 0.08054776380197962,
+          "edge": 0.14070301296066143,
+          "self": 0.01707984934062128,
+          "recent_nonself": 0.08769466104442328,
+          "middle": 0.6739747128523144
+        },
+        "pre_token_score_mean": {
+          "special/chat-marker": 19.881328296661376,
+          "punctuation/newline": 64.22511444091796,
+          "content": 70.18060302734375
+        },
+        "pre_token_share_mean": {
+          "special/chat-marker": 0.13560420978242488,
+          "punctuation/newline": 0.40303371137349464,
+          "content": 0.46136207884408054
+        },
+        "attention_overlap_mass_mean": {
+          "bos": 0.049056053161621094,
+          "edge": 0.26971435546875,
+          "recent": 0.10465695410966873,
+          "self": 0.016257190704345705,
+          "middle": 0.6255079567432403
+        },
+        "top_position_group_frac": {
+          "bos": 0.6,
+          "edge": 0.2,
+          "self": 0.0,
+          "recent_nonself": 0.2,
+          "middle": 0.0
+        },
+        "top_token_group_frac": {
+          "special/chat-marker": 0.6,
+          "punctuation/newline": 0.2,
+          "content": 0.2
+        },
+        "top_abs_position_hist": {
+          "509": 1,
+          "0": 3,
+          "2": 1
+        },
+        "top_query_offset_hist": {
+          "3": 1,
+          "513": 1,
+          "514": 2,
+          "515": 1
+        },
+        "top_edge_offset_hist": {
+          "509": 1,
+          "0": 3,
+          "2": 1
+        },
+        "anchor_exact_overlap_mean": {
+          "bos": 2.1002286672592163,
+          "edge": 7.396863301595052,
+          "recent": 5.022154331207275,
+          "self": 1.401239385207494,
+          "middle": 21.18956247965495
+        },
+        "anchor_exact_position_partition_mean": {
+          "bos": 2.1002286672592163,
+          "edge": 7.396863301595052,
+          "self": 1.401239385207494,
+          "recent_nonself": 4.450432141621907,
+          "middle": 21.18956247965495
+        },
+        "anchor_exact_position_partition_share_mean": {
+          "bos": 0.056907466842531985,
+          "edge": 0.19616166617786232,
+          "self": 0.037962944282107974,
+          "recent_nonself": 0.1256930159702825,
+          "middle": 0.5832749067272153
+        },
+        "anchor_exact_token_mean": {
+          "special/chat-marker": 4.0945208470026655,
+          "punctuation/newline": 16.986509482065838,
+          "content": 12.739420255025228
+        },
+        "anchor_exact_token_share_mean": {
+          "special/chat-marker": 0.13182657311185456,
+          "punctuation/newline": 0.4810823982676005,
+          "content": 0.3870910286205449
+        }
+      },
+      "5": {
+        "query_count": 5,
+        "anchor_count": 3,
+        "pre_overlap_score_mean": {
+          "bos": 0.0,
+          "edge": 1.0998594880104064,
+          "recent": 40.389398193359376,
+          "self": 5.757136750221252,
+          "middle": 71.45709991455078
+        },
+        "pre_position_partition_mean": {
+          "bos": 0.0,
+          "edge": 1.0998594880104064,
+          "self": 5.757136750221252,
+          "recent_nonself": 34.63226089477539,
+          "middle": 71.45709991455078
+        },
+        "pre_position_partition_share_mean": {
+          "bos": 0.0,
+          "edge": 0.009935048604167215,
+          "self": 0.05337832302106556,
+          "recent_nonself": 0.300902366546688,
+          "middle": 0.6357842618280792
+        },
+        "pre_token_score_mean": {
+          "special/chat-marker": 5.616731929779053,
+          "punctuation/newline": 55.206787109375,
+          "content": 52.12284164428711
+        },
+        "pre_token_share_mean": {
+          "special/chat-marker": 0.05365228942355245,
+          "punctuation/newline": 0.48409649055390513,
+          "content": 0.46225122002254243
+        },
+        "attention_overlap_mass_mean": {
+          "bos": 0.0,
+          "edge": 0.01847407817840576,
+          "recent": 0.3491388440132141,
+          "self": 0.07338822782039642,
+          "middle": 0.6323981165885926
+        },
+        "top_position_group_frac": {
+          "bos": 0.0,
+          "edge": 0.0,
+          "self": 0.0,
+          "recent_nonself": 0.8,
+          "middle": 0.2
+        },
+        "top_token_group_frac": {
+          "special/chat-marker": 0.0,
+          "punctuation/newline": 1.0,
+          "content": 0.0
+        },
+        "top_abs_position_hist": {
+          "511": 2,
+          "288": 1,
+          "514": 2
+        },
+        "top_query_offset_hist": {
+          "1": 2,
+          "2": 2,
+          "226": 1
+        },
+        "top_edge_offset_hist": {
+          "510": 2,
+          "509": 2,
+          "285": 1
+        },
+        "anchor_exact_overlap_mean": {
+          "bos": 0.0,
+          "edge": 0.278680478533109,
+          "recent": 6.407490412394206,
+          "self": 1.1588828911383946,
+          "middle": 9.681963602701822
+        },
+        "anchor_exact_position_partition_mean": {
+          "bos": 0.0,
+          "edge": 0.278680478533109,
+          "self": 1.1588828911383946,
+          "recent_nonself": 6.107502142588298,
+          "middle": 9.681963602701822
+        },
+        "anchor_exact_position_partition_share_mean": {
+          "bos": 0.0,
+          "edge": 0.016055023221056664,
+          "self": 0.06599342747440044,
+          "recent_nonself": 0.35767586246660105,
+          "middle": 0.5602756868379418
+        },
+        "anchor_exact_token_mean": {
+          "special/chat-marker": 1.3845978180567424,
+          "punctuation/newline": 7.960282802581787,
+          "content": 6.242905775705974
+        },
+        "anchor_exact_token_share_mean": {
+          "special/chat-marker": 0.08927341656974362,
+          "punctuation/newline": 0.5077634264105533,
+          "content": 0.4029631570197032
+        }
+      },
+      "6": {
+        "query_count": 5,
+        "anchor_count": 3,
+        "pre_overlap_score_mean": {
+          "bos": 0.0,
+          "edge": 0.6873817563056945,
+          "recent": 53.95659637451172,
+          "self": 9.22337074279785,
+          "middle": 31.225647735595704
+        },
+        "pre_position_partition_mean": {
+          "bos": 0.0,
+          "edge": 0.6873817563056945,
+          "self": 9.22337074279785,
+          "recent_nonself": 44.7332260131836,
+          "middle": 31.225647735595704
+        },
+        "pre_position_partition_share_mean": {
+          "bos": 0.0,
+          "edge": 0.008728273272177598,
+          "self": 0.11051890234221884,
+          "recent_nonself": 0.5151764047033487,
+          "middle": 0.36557641968225485
+        },
+        "pre_token_score_mean": {
+          "special/chat-marker": 5.245446625351906,
+          "punctuation/newline": 58.28425979614258,
+          "content": 22.339916229248047
+        },
+        "pre_token_share_mean": {
+          "special/chat-marker": 0.06952550420603534,
+          "punctuation/newline": 0.6680289780981344,
+          "content": 0.2624455176958302
+        },
+        "attention_overlap_mass_mean": {
+          "bos": 0.0,
+          "edge": 0.006053049862384796,
+          "recent": 0.6705174088478089,
+          "self": 0.1437236785888672,
+          "middle": 0.32335915565490725
+        },
+        "top_position_group_frac": {
+          "bos": 0.0,
+          "edge": 0.0,
+          "self": 0.4,
+          "recent_nonself": 0.6,
+          "middle": 0.0
+        },
+        "top_token_group_frac": {
+          "special/chat-marker": 0.0,
+          "punctuation/newline": 0.8,
+          "content": 0.2
+        },
+        "top_abs_position_hist": {
+          "511": 1,
+          "513": 1,
+          "514": 3
+        },
+        "top_query_offset_hist": {
+          "1": 2,
+          "0": 2,
+          "2": 1
+        },
+        "top_edge_offset_hist": {
+          "510": 2,
+          "511": 2,
+          "509": 1
+        },
+        "anchor_exact_overlap_mean": {
+          "bos": 0.0,
+          "edge": 0.46962398042281467,
+          "recent": 19.051372528076172,
+          "self": 4.464880208174388,
+          "middle": 9.534565289815268
+        },
+        "anchor_exact_position_partition_mean": {
+          "bos": 0.0,
+          "edge": 0.46962398042281467,
+          "self": 4.464880208174388,
+          "recent_nonself": 18.143964449564617,
+          "middle": 9.534565289815268
+        },
+        "anchor_exact_position_partition_share_mean": {
+          "bos": 0.0,
+          "edge": 0.017133076038463046,
+          "self": 0.12784157933019208,
+          "recent_nonself": 0.5528418556512597,
+          "middle": 0.30218348898008524
+        },
+        "anchor_exact_token_mean": {
+          "special/chat-marker": 2.495031033953031,
+          "punctuation/newline": 21.43020502726237,
+          "content": 6.6341837247212725
+        },
+        "anchor_exact_token_share_mean": {
+          "special/chat-marker": 0.09642327139920613,
+          "punctuation/newline": 0.6876704889294546,
+          "content": 0.21590623967133915
+        }
+      },
+      "7": {
+        "query_count": 5,
+        "anchor_count": 3,
+        "pre_overlap_score_mean": {
+          "bos": 0.0,
+          "edge": 0.4161282867193222,
+          "recent": 29.18134174346924,
+          "self": 4.649689626693726,
+          "middle": 44.250945281982425
+        },
+        "pre_position_partition_mean": {
+          "bos": 0.0,
+          "edge": 0.4161282867193222,
+          "self": 4.649689626693726,
+          "recent_nonself": 24.531652450561523,
+          "middle": 44.250945281982425
+        },
+        "pre_position_partition_share_mean": {
+          "bos": 0.0,
+          "edge": 0.005895220295390559,
+          "self": 0.06307551635489936,
+          "recent_nonself": 0.32170157194784216,
+          "middle": 0.6093276914018679
+        },
+        "pre_token_score_mean": {
+          "special/chat-marker": 3.3513860195875167,
+          "punctuation/newline": 45.48405151367187,
+          "content": 25.012976837158202
+        },
+        "pre_token_share_mean": {
+          "special/chat-marker": 0.04945160667752127,
+          "punctuation/newline": 0.610352548526085,
+          "content": 0.34019584479639364
+        },
+        "attention_overlap_mass_mean": {
+          "bos": 0.0,
+          "edge": 0.006366531550884247,
+          "recent": 0.3822042793035507,
+          "self": 0.05515480041503906,
+          "middle": 0.611335951089859
+        },
+        "top_position_group_frac": {
+          "bos": 0.0,
+          "edge": 0.0,
+          "self": 0.2,
+          "recent_nonself": 0.8,
+          "middle": 0.0
+        },
+        "top_token_group_frac": {
+          "special/chat-marker": 0.4,
+          "punctuation/newline": 0.4,
+          "content": 0.2
+        },
+        "top_abs_position_hist": {
+          "501": 1,
+          "511": 1,
+          "513": 1,
+          "515": 2
+        },
+        "top_query_offset_hist": {
+          "11": 1,
+          "2": 1,
+          "1": 2,
+          "0": 1
+        },
+        "top_edge_offset_hist": {
+          "500": 1,
+          "509": 1,
+          "510": 2,
+          "511": 1
+        },
+        "anchor_exact_overlap_mean": {
+          "bos": 0.0,
+          "edge": 0.31285236527522403,
+          "recent": 14.302523612976074,
+          "self": 2.9909745852152505,
+          "middle": 15.35238234202067
+        },
+        "anchor_exact_position_partition_mean": {
+          "bos": 0.0,
+          "edge": 0.31285236527522403,
+          "self": 2.9909745852152505,
+          "recent_nonself": 13.056426048278809,
+          "middle": 15.35238234202067
+        },
+        "anchor_exact_position_partition_share_mean": {
+          "bos": 0.0,
+          "edge": 0.00989715846811128,
+          "self": 0.09339663275904653,
+          "recent_nonself": 0.41261359459357133,
+          "middle": 0.48409261417927096
+        },
+        "anchor_exact_token_mean": {
+          "special/chat-marker": 2.4057752986749015,
+          "punctuation/newline": 17.07913335164388,
+          "content": 9.12168296178182
+        },
+        "anchor_exact_token_share_mean": {
+          "special/chat-marker": 0.08421652947730711,
+          "punctuation/newline": 0.5978402394397286,
+          "content": 0.31794323108296424
+        }
+      },
+      "8": {
+        "query_count": 5,
+        "anchor_count": 3,
+        "pre_overlap_score_mean": {
+          "bos": 0.0,
+          "edge": 0.21671520918607712,
+          "recent": 25.352120208740235,
+          "self": 3.2703744173049927,
+          "middle": 32.241902923583986
+        },
+        "pre_position_partition_mean": {
+          "bos": 0.0,
+          "edge": 0.21671520918607712,
+          "self": 3.2703744173049927,
+          "recent_nonself": 22.081745529174803,
+          "middle": 32.241902923583986
+        },
+        "pre_position_partition_share_mean": {
+          "bos": 0.0,
+          "edge": 0.003898215077766433,
+          "self": 0.056470354461753094,
+          "recent_nonself": 0.3672567982969124,
+          "middle": 0.572374632163568
+        },
+        "pre_token_score_mean": {
+          "special/chat-marker": 1.4435077831149101,
+          "punctuation/newline": 34.13795547485351,
+          "content": 22.229276275634767
+        },
+        "pre_token_share_mean": {
+          "special/chat-marker": 0.028000895928928467,
+          "punctuation/newline": 0.5864350607623533,
+          "content": 0.38556404330871824
+        },
+        "attention_overlap_mass_mean": {
+          "bos": 0.0,
+          "edge": 0.003973428346216679,
+          "recent": 0.4248903304338455,
+          "self": 0.053250885009765624,
+          "middle": 0.5710951864719391
+        },
+        "top_position_group_frac": {
+          "bos": 0.0,
+          "edge": 0.0,
+          "self": 0.2,
+          "recent_nonself": 0.8,
+          "middle": 0.0
+        },
+        "top_token_group_frac": {
+          "special/chat-marker": 0.4,
+          "punctuation/newline": 0.6,
+          "content": 0.0
+        },
+        "top_abs_position_hist": {
+          "509": 1,
+          "511": 1,
+          "510": 1,
+          "515": 2
+        },
+        "top_query_offset_hist": {
+          "3": 1,
+          "2": 1,
+          "4": 1,
+          "0": 1,
+          "1": 1
+        },
+        "top_edge_offset_hist": {
+          "508": 1,
+          "509": 1,
+          "507": 1,
+          "511": 1,
+          "510": 1
+        },
+        "anchor_exact_overlap_mean": {
+          "bos": 0.0,
+          "edge": 0.36276231209437054,
+          "recent": 22.411311149597168,
+          "self": 4.228932619094849,
+          "middle": 21.852556228637695
+        },
+        "anchor_exact_position_partition_mean": {
+          "bos": 0.0,
+          "edge": 0.36276231209437054,
+          "self": 4.228932619094849,
+          "recent_nonself": 22.578651428222656,
+          "middle": 21.852556228637695
+        },
+        "anchor_exact_position_partition_share_mean": {
+          "bos": 0.0,
+          "edge": 0.008367380778673434,
+          "self": 0.08378739282666814,
+          "recent_nonself": 0.43738346381167076,
+          "middle": 0.4704617625829876
+        },
+        "anchor_exact_token_mean": {
+          "special/chat-marker": 2.5043865591287613,
+          "punctuation/newline": 21.74175453186035,
+          "content": 15.191365559895834
+        },
+        "anchor_exact_token_share_mean": {
+          "special/chat-marker": 0.06558306638218749,
+          "punctuation/newline": 0.5494787660575944,
+          "content": 0.38493816756021815
+        }
+      },
+      "9": {
+        "query_count": 5,
+        "anchor_count": 3,
+        "pre_overlap_score_mean": {
+          "bos": 1.5375781178474426,
+          "edge": 6.851079845428467,
+          "recent": 9.719318675994874,
+          "self": 3.179949164390564,
+          "middle": 46.72188034057617
+        },
+        "pre_position_partition_mean": {
+          "bos": 1.5375781178474426,
+          "edge": 5.313501691818237,
+          "self": 3.179949164390564,
+          "recent_nonself": 6.539369511604309,
+          "middle": 46.72188034057617
+        },
+        "pre_position_partition_share_mean": {
+          "bos": 0.02525283931941811,
+          "edge": 0.08711642872719834,
+          "self": 0.051649033357687724,
+          "recent_nonself": 0.10057899048303887,
+          "middle": 0.735402708112657
+        },
+        "pre_token_score_mean": {
+          "special/chat-marker": 6.86963529586792,
+          "punctuation/newline": 31.396314239501955,
+          "content": 25.02632865905762
+        },
+        "pre_token_share_mean": {
+          "special/chat-marker": 0.11560061520934503,
+          "punctuation/newline": 0.4936126972943371,
+          "content": 0.39078668749631784
+        },
+        "attention_overlap_mass_mean": {
+          "bos": 0.05101852416992188,
+          "edge": 0.13359596729278564,
+          "recent": 0.15173573791980743,
+          "self": 0.05864734649658203,
+          "middle": 0.7146417021751403
+        },
+        "top_position_group_frac": {
+          "bos": 0.0,
+          "edge": 0.0,
+          "self": 0.2,
+          "recent_nonself": 0.2,
+          "middle": 0.6
+        },
+        "top_token_group_frac": {
+          "special/chat-marker": 0.4,
+          "punctuation/newline": 0.2,
+          "content": 0.4
+        },
+        "top_abs_position_hist": {
+          "258": 1,
+          "278": 1,
+          "136": 1,
+          "515": 2
+        },
+        "top_query_offset_hist": {
+          "254": 1,
+          "235": 1,
+          "378": 1,
+          "0": 1,
+          "1": 1
+        },
+        "top_edge_offset_hist": {
+          "258": 1,
+          "278": 1,
+          "136": 1,
+          "515": 2
+        },
+        "anchor_exact_overlap_mean": {
+          "bos": 2.5578107039133706,
+          "edge": 7.870355606079102,
+          "recent": 12.283007621765137,
+          "self": 4.954744418462117,
+          "middle": 34.90069325764974
+        },
+        "anchor_exact_position_partition_mean": {
+          "bos": 2.5578107039133706,
+          "edge": 7.870355606079102,
+          "self": 4.954744418462117,
+          "recent_nonself": 10.338459650675455,
+          "middle": 34.90069325764974
+        },
+        "anchor_exact_position_partition_share_mean": {
+          "bos": 0.041111941065138415,
+          "edge": 0.12858342153021798,
+          "self": 0.08280241339479334,
+          "recent_nonself": 0.1701167171514378,
+          "middle": 0.5773855068584125
+        },
+        "anchor_exact_token_mean": {
+          "special/chat-marker": 8.120920022328695,
+          "punctuation/newline": 23.29381561279297,
+          "content": 19.23156674702962
+        },
+        "anchor_exact_token_share_mean": {
+          "special/chat-marker": 0.16496492051870792,
+          "punctuation/newline": 0.4531566764082158,
+          "content": 0.38187840307307636
+        }
+      },
+      "10": {
+        "query_count": 5,
+        "anchor_count": 3,
+        "pre_overlap_score_mean": {
+          "bos": 0.0,
+          "edge": 0.07500454485416412,
+          "recent": 28.002017974853516,
+          "self": 4.438817167282105,
+          "middle": 24.15997886657715
+        },
+        "pre_position_partition_mean": {
+          "bos": 0.0,
+          "edge": 0.07500454485416412,
+          "self": 4.438817167282105,
+          "recent_nonself": 23.563201713562012,
+          "middle": 24.15997886657715
+        },
+        "pre_position_partition_share_mean": {
+          "bos": 0.0,
+          "edge": 0.0014782061809569334,
+          "self": 0.08566351477766523,
+          "recent_nonself": 0.4382625718744563,
+          "middle": 0.4745957071669215
+        },
+        "pre_token_score_mean": {
+          "special/chat-marker": 3.1307077914476396,
+          "punctuation/newline": 32.99484024047852,
+          "content": 16.111455535888673
+        },
+        "pre_token_share_mean": {
+          "special/chat-marker": 0.06667485250497898,
+          "punctuation/newline": 0.6211167236417114,
+          "content": 0.3122084238533097
+        },
+        "attention_overlap_mass_mean": {
+          "bos": 0.0,
+          "edge": 0.0014911423437297343,
+          "recent": 0.4533106029033661,
+          "self": 0.062315845489501955,
+          "middle": 0.545278799533844
+        },
+        "top_position_group_frac": {
+          "bos": 0.0,
+          "edge": 0.0,
+          "self": 0.2,
+          "recent_nonself": 0.8,
+          "middle": 0.0
+        },
+        "top_token_group_frac": {
+          "special/chat-marker": 0.4,
+          "punctuation/newline": 0.6,
+          "content": 0.0
+        },
+        "top_abs_position_hist": {
+          "509": 1,
+          "512": 1,
+          "511": 1,
+          "515": 2
+        },
+        "top_query_offset_hist": {
+          "3": 2,
+          "1": 2,
+          "0": 1
+        },
+        "top_edge_offset_hist": {
+          "508": 2,
+          "510": 2,
+          "511": 1
+        },
+        "anchor_exact_overlap_mean": {
+          "bos": 0.0,
+          "edge": 0.11756038665771484,
+          "recent": 31.174779891967773,
+          "self": 5.307251373926799,
+          "middle": 18.996861775716145
+        },
+        "anchor_exact_position_partition_mean": {
+          "bos": 0.0,
+          "edge": 0.11756038665771484,
+          "self": 5.307251373926799,
+          "recent_nonself": 27.78701400756836,
+          "middle": 18.996861775716145
+        },
+        "anchor_exact_position_partition_share_mean": {
+          "bos": 0.0,
+          "edge": 0.002340715027568663,
+          "self": 0.09835588716508888,
+          "recent_nonself": 0.5302114149738755,
+          "middle": 0.36909198283346706
+        },
+        "anchor_exact_token_mean": {
+          "special/chat-marker": 5.734923034906387,
+          "punctuation/newline": 26.89361572265625,
+          "content": 11.610321998596191
+        },
+        "anchor_exact_token_share_mean": {
+          "special/chat-marker": 0.12244062814142413,
+          "punctuation/newline": 0.6170015143619932,
+          "content": 0.2605578574965826
+        }
+      },
+      "11": {
+        "query_count": 5,
+        "anchor_count": 3,
+        "pre_overlap_score_mean": {
+          "bos": 0.0,
+          "edge": 0.06658849269151687,
+          "recent": 14.489875316619873,
+          "self": 2.244717836380005,
+          "middle": 28.71082305908203
+        },
+        "pre_position_partition_mean": {
+          "bos": 0.0,
+          "edge": 0.06658849269151687,
+          "self": 2.244717836380005,
+          "recent_nonself": 12.245157146453858,
+          "middle": 28.71082305908203
+        },
+        "pre_position_partition_share_mean": {
+          "bos": 0.0,
+          "edge": 0.001579494600583109,
+          "self": 0.050214666718704934,
+          "recent_nonself": 0.2695068210471111,
+          "middle": 0.6786990176336009
+        },
+        "pre_token_score_mean": {
+          "special/chat-marker": 2.132807859778404,
+          "punctuation/newline": 25.98168487548828,
+          "content": 15.15279426574707
+        },
+        "pre_token_share_mean": {
+          "special/chat-marker": 0.053235701063083105,
+          "punctuation/newline": 0.6008837362150448,
+          "content": 0.3458805627218721
+        },
+        "attention_overlap_mass_mean": {
+          "bos": 0.0,
+          "edge": 0.0019256487488746644,
+          "recent": 0.27806497514247897,
+          "self": 0.03776206970214844,
+          "middle": 0.7201120018959045
+        },
+        "top_position_group_frac": {
+          "bos": 0.0,
+          "edge": 0.0,
+          "self": 0.0,
+          "recent_nonself": 0.8,
+          "middle": 0.2
+        },
+        "top_token_group_frac": {
+          "special/chat-marker": 0.2,
+          "punctuation/newline": 0.6,
+          "content": 0.2
+        },
+        "top_abs_position_hist": {
+          "506": 1,
+          "511": 1,
+          "509": 1,
+          "282": 1,
+          "515": 1
+        },
+        "top_query_offset_hist": {
+          "6": 1,
+          "2": 1,
+          "5": 1,
+          "233": 1,
+          "1": 1
+        },
+        "top_edge_offset_hist": {
+          "505": 1,
+          "509": 1,
+          "506": 1,
+          "278": 1,
+          "510": 1
+        },
+        "anchor_exact_overlap_mean": {
+          "bos": 0.0,
+          "edge": 0.14097503075997034,
+          "recent": 20.766560554504395,
+          "self": 4.406094789505005,
+          "middle": 28.45451545715332
+        },
+        "anchor_exact_position_partition_mean": {
+          "bos": 0.0,
+          "edge": 0.14097503075997034,
+          "self": 4.406094789505005,
+          "recent_nonself": 18.68705113728841,
+          "middle": 28.45451545715332
+        },
+        "anchor_exact_position_partition_share_mean": {
+          "bos": 0.0,
+          "edge": 0.0027341724823903893,
+          "self": 0.0856833156800404,
+          "recent_nonself": 0.3525357588276703,
+          "middle": 0.5590467530098989
+        },
+        "anchor_exact_token_mean": {
+          "special/chat-marker": 5.362952917814255,
+          "punctuation/newline": 23.030240376790363,
+          "content": 14.022680600484213
+        },
+        "anchor_exact_token_share_mean": {
+          "special/chat-marker": 0.1164116242661668,
+          "punctuation/newline": 0.5528328422015866,
+          "content": 0.33075553353224657
+        }
+      },
+      "12": {
+        "query_count": 5,
+        "anchor_count": 3,
+        "pre_overlap_score_mean": {
+          "bos": 0.0,
+          "edge": 0.06584120318293571,
+          "recent": 20.690079116821288,
+          "self": 2.5952483654022216,
+          "middle": 22.211235427856444
+        },
+        "pre_position_partition_mean": {
+          "bos": 0.0,
+          "edge": 0.06584120318293571,
+          "self": 2.5952483654022216,
+          "recent_nonself": 18.094830322265626,
+          "middle": 22.211235427856444
+        },
+        "pre_position_partition_share_mean": {
+          "bos": 0.0,
+          "edge": 0.0015472730876886131,
+          "self": 0.060092894312814636,
+          "recent_nonself": 0.4194585091328401,
+          "middle": 0.5189013234666566
+        },
+        "pre_token_score_mean": {
+          "special/chat-marker": 1.8216352343559266,
+          "punctuation/newline": 24.960787963867187,
+          "content": 16.18473300933838
+        },
+        "pre_token_share_mean": {
+          "special/chat-marker": 0.04320402178815067,
+          "punctuation/newline": 0.5801415378058974,
+          "content": 0.376654440405952
+        },
+        "attention_overlap_mass_mean": {
+          "bos": 0.0,
+          "edge": 0.001668987423181534,
+          "recent": 0.3716604053974152,
+          "self": 0.05007591247558594,
+          "middle": 0.6265892505645752
+        },
+        "top_position_group_frac": {
+          "bos": 0.0,
+          "edge": 0.0,
+          "self": 0.0,
+          "recent_nonself": 1.0,
+          "middle": 0.0
+        },
+        "top_token_group_frac": {
+          "special/chat-marker": 0.2,
+          "punctuation/newline": 0.6,
+          "content": 0.2
+        },
+        "top_abs_position_hist": {
+          "511": 1,
+          "512": 1,
+          "513": 1,
+          "514": 1,
+          "515": 1
+        },
+        "top_query_offset_hist": {
+          "1": 5
+        },
+        "top_edge_offset_hist": {
+          "510": 5
+        },
+        "anchor_exact_overlap_mean": {
+          "bos": 0.0,
+          "edge": 0.24490713079770407,
+          "recent": 48.07309087117513,
+          "self": 6.880000829696655,
+          "middle": 28.003531138102215
+        },
+        "anchor_exact_position_partition_mean": {
+          "bos": 0.0,
+          "edge": 0.24490713079770407,
+          "self": 6.880000829696655,
+          "recent_nonself": 43.16879018147787,
+          "middle": 28.003531138102215
+        },
+        "anchor_exact_position_partition_share_mean": {
+          "bos": 0.0,
+          "edge": 0.0031630414311490246,
+          "self": 0.08605010906616546,
+          "recent_nonself": 0.5518865943467113,
+          "middle": 0.3589002551559742
+        },
+        "anchor_exact_token_mean": {
+          "special/chat-marker": 7.966017246246338,
+          "punctuation/newline": 38.74089113871256,
+          "content": 23.452620188395183
+        },
+        "anchor_exact_token_share_mean": {
+          "special/chat-marker": 0.11136900946202531,
+          "punctuation/newline": 0.5546695900282951,
+          "content": 0.33396140050967965
+        }
+      },
+      "13": {
+        "query_count": 5,
+        "anchor_count": 3,
+        "pre_overlap_score_mean": {
+          "bos": 0.0,
+          "edge": 0.09533057361841202,
+          "recent": 27.988673400878906,
+          "self": 2.7323735475540163,
+          "middle": 35.87390289306641
+        },
+        "pre_position_partition_mean": {
+          "bos": 0.0,
+          "edge": 0.09533057361841202,
+          "self": 2.7323735475540163,
+          "recent_nonself": 25.25630054473877,
+          "middle": 35.87390289306641
+        },
+        "pre_position_partition_share_mean": {
+          "bos": 0.0,
+          "edge": 0.0014963853666391555,
+          "self": 0.0427336882721793,
+          "recent_nonself": 0.39348780880062206,
+          "middle": 0.5622821175605595
+        },
+        "pre_token_score_mean": {
+          "special/chat-marker": 2.1696385771036146,
+          "punctuation/newline": 38.35296096801758,
+          "content": 23.43530731201172
+        },
+        "pre_token_share_mean": {
+          "special/chat-marker": 0.03437066669534544,
+          "punctuation/newline": 0.5984021158629197,
+          "content": 0.3672272174417349
+        },
+        "attention_overlap_mass_mean": {
+          "bos": 0.0,
+          "edge": 0.0019698888063430786,
+          "recent": 0.38927737474441526,
+          "self": 0.0469207763671875,
+          "middle": 0.6086929082870484
+        },
+        "top_position_group_frac": {
+          "bos": 0.0,
+          "edge": 0.0,
+          "self": 0.0,
+          "recent_nonself": 0.6,
+          "middle": 0.4
+        },
+        "top_token_group_frac": {
+          "special/chat-marker": 0.0,
+          "punctuation/newline": 0.6,
+          "content": 0.4
+        },
+        "top_abs_position_hist": {
+          "509": 1,
+          "511": 1,
+          "510": 1,
+          "286": 1,
+          "226": 1
+        },
+        "top_query_offset_hist": {
+          "3": 1,
+          "2": 1,
+          "4": 1,
+          "229": 1,
+          "290": 1
+        },
+        "top_edge_offset_hist": {
+          "508": 1,
+          "509": 1,
+          "507": 1,
+          "282": 1,
+          "221": 1
+        },
+        "anchor_exact_overlap_mean": {
+          "bos": 0.0,
+          "edge": 0.10242393612861633,
+          "recent": 16.56649907430013,
+          "self": 2.2804047664006553,
+          "middle": 21.030407587687176
+        },
+        "anchor_exact_position_partition_mean": {
+          "bos": 0.0,
+          "edge": 0.10242393612861633,
+          "self": 2.2804047664006553,
+          "recent_nonself": 15.425456682840982,
+          "middle": 21.030407587687176
+        },
+        "anchor_exact_position_partition_share_mean": {
+          "bos": 0.0,
+          "edge": 0.0026569421584457472,
+          "self": 0.05957064030278339,
+          "recent_nonself": 0.3982958921370395,
+          "middle": 0.5394765254017314
+        },
+        "anchor_exact_token_mean": {
+          "special/chat-marker": 2.1219967901706696,
+          "punctuation/newline": 16.463709513346355,
+          "content": 12.119404792785645
+        },
+        "anchor_exact_token_share_mean": {
+          "special/chat-marker": 0.06293768135429112,
+          "punctuation/newline": 0.5485789159448659,
+          "content": 0.388483402700843
+        }
+      },
+      "14": {
+        "query_count": 5,
+        "anchor_count": 3,
+        "pre_overlap_score_mean": {
+          "bos": 2.5369734525680543,
+          "edge": 10.249646377563476,
+          "recent": 20.092717933654786,
+          "self": 3.6889092206954954,
+          "middle": 48.038194274902345
+        },
+        "pre_position_partition_mean": {
+          "bos": 2.5369734525680543,
+          "edge": 7.712672996520996,
+          "self": 3.6889092206954954,
+          "recent_nonself": 16.403808212280275,
+          "middle": 48.038194274902345
+        },
+        "pre_position_partition_share_mean": {
+          "bos": 0.03366431314628049,
+          "edge": 0.10131818930921614,
+          "self": 0.04595113077709825,
+          "recent_nonself": 0.20200494740689462,
+          "middle": 0.6170614193605105
+        },
+        "pre_token_score_mean": {
+          "special/chat-marker": 8.766749000549316,
+          "punctuation/newline": 46.31259460449219,
+          "content": 23.301214599609374
+        },
+        "pre_token_share_mean": {
+          "special/chat-marker": 0.11679663502462405,
+          "punctuation/newline": 0.5877631362606971,
+          "content": 0.2954402287146788
+        },
+        "attention_overlap_mass_mean": {
+          "bos": 0.05072307586669922,
+          "edge": 0.24147348403930663,
+          "recent": 0.23386966288089753,
+          "self": 0.045339775085449216,
+          "middle": 0.524500721693039
+        },
+        "top_position_group_frac": {
+          "bos": 0.0,
+          "edge": 0.0,
+          "self": 0.0,
+          "recent_nonself": 0.2,
+          "middle": 0.8
+        },
+        "top_token_group_frac": {
+          "special/chat-marker": 0.0,
+          "punctuation/newline": 0.6,
+          "content": 0.4
+        },
+        "top_abs_position_hist": {
+          "293": 1,
+          "510": 1,
+          "288": 2,
+          "286": 1
+        },
+        "top_query_offset_hist": {
+          "219": 1,
+          "3": 1,
+          "226": 1,
+          "229": 1,
+          "228": 1
+        },
+        "top_edge_offset_hist": {
+          "293": 1,
+          "510": 1,
+          "288": 2,
+          "286": 1
+        },
+        "anchor_exact_overlap_mean": {
+          "bos": 59.61421648661295,
+          "edge": 70.849547068278,
+          "recent": 301.1912078857422,
+          "self": 75.05201021830241,
+          "middle": 495.96190388997394
+        },
+        "anchor_exact_position_partition_mean": {
+          "bos": 59.61421648661295,
+          "edge": 70.849547068278,
+          "self": 75.05201021830241,
+          "recent_nonself": 244.15384419759116,
+          "middle": 495.96190388997394
+        },
+        "anchor_exact_position_partition_share_mean": {
+          "bos": 0.06197066397019505,
+          "edge": 0.07401759810305196,
+          "self": 0.08115847115653065,
+          "recent_nonself": 0.2606557344514543,
+          "middle": 0.5221975323187681
+        },
+        "anchor_exact_token_mean": {
+          "special/chat-marker": 109.87471516927083,
+          "punctuation/newline": 431.5399169921875,
+          "content": 235.85789489746094
+        },
+        "anchor_exact_token_share_mean": {
+          "special/chat-marker": 0.14604358253243283,
+          "punctuation/newline": 0.5546771117707805,
+          "content": 0.2992793056967867
+        }
+      },
+      "15": {
+        "query_count": 5,
+        "anchor_count": 3,
+        "pre_overlap_score_mean": {
+          "bos": 0.0,
+          "edge": 0.22155388593673705,
+          "recent": 14.267738342285156,
+          "self": 1.6639415264129638,
+          "middle": 38.09533843994141
+        },
+        "pre_position_partition_mean": {
+          "bos": 0.0,
+          "edge": 0.22155388593673705,
+          "self": 1.6639415264129638,
+          "recent_nonself": 12.60379695892334,
+          "middle": 38.09533843994141
+        },
+        "pre_position_partition_share_mean": {
+          "bos": 0.0,
+          "edge": 0.004291685466805589,
+          "self": 0.03188324803252292,
+          "recent_nonself": 0.23367561778122145,
+          "middle": 0.73014944871945
+        },
+        "pre_token_score_mean": {
+          "special/chat-marker": 1.8845696091651916,
+          "punctuation/newline": 30.399539184570312,
+          "content": 20.300522994995116
+        },
+        "pre_token_share_mean": {
+          "special/chat-marker": 0.03735229867469108,
+          "punctuation/newline": 0.5747415162593541,
+          "content": 0.38790618506595487
+        },
+        "attention_overlap_mass_mean": {
+          "bos": 0.0,
+          "edge": 0.003950728476047516,
+          "recent": 0.21737464666366577,
+          "self": 0.027006816864013673,
+          "middle": 0.7786029219627381
+        },
+        "top_position_group_frac": {
+          "bos": 0.0,
+          "edge": 0.0,
+          "self": 0.0,
+          "recent_nonself": 0.2,
+          "middle": 0.8
+        },
+        "top_token_group_frac": {
+          "special/chat-marker": 0.0,
+          "punctuation/newline": 0.2,
+          "content": 0.8
+        },
+        "top_abs_position_hist": {
+          "510": 1,
+          "226": 4
+        },
+        "top_query_offset_hist": {
+          "2": 1,
+          "287": 1,
+          "288": 1,
+          "289": 1,
+          "290": 1
+        },
+        "top_edge_offset_hist": {
+          "509": 1,
+          "224": 1,
+          "223": 1,
+          "222": 1,
+          "221": 1
+        },
+        "anchor_exact_overlap_mean": {
+          "bos": 0.0,
+          "edge": 0.1525537371635437,
+          "recent": 11.172739823659262,
+          "self": 1.5016408761342366,
+          "middle": 18.522831916809082
+        },
+        "anchor_exact_position_partition_mean": {
+          "bos": 0.0,
+          "edge": 0.1525537371635437,
+          "self": 1.5016408761342366,
+          "recent_nonself": 10.106999238332113,
+          "middle": 18.522831916809082
+        },
+        "anchor_exact_position_partition_share_mean": {
+          "bos": 0.0,
+          "edge": 0.0053149229393282885,
+          "self": 0.04810723007635128,
+          "recent_nonself": 0.3193163450276349,
+          "middle": 0.6272615019566855
+        },
+        "anchor_exact_token_mean": {
+          "special/chat-marker": 1.4444262484709423,
+          "punctuation/newline": 12.790756384531656,
+          "content": 8.170822461446127
+        },
+        "anchor_exact_token_share_mean": {
+          "special/chat-marker": 0.07241669566777141,
+          "punctuation/newline": 0.5566946824476114,
+          "content": 0.3708886218846171
+        }
+      },
+      "16": {
+        "query_count": 5,
+        "anchor_count": 3,
+        "pre_overlap_score_mean": {
+          "bos": 0.0,
+          "edge": 0.2125125229358673,
+          "recent": 11.980671691894532,
+          "self": 1.1920144021511079,
+          "middle": 36.8922779083252
+        },
+        "pre_position_partition_mean": {
+          "bos": 0.0,
+          "edge": 0.2125125229358673,
+          "self": 1.1920144021511079,
+          "recent_nonself": 10.788657283782959,
+          "middle": 36.8922779083252
+        },
+        "pre_position_partition_share_mean": {
+          "bos": 0.0,
+          "edge": 0.004318293962405407,
+          "self": 0.024209019091947264,
+          "recent_nonself": 0.21995168949374225,
+          "middle": 0.751520997451905
+        },
+        "pre_token_score_mean": {
+          "special/chat-marker": 1.5209283351898193,
+          "punctuation/newline": 25.96539726257324,
+          "content": 21.599134826660155
+        },
+        "pre_token_share_mean": {
+          "special/chat-marker": 0.03071416714795285,
+          "punctuation/newline": 0.5291805751992449,
+          "content": 0.4401052576528023
+        },
+        "attention_overlap_mass_mean": {
+          "bos": 0.0,
+          "edge": 0.003900575637817383,
+          "recent": 0.2473277509212494,
+          "self": 0.02525634765625,
+          "middle": 0.7488681197166442
+        },
+        "top_position_group_frac": {
+          "bos": 0.0,
+          "edge": 0.0,
+          "self": 0.0,
+          "recent_nonself": 0.2,
+          "middle": 0.8
+        },
+        "top_token_group_frac": {
+          "special/chat-marker": 0.0,
+          "punctuation/newline": 0.2,
+          "content": 0.8
+        },
+        "top_abs_position_hist": {
+          "510": 1,
+          "226": 4
+        },
+        "top_query_offset_hist": {
+          "2": 1,
+          "287": 1,
+          "288": 1,
+          "289": 1,
+          "290": 1
+        },
+        "top_edge_offset_hist": {
+          "509": 1,
+          "224": 1,
+          "223": 1,
+          "222": 1,
+          "221": 1
+        },
+        "anchor_exact_overlap_mean": {
+          "bos": 0.0,
+          "edge": 0.1992336797217528,
+          "recent": 10.004555861155191,
+          "self": 0.8411781092484792,
+          "middle": 20.02840296427409
+        },
+        "anchor_exact_position_partition_mean": {
+          "bos": 0.0,
+          "edge": 0.1992336797217528,
+          "self": 0.8411781092484792,
+          "recent_nonself": 9.495957851409912,
+          "middle": 20.02840296427409
+        },
+        "anchor_exact_position_partition_share_mean": {
+          "bos": 0.0,
+          "edge": 0.007188278287311764,
+          "self": 0.027943420537168487,
+          "recent_nonself": 0.29609772379387267,
+          "middle": 0.6687705773816471
+        },
+        "anchor_exact_token_mean": {
+          "special/chat-marker": 1.2397024780511856,
+          "punctuation/newline": 12.57465918858846,
+          "content": 9.8674529393514
+        },
+        "anchor_exact_token_share_mean": {
+          "special/chat-marker": 0.06441462452383391,
+          "punctuation/newline": 0.5108284429644202,
+          "content": 0.42475693251174595
+        }
+      },
+      "17": {
+        "query_count": 5,
+        "anchor_count": 3,
+        "pre_overlap_score_mean": {
+          "bos": 0.0,
+          "edge": 0.18782556504011155,
+          "recent": 12.124494934082032,
+          "self": 0.9141898214817047,
+          "middle": 32.872213745117186
+        },
+        "pre_position_partition_mean": {
+          "bos": 0.0,
+          "edge": 0.18782556504011155,
+          "self": 0.9141898214817047,
+          "recent_nonself": 11.21030569076538,
+          "middle": 32.872213745117186
+        },
+        "pre_position_partition_share_mean": {
+          "bos": 0.0,
+          "edge": 0.004173665525717114,
+          "self": 0.01975241693422429,
+          "recent_nonself": 0.2470891164455542,
+          "middle": 0.7289848010945045
+        },
+        "pre_token_score_mean": {
+          "special/chat-marker": 1.7257586419582367,
+          "punctuation/newline": 23.597296524047852,
+          "content": 19.861479187011717
+        },
+        "pre_token_share_mean": {
+          "special/chat-marker": 0.03851390216130633,
+          "punctuation/newline": 0.5205666225905142,
+          "content": 0.44091947524817954
+        },
+        "attention_overlap_mass_mean": {
+          "bos": 0.0,
+          "edge": 0.004051810130476952,
+          "recent": 0.2183150827884674,
+          "self": 0.017873382568359374,
+          "middle": 0.777521276473999
+        },
+        "top_position_group_frac": {
+          "bos": 0.0,
+          "edge": 0.0,
+          "self": 0.0,
+          "recent_nonself": 0.2,
+          "middle": 0.8
+        },
+        "top_token_group_frac": {
+          "special/chat-marker": 0.0,
+          "punctuation/newline": 0.2,
+          "content": 0.8
+        },
+        "top_abs_position_hist": {
+          "510": 1,
+          "226": 4
+        },
+        "top_query_offset_hist": {
+          "2": 1,
+          "287": 1,
+          "288": 1,
+          "289": 1,
+          "290": 1
+        },
+        "top_edge_offset_hist": {
+          "509": 1,
+          "224": 1,
+          "223": 1,
+          "222": 1,
+          "221": 1
+        },
+        "anchor_exact_overlap_mean": {
+          "bos": 0.0,
+          "edge": 0.16136755918463072,
+          "recent": 11.865789413452148,
+          "self": 0.49077386657396954,
+          "middle": 18.24130980173747
+        },
+        "anchor_exact_position_partition_mean": {
+          "bos": 0.0,
+          "edge": 0.16136755918463072,
+          "self": 0.49077386657396954,
+          "recent_nonself": 11.7217116355896,
+          "middle": 18.24130980173747
+        },
+        "anchor_exact_position_partition_share_mean": {
+          "bos": 0.0,
+          "edge": 0.005393355680952734,
+          "self": 0.016064105319552404,
+          "recent_nonself": 0.37472050980202526,
+          "middle": 0.6038220291974695
+        },
+        "anchor_exact_token_mean": {
+          "special/chat-marker": 1.7557275990645091,
+          "punctuation/newline": 10.473773638407389,
+          "content": 8.557411193847656
+        },
+        "anchor_exact_token_share_mean": {
+          "special/chat-marker": 0.09742274326938478,
+          "punctuation/newline": 0.48406873104718867,
+          "content": 0.4185085256834265
+        }
+      },
+      "18": {
+        "query_count": 5,
+        "anchor_count": 3,
+        "pre_overlap_score_mean": {
+          "bos": 0.0,
+          "edge": 0.08469190448522568,
+          "recent": 17.253660202026367,
+          "self": 0.938054671883583,
+          "middle": 27.970712661743164
+        },
+        "pre_position_partition_mean": {
+          "bos": 0.0,
+          "edge": 0.08469190448522568,
+          "self": 0.938054671883583,
+          "recent_nonself": 16.315606307983398,
+          "middle": 27.970712661743164
+        },
+        "pre_position_partition_share_mean": {
+          "bos": 0.0,
+          "edge": 0.0018880459605028215,
+          "self": 0.020612753543442587,
+          "recent_nonself": 0.35710727036324125,
+          "middle": 0.6203919301328134
+        },
+        "pre_token_score_mean": {
+          "special/chat-marker": 0.8722230792045593,
+          "punctuation/newline": 25.835444259643555,
+          "content": 18.6013973236084
+        },
+        "pre_token_share_mean": {
+          "special/chat-marker": 0.0195729026527435,
+          "punctuation/newline": 0.5678762931283142,
+          "content": 0.41255080421894225
+        },
+        "attention_overlap_mass_mean": {
+          "bos": 0.0,
+          "edge": 0.0019511369988322257,
+          "recent": 0.32021228075027464,
+          "self": 0.020673274993896484,
+          "middle": 0.6778271555900574
+        },
+        "top_position_group_frac": {
+          "bos": 0.0,
+          "edge": 0.0,
+          "self": 0.0,
+          "recent_nonself": 0.4,
+          "middle": 0.6
+        },
+        "top_token_group_frac": {
+          "special/chat-marker": 0.0,
+          "punctuation/newline": 0.4,
+          "content": 0.6
+        },
+        "top_abs_position_hist": {
+          "510": 2,
+          "226": 3
+        },
+        "top_query_offset_hist": {
+          "2": 1,
+          "3": 1,
+          "288": 1,
+          "289": 1,
+          "290": 1
+        },
+        "top_edge_offset_hist": {
+          "509": 1,
+          "508": 1,
+          "223": 1,
+          "222": 1,
+          "221": 1
+        },
+        "anchor_exact_overlap_mean": {
+          "bos": 0.0,
+          "edge": 0.0762034331758817,
+          "recent": 12.038432757059732,
+          "self": 0.7566306938727697,
+          "middle": 14.29923152923584
+        },
+        "anchor_exact_position_partition_mean": {
+          "bos": 0.0,
+          "edge": 0.0762034331758817,
+          "self": 0.7566306938727697,
+          "recent_nonself": 11.606287638346354,
+          "middle": 14.29923152923584
+        },
+        "anchor_exact_position_partition_share_mean": {
+          "bos": 0.0,
+          "edge": 0.002849786333116208,
+          "self": 0.028308618030171342,
+          "recent_nonself": 0.4341015608119814,
+          "middle": 0.534740034824731
+        },
+        "anchor_exact_token_mean": {
+          "special/chat-marker": 0.7166719759504,
+          "punctuation/newline": 12.217515627543131,
+          "content": 8.296758651733398
+        },
+        "anchor_exact_token_share_mean": {
+          "special/chat-marker": 0.036188665700483354,
+          "punctuation/newline": 0.5676987323222557,
+          "content": 0.39611260197726095
+        }
+      },
+      "19": {
+        "query_count": 5,
+        "anchor_count": 3,
+        "pre_overlap_score_mean": {
+          "bos": 2.4756521224975585,
+          "edge": 9.174852657318116,
+          "recent": 10.831184673309327,
+          "self": 1.827241885662079,
+          "middle": 38.768494033813475
+        },
+        "pre_position_partition_mean": {
+          "bos": 2.4756521224975585,
+          "edge": 6.69920072555542,
+          "self": 1.827241885662079,
+          "recent_nonself": 9.003943061828613,
+          "middle": 38.768494033813475
+        },
+        "pre_position_partition_share_mean": {
+          "bos": 0.044523229255048924,
+          "edge": 0.1193741576405436,
+          "self": 0.030709671483036226,
+          "recent_nonself": 0.1513922011833484,
+          "middle": 0.6540007404380228
+        },
+        "pre_token_score_mean": {
+          "special/chat-marker": 6.8641129493713375,
+          "punctuation/newline": 33.18264808654785,
+          "content": 18.72777042388916
+        },
+        "pre_token_share_mean": {
+          "special/chat-marker": 0.12279737812226346,
+          "punctuation/newline": 0.5533672900509379,
+          "content": 0.32383533182679863
+        },
+        "attention_overlap_mass_mean": {
+          "bos": 0.04136199951171875,
+          "edge": 0.23467483520507812,
+          "recent": 0.15578894317150116,
+          "self": 0.026874637603759764,
+          "middle": 0.6095545649528503
+        },
+        "top_position_group_frac": {
+          "bos": 0.2,
+          "edge": 0.2,
+          "self": 0.0,
+          "recent_nonself": 0.0,
+          "middle": 0.6
+        },
+        "top_token_group_frac": {
+          "special/chat-marker": 0.4,
+          "punctuation/newline": 0.6,
+          "content": 0.0
+        },
+        "top_abs_position_hist": {
+          "1": 1,
+          "136": 1,
+          "0": 1,
+          "282": 2
+        },
+        "top_query_offset_hist": {
+          "511": 1,
+          "377": 1,
+          "514": 1,
+          "233": 1,
+          "234": 1
+        },
+        "top_edge_offset_hist": {
+          "1": 1,
+          "136": 1,
+          "0": 1,
+          "282": 2
+        },
+        "anchor_exact_overlap_mean": {
+          "bos": 3.680790980656942,
+          "edge": 7.924036343892415,
+          "recent": 11.595643679300943,
+          "self": 2.065284252166748,
+          "middle": 23.15535545349121
+        },
+        "anchor_exact_position_partition_mean": {
+          "bos": 3.680790980656942,
+          "edge": 7.924036343892415,
+          "self": 2.065284252166748,
+          "recent_nonself": 10.384416262308756,
+          "middle": 23.15535545349121
+        },
+        "anchor_exact_position_partition_share_mean": {
+          "bos": 0.07820724068495488,
+          "edge": 0.1679633661067997,
+          "self": 0.04473696395106184,
+          "recent_nonself": 0.21914958869123194,
+          "middle": 0.4899428405659516
+        },
+        "anchor_exact_token_mean": {
+          "special/chat-marker": 7.71987517674764,
+          "punctuation/newline": 16.472997665405273,
+          "content": 12.853412310282389
+        },
+        "anchor_exact_token_share_mean": {
+          "special/chat-marker": 0.20906587560256096,
+          "punctuation/newline": 0.4454434079677467,
+          "content": 0.34549071642969237
+        }
+      },
+      "20": {
+        "query_count": 5,
+        "anchor_count": 3,
+        "pre_overlap_score_mean": {
+          "bos": 0.0,
+          "edge": 0.20612585991621019,
+          "recent": 17.715935134887694,
+          "self": 2.067490828037262,
+          "middle": 36.55599594116211
+        },
+        "pre_position_partition_mean": {
+          "bos": 0.0,
+          "edge": 0.20612585991621019,
+          "self": 2.067490828037262,
+          "recent_nonself": 15.648445129394531,
+          "middle": 36.55599594116211
+        },
+        "pre_position_partition_share_mean": {
+          "bos": 0.0,
+          "edge": 0.003743035416651954,
+          "self": 0.03795741825433954,
+          "recent_nonself": 0.28186513445888106,
+          "middle": 0.6764344118701274
+        },
+        "pre_token_score_mean": {
+          "special/chat-marker": 1.946207857131958,
+          "punctuation/newline": 27.73567886352539,
+          "content": 24.79617042541504
+        },
+        "pre_token_share_mean": {
+          "special/chat-marker": 0.03756783646338337,
+          "punctuation/newline": 0.5043004579220407,
+          "content": 0.45813170561457595
+        },
+        "attention_overlap_mass_mean": {
+          "bos": 0.0,
+          "edge": 0.0027562186121940615,
+          "recent": 0.28142900466918946,
+          "self": 0.030958175659179688,
+          "middle": 0.7159510612487793
+        },
+        "top_position_group_frac": {
+          "bos": 0.0,
+          "edge": 0.0,
+          "self": 0.0,
+          "recent_nonself": 0.0,
+          "middle": 1.0
+        },
+        "top_token_group_frac": {
+          "special/chat-marker": 0.0,
+          "punctuation/newline": 0.0,
+          "content": 1.0
+        },
+        "top_abs_position_hist": {
+          "226": 5
+        },
+        "top_query_offset_hist": {
+          "286": 1,
+          "287": 1,
+          "288": 1,
+          "289": 1,
+          "290": 1
+        },
+        "top_edge_offset_hist": {
+          "225": 1,
+          "224": 1,
+          "223": 1,
+          "222": 1,
+          "221": 1
+        },
+        "anchor_exact_overlap_mean": {
+          "bos": 0.0,
+          "edge": 0.12101594855388005,
+          "recent": 10.885023434956869,
+          "self": 1.5061171650886536,
+          "middle": 20.020798683166504
+        },
+        "anchor_exact_position_partition_mean": {
+          "bos": 0.0,
+          "edge": 0.12101594855388005,
+          "self": 1.5061171650886536,
+          "recent_nonself": 10.303315162658691,
+          "middle": 20.020798683166504
+        },
+        "anchor_exact_position_partition_share_mean": {
+          "bos": 0.0,
+          "edge": 0.0038014397783437005,
+          "self": 0.04660437194650092,
+          "recent_nonself": 0.3200409294196536,
+          "middle": 0.6295532588555018
+        },
+        "anchor_exact_token_mean": {
+          "special/chat-marker": 1.6542201240857441,
+          "punctuation/newline": 10.472734133402506,
+          "content": 10.827366511027018
+        },
+        "anchor_exact_token_share_mean": {
+          "special/chat-marker": 0.07346807418143197,
+          "punctuation/newline": 0.44981733376371347,
+          "content": 0.4767145920548546
+        }
+      },
+      "21": {
+        "query_count": 5,
+        "anchor_count": 3,
+        "pre_overlap_score_mean": {
+          "bos": 0.0,
+          "edge": 0.18649054914712906,
+          "recent": 11.770302391052246,
+          "self": 2.9760029911994934,
+          "middle": 42.69990844726563
+        },
+        "pre_position_partition_mean": {
+          "bos": 0.0,
+          "edge": 0.18649054914712906,
+          "self": 2.9760029911994934,
+          "recent_nonself": 8.794299602508545,
+          "middle": 42.69990844726563
+        },
+        "pre_position_partition_share_mean": {
+          "bos": 0.0,
+          "edge": 0.0034069650207907095,
+          "self": 0.051896481496163674,
+          "recent_nonself": 0.16212923093079973,
+          "middle": 0.7825673225522459
+        },
+        "pre_token_score_mean": {
+          "special/chat-marker": 1.9868648529052735,
+          "punctuation/newline": 25.90221710205078,
+          "content": 26.76762161254883
+        },
+        "pre_token_share_mean": {
+          "special/chat-marker": 0.03755455182042319,
+          "punctuation/newline": 0.46937115152912784,
+          "content": 0.49307429665044894
+        },
+        "attention_overlap_mass_mean": {
+          "bos": 0.0,
+          "edge": 0.004518622159957885,
+          "recent": 0.17025520503520966,
+          "self": 0.031223487854003907,
+          "middle": 0.8251531600952149
+        },
+        "top_position_group_frac": {
+          "bos": 0.0,
+          "edge": 0.0,
+          "self": 0.0,
+          "recent_nonself": 0.0,
+          "middle": 1.0
+        },
+        "top_token_group_frac": {
+          "special/chat-marker": 0.0,
+          "punctuation/newline": 0.0,
+          "content": 1.0
+        },
+        "top_abs_position_hist": {
+          "226": 5
+        },
+        "top_query_offset_hist": {
+          "286": 1,
+          "287": 1,
+          "288": 1,
+          "289": 1,
+          "290": 1
+        },
+        "top_edge_offset_hist": {
+          "225": 1,
+          "224": 1,
+          "223": 1,
+          "222": 1,
+          "221": 1
+        },
+        "anchor_exact_overlap_mean": {
+          "bos": 0.0,
+          "edge": 0.10708239426215489,
+          "recent": 5.708602746327718,
+          "self": 1.6598456005255382,
+          "middle": 20.687049229939777
+        },
+        "anchor_exact_position_partition_mean": {
+          "bos": 0.0,
+          "edge": 0.10708239426215489,
+          "self": 1.6598456005255382,
+          "recent_nonself": 4.885581334431966,
+          "middle": 20.687049229939777
+        },
+        "anchor_exact_position_partition_share_mean": {
+          "bos": 0.0,
+          "edge": 0.003931280396830832,
+          "self": 0.059306030392704885,
+          "recent_nonself": 0.1804802730118457,
+          "middle": 0.7562824161986187
+        },
+        "anchor_exact_token_mean": {
+          "special/chat-marker": 1.3796350558598836,
+          "punctuation/newline": 6.970573743184407,
+          "content": 9.289113680521647
+        },
+        "anchor_exact_token_share_mean": {
+          "special/chat-marker": 0.07237816996424205,
+          "punctuation/newline": 0.39918123316686155,
+          "content": 0.5284405968688964
+        }
+      },
+      "22": {
+        "query_count": 5,
+        "anchor_count": 3,
+        "pre_overlap_score_mean": {
+          "bos": 0.0,
+          "edge": 0.12446738481521606,
+          "recent": 17.26453056335449,
+          "self": 2.244479250907898,
+          "middle": 38.321458435058595
+        },
+        "pre_position_partition_mean": {
+          "bos": 0.0,
+          "edge": 0.12446738481521606,
+          "self": 2.244479250907898,
+          "recent_nonself": 15.020051383972168,
+          "middle": 38.321458435058595
+        },
+        "pre_position_partition_share_mean": {
+          "bos": 0.0,
+          "edge": 0.0022645281438842526,
+          "self": 0.040956878352716095,
+          "recent_nonself": 0.26575334033045217,
+          "middle": 0.6910252531729475
+        },
+        "pre_token_score_mean": {
+          "special/chat-marker": 2.4773411452770233,
+          "punctuation/newline": 22.090407943725587,
+          "content": 31.14270782470703
+        },
+        "pre_token_share_mean": {
+          "special/chat-marker": 0.04537833904071782,
+          "punctuation/newline": 0.3966846685898464,
+          "content": 0.5579369923694358
+        },
+        "attention_overlap_mass_mean": {
+          "bos": 0.0,
+          "edge": 0.002521165460348129,
+          "recent": 0.27428044080734254,
+          "self": 0.03864622116088867,
+          "middle": 0.7231749653816223
+        },
+        "top_position_group_frac": {
+          "bos": 0.0,
+          "edge": 0.0,
+          "self": 0.0,
+          "recent_nonself": 0.0,
+          "middle": 1.0
+        },
+        "top_token_group_frac": {
+          "special/chat-marker": 0.0,
+          "punctuation/newline": 0.0,
+          "content": 1.0
+        },
+        "top_abs_position_hist": {
+          "226": 5
+        },
+        "top_query_offset_hist": {
+          "286": 1,
+          "287": 1,
+          "288": 1,
+          "289": 1,
+          "290": 1
+        },
+        "top_edge_offset_hist": {
+          "225": 1,
+          "224": 1,
+          "223": 1,
+          "222": 1,
+          "221": 1
+        },
+        "anchor_exact_overlap_mean": {
+          "bos": 0.0,
+          "edge": 0.06089864174524943,
+          "recent": 8.223101456960043,
+          "self": 1.18815682331721,
+          "middle": 16.913058280944824
+        },
+        "anchor_exact_position_partition_mean": {
+          "bos": 0.0,
+          "edge": 0.06089864174524943,
+          "self": 1.18815682331721,
+          "recent_nonself": 7.771712938944499,
+          "middle": 16.913058280944824
+        },
+        "anchor_exact_position_partition_share_mean": {
+          "bos": 0.0,
+          "edge": 0.002288668350029504,
+          "self": 0.04467581848656952,
+          "recent_nonself": 0.30657601923833183,
+          "middle": 0.6464594939250691
+        },
+        "anchor_exact_token_mean": {
+          "special/chat-marker": 1.9179845042526722,
+          "punctuation/newline": 5.422029972076416,
+          "content": 12.761950174967447
+        },
+        "anchor_exact_token_share_mean": {
+          "special/chat-marker": 0.0847013791925168,
+          "punctuation/newline": 0.27689336171060797,
+          "content": 0.6384052590968752
+        }
+      },
+      "23": {
+        "query_count": 5,
+        "anchor_count": 3,
+        "pre_overlap_score_mean": {
+          "bos": 0.0,
+          "edge": 0.1011230081319809,
+          "recent": 20.935175704956055,
+          "self": 3.843234825134277,
+          "middle": 35.50394248962402
+        },
+        "pre_position_partition_mean": {
+          "bos": 0.0,
+          "edge": 0.1011230081319809,
+          "self": 3.843234825134277,
+          "recent_nonself": 17.091940879821777,
+          "middle": 35.50394248962402
+        },
+        "pre_position_partition_share_mean": {
+          "bos": 0.0,
+          "edge": 0.0018193693532266779,
+          "self": 0.06803722086207982,
+          "recent_nonself": 0.2998618334194994,
+          "middle": 0.6302815763651941
+        },
+        "pre_token_score_mean": {
+          "special/chat-marker": 3.246739315986633,
+          "punctuation/newline": 27.382100677490236,
+          "content": 25.911400985717773
+        },
+        "pre_token_share_mean": {
+          "special/chat-marker": 0.05836038903271725,
+          "punctuation/newline": 0.4840901792585061,
+          "content": 0.45754943170877665
+        },
+        "attention_overlap_mass_mean": {
+          "bos": 0.0,
+          "edge": 0.0021348610520362855,
+          "recent": 0.32556000649929046,
+          "self": 0.05870876312255859,
+          "middle": 0.6722332239151001
+        },
+        "top_position_group_frac": {
+          "bos": 0.0,
+          "edge": 0.0,
+          "self": 0.0,
+          "recent_nonself": 0.0,
+          "middle": 1.0
+        },
+        "top_token_group_frac": {
+          "special/chat-marker": 0.0,
+          "punctuation/newline": 0.0,
+          "content": 1.0
+        },
+        "top_abs_position_hist": {
+          "226": 5
+        },
+        "top_query_offset_hist": {
+          "286": 1,
+          "287": 1,
+          "288": 1,
+          "289": 1,
+          "290": 1
+        },
+        "top_edge_offset_hist": {
+          "225": 1,
+          "224": 1,
+          "223": 1,
+          "222": 1,
+          "221": 1
+        },
+        "anchor_exact_overlap_mean": {
+          "bos": 0.0,
+          "edge": 0.042028908928235374,
+          "recent": 6.089680035909017,
+          "self": 1.3668399254480998,
+          "middle": 11.419592221577963
+        },
+        "anchor_exact_position_partition_mean": {
+          "bos": 0.0,
+          "edge": 0.042028908928235374,
+          "self": 1.3668399254480998,
+          "recent_nonself": 5.1724545160929365,
+          "middle": 11.419592221577963
+        },
+        "anchor_exact_position_partition_share_mean": {
+          "bos": 0.0,
+          "edge": 0.002404596846393614,
+          "self": 0.07331723332814263,
+          "recent_nonself": 0.27724566100822945,
+          "middle": 0.6470325088172343
+        },
+        "anchor_exact_token_mean": {
+          "special/chat-marker": 1.1210531145334244,
+          "punctuation/newline": 6.279840071996053,
+          "content": 7.631837685902913
+        },
+        "anchor_exact_token_share_mean": {
+          "special/chat-marker": 0.08590023291841543,
+          "punctuation/newline": 0.4019707722997083,
+          "content": 0.5121289947818762
+        }
+      },
+      "24": {
+        "query_count": 5,
+        "anchor_count": 3,
+        "pre_overlap_score_mean": {
+          "bos": 3.972674036026001,
+          "edge": 10.793401527404786,
+          "recent": 7.231652355194091,
+          "self": 0.8055660843849182,
+          "middle": 34.988961410522464
+        },
+        "pre_position_partition_mean": {
+          "bos": 3.972674036026001,
+          "edge": 6.8207276344299315,
+          "self": 0.8055660843849182,
+          "recent_nonself": 6.426086664199829,
+          "middle": 34.988961410522464
+        },
+        "pre_position_partition_share_mean": {
+          "bos": 0.07702105357053977,
+          "edge": 0.13248802173124824,
+          "self": 0.01596581773844411,
+          "recent_nonself": 0.1162999935359011,
+          "middle": 0.6582251134238668
+        },
+        "pre_token_score_mean": {
+          "special/chat-marker": 8.129891109466552,
+          "punctuation/newline": 24.97054672241211,
+          "content": 19.91357879638672
+        },
+        "pre_token_share_mean": {
+          "special/chat-marker": 0.15865916857680468,
+          "punctuation/newline": 0.4669147308721535,
+          "content": 0.37442610055104175
+        },
+        "attention_overlap_mass_mean": {
+          "bos": 0.057872772216796875,
+          "edge": 0.3211618423461914,
+          "recent": 0.10972935855388641,
+          "self": 0.014695358276367188,
+          "middle": 0.5691587448120117
+        },
+        "top_position_group_frac": {
+          "bos": 0.2,
+          "edge": 0.0,
+          "self": 0.0,
+          "recent_nonself": 0.0,
+          "middle": 0.8
+        },
+        "top_token_group_frac": {
+          "special/chat-marker": 0.2,
+          "punctuation/newline": 0.2,
+          "content": 0.6
+        },
+        "top_abs_position_hist": {
+          "293": 1,
+          "289": 1,
+          "286": 2,
+          "0": 1
+        },
+        "top_query_offset_hist": {
+          "219": 1,
+          "224": 1,
+          "228": 1,
+          "515": 1,
+          "230": 1
+        },
+        "top_edge_offset_hist": {
+          "293": 1,
+          "289": 1,
+          "286": 2,
+          "0": 1
+        },
+        "anchor_exact_overlap_mean": {
+          "bos": 5.430881977081299,
+          "edge": 5.545543909072876,
+          "recent": 7.943844159444173,
+          "self": 1.4276102383931477,
+          "middle": 31.779414494832356
+        },
+        "anchor_exact_position_partition_mean": {
+          "bos": 5.430881977081299,
+          "edge": 5.545543909072876,
+          "self": 1.4276102383931477,
+          "recent_nonself": 7.084682464599609,
+          "middle": 31.779414494832356
+        },
+        "anchor_exact_position_partition_share_mean": {
+          "bos": 0.10606056885090374,
+          "edge": 0.10858154071728181,
+          "self": 0.027806857354960936,
+          "recent_nonself": 0.1370105375483292,
+          "middle": 0.6205404955285244
+        },
+        "anchor_exact_token_mean": {
+          "special/chat-marker": 4.83525284131368,
+          "punctuation/newline": 15.47274653116862,
+          "content": 21.905154546101887
+        },
+        "anchor_exact_token_share_mean": {
+          "special/chat-marker": 0.11372184794917013,
+          "punctuation/newline": 0.3651363938873035,
+          "content": 0.5211417581635264
+        }
+      },
+      "25": {
+        "query_count": 5,
+        "anchor_count": 3,
+        "pre_overlap_score_mean": {
+          "bos": 0.0,
+          "edge": 0.46237015128135683,
+          "recent": 7.694212627410889,
+          "self": 0.7178788959980011,
+          "middle": 53.50466537475586
+        },
+        "pre_position_partition_mean": {
+          "bos": 0.0,
+          "edge": 0.46237015128135683,
+          "self": 0.7178788959980011,
+          "recent_nonself": 6.976333713531494,
+          "middle": 53.50466537475586
+        },
+        "pre_position_partition_share_mean": {
+          "bos": 0.0,
+          "edge": 0.007522054813174435,
+          "self": 0.011657176594422418,
+          "recent_nonself": 0.112995567967941,
+          "middle": 0.8678252006244621
+        },
+        "pre_token_score_mean": {
+          "special/chat-marker": 1.3176522135734559,
+          "punctuation/newline": 23.676770401000976,
+          "content": 36.66682586669922
+        },
+        "pre_token_share_mean": {
+          "special/chat-marker": 0.021450380850456002,
+          "punctuation/newline": 0.38386156023589973,
+          "content": 0.5946880589136443
+        },
+        "attention_overlap_mass_mean": {
+          "bos": 0.0,
+          "edge": 0.006631401181221008,
+          "recent": 0.11270092576742172,
+          "self": 0.01088571548461914,
+          "middle": 0.8806912541389466
+        },
+        "top_position_group_frac": {
+          "bos": 0.0,
+          "edge": 0.0,
+          "self": 0.0,
+          "recent_nonself": 0.0,
+          "middle": 1.0
+        },
+        "top_token_group_frac": {
+          "special/chat-marker": 0.0,
+          "punctuation/newline": 0.0,
+          "content": 1.0
+        },
+        "top_abs_position_hist": {
+          "226": 5
+        },
+        "top_query_offset_hist": {
+          "286": 1,
+          "287": 1,
+          "288": 1,
+          "289": 1,
+          "290": 1
+        },
+        "top_edge_offset_hist": {
+          "225": 1,
+          "224": 1,
+          "223": 1,
+          "222": 1,
+          "221": 1
+        },
+        "anchor_exact_overlap_mean": {
+          "bos": 0.0,
+          "edge": 0.22024819751580557,
+          "recent": 3.265452265739441,
+          "self": 0.3541870762904485,
+          "middle": 17.820646286010742
+        },
+        "anchor_exact_position_partition_mean": {
+          "bos": 0.0,
+          "edge": 0.22024819751580557,
+          "self": 0.3541870762904485,
+          "recent_nonself": 3.1403862635294595,
+          "middle": 17.820646286010742
+        },
+        "anchor_exact_position_partition_share_mean": {
+          "bos": 0.0,
+          "edge": 0.010544597489514133,
+          "self": 0.01599672373504919,
+          "recent_nonself": 0.14146394585505345,
+          "middle": 0.8319947329203833
+        },
+        "anchor_exact_token_mean": {
+          "special/chat-marker": 0.6316102743148804,
+          "punctuation/newline": 5.226512273152669,
+          "content": 9.25714143117269
+        },
+        "anchor_exact_token_share_mean": {
+          "special/chat-marker": 0.04400973589258175,
+          "punctuation/newline": 0.3418745994642654,
+          "content": 0.6141156646431528
+        }
+      },
+      "26": {
+        "query_count": 5,
+        "anchor_count": 3,
+        "pre_overlap_score_mean": {
+          "bos": 0.0,
+          "edge": 0.216355499625206,
+          "recent": 14.592187023162841,
+          "self": 4.1836725801229475,
+          "middle": 39.0238597869873
+        },
+        "pre_position_partition_mean": {
+          "bos": 0.0,
+          "edge": 0.216355499625206,
+          "self": 4.1836725801229475,
+          "recent_nonself": 10.408514595031738,
+          "middle": 39.0238597869873
+        },
+        "pre_position_partition_share_mean": {
+          "bos": 0.0,
+          "edge": 0.004005480408694672,
+          "self": 0.07658515400607305,
+          "recent_nonself": 0.18987436195786792,
+          "middle": 0.7295350036273643
+        },
+        "pre_token_score_mean": {
+          "special/chat-marker": 1.5544753193855285,
+          "punctuation/newline": 21.300342178344728,
+          "content": 30.977584075927734
+        },
+        "pre_token_share_mean": {
+          "special/chat-marker": 0.029899037059253147,
+          "punctuation/newline": 0.392602959113442,
+          "content": 0.5774980038273049
+        },
+        "attention_overlap_mass_mean": {
+          "bos": 0.0,
+          "edge": 0.003333520144224167,
+          "recent": 0.1908852517604828,
+          "self": 0.044565868377685544,
+          "middle": 0.8057702779769897
+        },
+        "top_position_group_frac": {
+          "bos": 0.0,
+          "edge": 0.0,
+          "self": 0.0,
+          "recent_nonself": 0.0,
+          "middle": 1.0
+        },
+        "top_token_group_frac": {
+          "special/chat-marker": 0.0,
+          "punctuation/newline": 0.0,
+          "content": 1.0
+        },
+        "top_abs_position_hist": {
+          "226": 5
+        },
+        "top_query_offset_hist": {
+          "286": 1,
+          "287": 1,
+          "288": 1,
+          "289": 1,
+          "290": 1
+        },
+        "top_edge_offset_hist": {
+          "225": 1,
+          "224": 1,
+          "223": 1,
+          "222": 1,
+          "221": 1
+        },
+        "anchor_exact_overlap_mean": {
+          "bos": 0.0,
+          "edge": 0.06551891689499219,
+          "recent": 4.454158782958984,
+          "self": 2.24263454725345,
+          "middle": 17.483895619710285
+        },
+        "anchor_exact_position_partition_mean": {
+          "bos": 0.0,
+          "edge": 0.06551891689499219,
+          "self": 2.24263454725345,
+          "recent_nonself": 2.898353854815165,
+          "middle": 17.483895619710285
+        },
+        "anchor_exact_position_partition_share_mean": {
+          "bos": 0.0,
+          "edge": 0.002883488585810384,
+          "self": 0.09943678175503327,
+          "recent_nonself": 0.13792435132636288,
+          "middle": 0.7597553783327934
+        },
+        "anchor_exact_token_mean": {
+          "special/chat-marker": 0.5915124999980131,
+          "punctuation/newline": 4.356718937555949,
+          "content": 10.161348660786947
+        },
+        "anchor_exact_token_share_mean": {
+          "special/chat-marker": 0.04075371645758566,
+          "punctuation/newline": 0.2909813167525987,
+          "content": 0.6682649667898156
+        }
+      },
+      "27": {
+        "query_count": 5,
+        "anchor_count": 3,
+        "pre_overlap_score_mean": {
+          "bos": 0.0,
+          "edge": 0.19643572792410852,
+          "recent": 8.834049654006957,
+          "self": 0.5223398447036743,
+          "middle": 56.46960983276367
+        },
+        "pre_position_partition_mean": {
+          "bos": 0.0,
+          "edge": 0.19643572792410852,
+          "self": 0.5223398447036743,
+          "recent_nonself": 8.311709666252137,
+          "middle": 56.46960983276367
+        },
+        "pre_position_partition_share_mean": {
+          "bos": 0.0,
+          "edge": 0.002962562924548905,
+          "self": 0.007898007065416376,
+          "recent_nonself": 0.12248065623648548,
+          "middle": 0.8666587737735492
+        },
+        "pre_token_score_mean": {
+          "special/chat-marker": 0.6585944414138794,
+          "punctuation/newline": 21.544407272338866,
+          "content": 43.297087860107425
+        },
+        "pre_token_share_mean": {
+          "special/chat-marker": 0.010613709925825202,
+          "punctuation/newline": 0.3272908297948932,
+          "content": 0.6620954602792817
+        },
+        "attention_overlap_mass_mean": {
+          "bos": 0.0,
+          "edge": 0.0036887537688016893,
+          "recent": 0.11192691698670387,
+          "self": 0.008994877338409424,
+          "middle": 0.8845057725906372
+        },
+        "top_position_group_frac": {
+          "bos": 0.0,
+          "edge": 0.0,
+          "self": 0.0,
+          "recent_nonself": 0.0,
+          "middle": 1.0
+        },
+        "top_token_group_frac": {
+          "special/chat-marker": 0.0,
+          "punctuation/newline": 0.0,
+          "content": 1.0
+        },
+        "top_abs_position_hist": {
+          "226": 5
+        },
+        "top_query_offset_hist": {
+          "286": 1,
+          "287": 1,
+          "288": 1,
+          "289": 1,
+          "290": 1
+        },
+        "top_edge_offset_hist": {
+          "225": 1,
+          "224": 1,
+          "223": 1,
+          "222": 1,
+          "221": 1
+        },
+        "anchor_exact_overlap_mean": {
+          "bos": 0.0,
+          "edge": 0.07014419510960579,
+          "recent": 3.0228293240070343,
+          "self": 0.2327185459434986,
+          "middle": 23.820628484090168
+        },
+        "anchor_exact_position_partition_mean": {
+          "bos": 0.0,
+          "edge": 0.07014419510960579,
+          "self": 0.2327185459434986,
+          "recent_nonself": 2.901088615258535,
+          "middle": 23.820628484090168
+        },
+        "anchor_exact_position_partition_share_mean": {
+          "bos": 0.0,
+          "edge": 0.0025748758305066993,
+          "self": 0.008523534794213713,
+          "recent_nonself": 0.1092438716624084,
+          "middle": 0.8796577177128713
+        },
+        "anchor_exact_token_mean": {
+          "special/chat-marker": 0.3030366313954194,
+          "punctuation/newline": 4.616715272267659,
+          "content": 15.218423843383789
+        },
+        "anchor_exact_token_share_mean": {
+          "special/chat-marker": 0.021200160574449425,
+          "punctuation/newline": 0.21579170282057816,
+          "content": 0.7630081366049725
+        }
+      },
+      "28": {
+        "query_count": 5,
+        "anchor_count": 3,
+        "pre_overlap_score_mean": {
+          "bos": 0.0,
+          "edge": 0.13820767998695374,
+          "recent": 9.602638435363769,
+          "self": 2.17947536110878,
+          "middle": 44.77208404541015
+        },
+        "pre_position_partition_mean": {
+          "bos": 0.0,
+          "edge": 0.13820767998695374,
+          "self": 2.17947536110878,
+          "recent_nonself": 7.423162889480591,
+          "middle": 44.77208404541015
+        },
+        "pre_position_partition_share_mean": {
+          "bos": 0.0,
+          "edge": 0.002556309812158853,
+          "self": 0.039998920657603465,
+          "recent_nonself": 0.13402732647279342,
+          "middle": 0.8234174430574444
+        },
+        "pre_token_score_mean": {
+          "special/chat-marker": 1.8782656237483024,
+          "punctuation/newline": 19.36849250793457,
+          "content": 33.26616897583008
+        },
+        "pre_token_share_mean": {
+          "special/chat-marker": 0.034970048944038885,
+          "punctuation/newline": 0.3537590085882619,
+          "content": 0.6112709424676993
+        },
+        "attention_overlap_mass_mean": {
+          "bos": 0.0,
+          "edge": 0.0032950356602668763,
+          "recent": 0.12880875319242477,
+          "self": 0.026164042949676513,
+          "middle": 0.8679331183433533
+        },
+        "top_position_group_frac": {
+          "bos": 0.0,
+          "edge": 0.0,
+          "self": 0.0,
+          "recent_nonself": 0.0,
+          "middle": 1.0
+        },
+        "top_token_group_frac": {
+          "special/chat-marker": 0.0,
+          "punctuation/newline": 0.0,
+          "content": 1.0
+        },
+        "top_abs_position_hist": {
+          "226": 5
+        },
+        "top_query_offset_hist": {
+          "286": 1,
+          "287": 1,
+          "288": 1,
+          "289": 1,
+          "290": 1
+        },
+        "top_edge_offset_hist": {
+          "225": 1,
+          "224": 1,
+          "223": 1,
+          "222": 1,
+          "221": 1
+        },
+        "anchor_exact_overlap_mean": {
+          "bos": 0.0,
+          "edge": 0.0650074811031421,
+          "recent": 3.974328597386678,
+          "self": 1.2673576871554058,
+          "middle": 19.142268498738606
+        },
+        "anchor_exact_position_partition_mean": {
+          "bos": 0.0,
+          "edge": 0.0650074811031421,
+          "self": 1.2673576871554058,
+          "recent_nonself": 3.22991144657135,
+          "middle": 19.142268498738606
+        },
+        "anchor_exact_position_partition_share_mean": {
+          "bos": 0.0,
+          "edge": 0.0026870189089472315,
+          "self": 0.05263247492545089,
+          "recent_nonself": 0.13908543475777999,
+          "middle": 0.8055950714078218
+        },
+        "anchor_exact_token_mean": {
+          "special/chat-marker": 1.1806752619644005,
+          "punctuation/newline": 4.480891784032186,
+          "content": 12.526583671569824
+        },
+        "anchor_exact_token_share_mean": {
+          "special/chat-marker": 0.06522493895183586,
+          "punctuation/newline": 0.24676290089955746,
+          "content": 0.6880121601486066
+        }
+      },
+      "29": {
+        "query_count": 5,
+        "anchor_count": 3,
+        "pre_overlap_score_mean": {
+          "bos": 6.72126784324646,
+          "edge": 19.492249298095704,
+          "recent": 2.072787046432495,
+          "self": 0.41259231567382815,
+          "middle": 37.24415588378906
+        },
+        "pre_position_partition_mean": {
+          "bos": 6.72126784324646,
+          "edge": 12.770981407165527,
+          "self": 0.41259231567382815,
+          "recent_nonself": 1.6601947784423827,
+          "middle": 37.24415588378906
+        },
+        "pre_position_partition_share_mean": {
+          "bos": 0.11637378772934756,
+          "edge": 0.22446584029681,
+          "self": 0.007640889395277658,
+          "recent_nonself": 0.02787910920064004,
+          "middle": 0.6236403733779248
+        },
+        "pre_token_score_mean": {
+          "special/chat-marker": 14.999250984191894,
+          "punctuation/newline": 19.30685806274414,
+          "content": 24.50308265686035
+        },
+        "pre_token_share_mean": {
+          "special/chat-marker": 0.26265534832502635,
+          "punctuation/newline": 0.31059659761246894,
+          "content": 0.42674805406250477
+        },
+        "attention_overlap_mass_mean": {
+          "bos": 0.07694091796875,
+          "edge": 0.46788558959960935,
+          "recent": 0.030784082785248756,
+          "self": 0.005459457635879517,
+          "middle": 0.5012482285499573
+        },
+        "top_position_group_frac": {
+          "bos": 0.0,
+          "edge": 0.4,
+          "self": 0.0,
+          "recent_nonself": 0.0,
+          "middle": 0.6
+        },
+        "top_token_group_frac": {
+          "special/chat-marker": 0.4,
+          "punctuation/newline": 0.2,
+          "content": 0.4
+        },
+        "top_abs_position_hist": {
+          "278": 1,
+          "289": 1,
+          "286": 1,
+          "1": 2
+        },
+        "top_query_offset_hist": {
+          "234": 1,
+          "224": 1,
+          "228": 1,
+          "514": 1,
+          "515": 1
+        },
+        "top_edge_offset_hist": {
+          "278": 1,
+          "289": 1,
+          "286": 1,
+          "1": 2
+        },
+        "anchor_exact_overlap_mean": {
+          "bos": 3.264559348424276,
+          "edge": 4.183285395304362,
+          "recent": 0.877255896727244,
+          "self": 0.18167779967188835,
+          "middle": 14.42780844370524
+        },
+        "anchor_exact_position_partition_mean": {
+          "bos": 3.264559348424276,
+          "edge": 4.183285395304362,
+          "self": 0.18167779967188835,
+          "recent_nonself": 0.7809138298034668,
+          "middle": 14.42780844370524
+        },
+        "anchor_exact_position_partition_share_mean": {
+          "bos": 0.14705774752834258,
+          "edge": 0.1980238454480754,
+          "self": 0.007954481482930098,
+          "recent_nonself": 0.033318711784707584,
+          "middle": 0.6136452137559444
+        },
+        "anchor_exact_token_mean": {
+          "special/chat-marker": 5.566772063573201,
+          "punctuation/newline": 4.127235412597656,
+          "content": 13.772297223409018
+        },
+        "anchor_exact_token_share_mean": {
+          "special/chat-marker": 0.2657768760322343,
+          "punctuation/newline": 0.1790134045795637,
+          "content": 0.5552097193882021
+        }
+      },
+      "30": {
+        "query_count": 5,
+        "anchor_count": 3,
+        "pre_overlap_score_mean": {
+          "bos": 0.0,
+          "edge": 0.1866544723510742,
+          "recent": 11.593604469299317,
+          "self": 1.8617851495742799,
+          "middle": 43.932211303710936
+        },
+        "pre_position_partition_mean": {
+          "bos": 0.0,
+          "edge": 0.1866544723510742,
+          "self": 1.8617851495742799,
+          "recent_nonself": 9.731818985939025,
+          "middle": 43.932211303710936
+        },
+        "pre_position_partition_share_mean": {
+          "bos": 0.0,
+          "edge": 0.00346331591147582,
+          "self": 0.03328305888675896,
+          "recent_nonself": 0.16351339521810976,
+          "middle": 0.7997402299836555
+        },
+        "pre_token_score_mean": {
+          "special/chat-marker": 0.5993432193994522,
+          "punctuation/newline": 24.661828231811523,
+          "content": 30.451297760009766
+        },
+        "pre_token_share_mean": {
+          "special/chat-marker": 0.011428364734121508,
+          "punctuation/newline": 0.43318150055365445,
+          "content": 0.5553901347122241
+        },
+        "attention_overlap_mass_mean": {
+          "bos": 0.0,
+          "edge": 0.0042083367705345156,
+          "recent": 0.14935943558812143,
+          "self": 0.019377660751342774,
+          "middle": 0.8466493964195252
+        },
+        "top_position_group_frac": {
+          "bos": 0.0,
+          "edge": 0.0,
+          "self": 0.0,
+          "recent_nonself": 0.0,
+          "middle": 1.0
+        },
+        "top_token_group_frac": {
+          "special/chat-marker": 0.0,
+          "punctuation/newline": 0.0,
+          "content": 1.0
+        },
+        "top_abs_position_hist": {
+          "226": 5
+        },
+        "top_query_offset_hist": {
+          "286": 1,
+          "287": 1,
+          "288": 1,
+          "289": 1,
+          "290": 1
+        },
+        "top_edge_offset_hist": {
+          "225": 1,
+          "224": 1,
+          "223": 1,
+          "222": 1,
+          "221": 1
+        },
+        "anchor_exact_overlap_mean": {
+          "bos": 0.0,
+          "edge": 0.056265403827031456,
+          "recent": 3.106260518232981,
+          "self": 1.1898429567615192,
+          "middle": 13.196014086405436
+        },
+        "anchor_exact_position_partition_mean": {
+          "bos": 0.0,
+          "edge": 0.056265403827031456,
+          "self": 1.1898429567615192,
+          "recent_nonself": 2.2144683599472046,
+          "middle": 13.196014086405436
+        },
+        "anchor_exact_position_partition_share_mean": {
+          "bos": 0.0,
+          "edge": 0.0033890840729314206,
+          "self": 0.07117654702225952,
+          "recent_nonself": 0.13298502088626651,
+          "middle": 0.7924493480185425
+        },
+        "anchor_exact_token_mean": {
+          "special/chat-marker": 0.26718611394365627,
+          "punctuation/newline": 4.517526388168335,
+          "content": 9.635222434997559
+        },
+        "anchor_exact_token_share_mean": {
+          "special/chat-marker": 0.021092619215612993,
+          "punctuation/newline": 0.3057511246466636,
+          "content": 0.6731562561377235
+        }
+      },
+      "31": {
+        "query_count": 5,
+        "anchor_count": 3,
+        "pre_overlap_score_mean": {
+          "bos": 0.0,
+          "edge": 0.1829513981938362,
+          "recent": 5.697806549072266,
+          "self": 0.38123656511306764,
+          "middle": 57.466128540039065
+        },
+        "pre_position_partition_mean": {
+          "bos": 0.0,
+          "edge": 0.1829513981938362,
+          "self": 0.38123656511306764,
+          "recent_nonself": 5.316570091247558,
+          "middle": 57.466128540039065
+        },
+        "pre_position_partition_share_mean": {
+          "bos": 0.0,
+          "edge": 0.002914193583371153,
+          "self": 0.005942452650116922,
+          "recent_nonself": 0.0796822480820642,
+          "middle": 0.9114611056844477
+        },
+        "pre_token_score_mean": {
+          "special/chat-marker": 0.3658032834529877,
+          "punctuation/newline": 22.71082420349121,
+          "content": 40.27026023864746
+        },
+        "pre_token_share_mean": {
+          "special/chat-marker": 0.00596734449164011,
+          "punctuation/newline": 0.35320664088451553,
+          "content": 0.6408260146238444
+        },
+        "attention_overlap_mass_mean": {
+          "bos": 0.0,
+          "edge": 0.004094229638576507,
+          "recent": 0.08005720525979995,
+          "self": 0.005483800172805786,
+          "middle": 0.9159804940223694
+        },
+        "top_position_group_frac": {
+          "bos": 0.0,
+          "edge": 0.0,
+          "self": 0.0,
+          "recent_nonself": 0.0,
+          "middle": 1.0
+        },
+        "top_token_group_frac": {
+          "special/chat-marker": 0.0,
+          "punctuation/newline": 0.0,
+          "content": 1.0
+        },
+        "top_abs_position_hist": {
+          "226": 5
+        },
+        "top_query_offset_hist": {
+          "286": 1,
+          "287": 1,
+          "288": 1,
+          "289": 1,
+          "290": 1
+        },
+        "top_edge_offset_hist": {
+          "225": 1,
+          "224": 1,
+          "223": 1,
+          "222": 1,
+          "221": 1
+        },
+        "anchor_exact_overlap_mean": {
+          "bos": 0.0,
+          "edge": 0.06908129652341206,
+          "recent": 1.4625300566355388,
+          "self": 0.12953850254416466,
+          "middle": 13.910906473795572
+        },
+        "anchor_exact_position_partition_mean": {
+          "bos": 0.0,
+          "edge": 0.06908129652341206,
+          "self": 0.12953850254416466,
+          "recent_nonself": 1.4205325543880463,
+          "middle": 13.910906473795572
+        },
+        "anchor_exact_position_partition_share_mean": {
+          "bos": 0.0,
+          "edge": 0.004647961785150312,
+          "self": 0.00799147182133658,
+          "recent_nonself": 0.08494392124808324,
+          "middle": 0.90241664514543
+        },
+        "anchor_exact_token_mean": {
+          "special/chat-marker": 0.14748958870768547,
+          "punctuation/newline": 2.7507075866063437,
+          "content": 13.849931081136068
+        },
+        "anchor_exact_token_share_mean": {
+          "special/chat-marker": 0.009118301679769257,
+          "punctuation/newline": 0.1742986605808127,
+          "content": 0.816583037739418
+        }
+      },
+      "32": {
+        "query_count": 5,
+        "anchor_count": 3,
+        "pre_overlap_score_mean": {
+          "bos": 0.0,
+          "edge": 0.2228971928358078,
+          "recent": 7.557135391235351,
+          "self": 0.5633819699287415,
+          "middle": 45.33734664916992
+        },
+        "pre_position_partition_mean": {
+          "bos": 0.0,
+          "edge": 0.2228971928358078,
+          "self": 0.5633819699287415,
+          "recent_nonself": 6.99375319480896,
+          "middle": 45.33734664916992
+        },
+        "pre_position_partition_share_mean": {
+          "bos": 0.0,
+          "edge": 0.004201961844469905,
+          "self": 0.010562673287557176,
+          "recent_nonself": 0.13192499357687346,
+          "middle": 0.8533103712910994
+        },
+        "pre_token_score_mean": {
+          "special/chat-marker": 1.2095197796821595,
+          "punctuation/newline": 20.359788131713866,
+          "content": 31.548069381713866
+        },
+        "pre_token_share_mean": {
+          "special/chat-marker": 0.022962484513775284,
+          "punctuation/newline": 0.38320591131162673,
+          "content": 0.5938316041745979
+        },
+        "attention_overlap_mass_mean": {
+          "bos": 0.0,
+          "edge": 0.005797792226076126,
+          "recent": 0.0956411637365818,
+          "self": 0.008124589920043945,
+          "middle": 0.8987437963485718
+        },
+        "top_position_group_frac": {
+          "bos": 0.0,
+          "edge": 0.0,
+          "self": 0.0,
+          "recent_nonself": 0.0,
+          "middle": 1.0
+        },
+        "top_token_group_frac": {
+          "special/chat-marker": 0.0,
+          "punctuation/newline": 0.0,
+          "content": 1.0
+        },
+        "top_abs_position_hist": {
+          "226": 5
+        },
+        "top_query_offset_hist": {
+          "286": 1,
+          "287": 1,
+          "288": 1,
+          "289": 1,
+          "290": 1
+        },
+        "top_edge_offset_hist": {
+          "225": 1,
+          "224": 1,
+          "223": 1,
+          "222": 1,
+          "221": 1
+        },
+        "anchor_exact_overlap_mean": {
+          "bos": 0.0,
+          "edge": 0.07783057292302449,
+          "recent": 1.8588953415552776,
+          "self": 0.20479794840017954,
+          "middle": 12.024220784505209
+        },
+        "anchor_exact_position_partition_mean": {
+          "bos": 0.0,
+          "edge": 0.07783057292302449,
+          "self": 0.20479794840017954,
+          "recent_nonself": 1.7579994996388753,
+          "middle": 12.024220784505209
+        },
+        "anchor_exact_position_partition_share_mean": {
+          "bos": 0.0,
+          "edge": 0.005546911563006583,
+          "self": 0.014640147643924219,
+          "recent_nonself": 0.12442587228705092,
+          "middle": 0.8553870685060182
+        },
+        "anchor_exact_token_mean": {
+          "special/chat-marker": 0.7014063919583956,
+          "punctuation/newline": 2.58625598748525,
+          "content": 7.3423542976379395
+        },
+        "anchor_exact_token_share_mean": {
+          "special/chat-marker": 0.05480317360368538,
+          "punctuation/newline": 0.24944835728817946,
+          "content": 0.6957484691081351
+        }
+      },
+      "33": {
+        "query_count": 5,
+        "anchor_count": 3,
+        "pre_overlap_score_mean": {
+          "bos": 0.0,
+          "edge": 0.2874348036944866,
+          "recent": 7.114961194992065,
+          "self": 0.965397036075592,
+          "middle": 42.660527038574216
+        },
+        "pre_position_partition_mean": {
+          "bos": 0.0,
+          "edge": 0.2874348036944866,
+          "self": 0.965397036075592,
+          "recent_nonself": 6.149564361572265,
+          "middle": 42.660527038574216
+        },
+        "pre_position_partition_share_mean": {
+          "bos": 0.0,
+          "edge": 0.005633792436824775,
+          "self": 0.01887588972219873,
+          "recent_nonself": 0.12122941106500758,
+          "middle": 0.8542609067759688
+        },
+        "pre_token_score_mean": {
+          "special/chat-marker": 0.749452656134963,
+          "punctuation/newline": 16.835066986083984,
+          "content": 32.47840423583985
+        },
+        "pre_token_share_mean": {
+          "special/chat-marker": 0.01457835438715844,
+          "punctuation/newline": 0.33464652613207385,
+          "content": 0.6507751194807677
+        },
+        "attention_overlap_mass_mean": {
+          "bos": 0.0,
+          "edge": 0.006270910985767842,
+          "recent": 0.1087586060166359,
+          "self": 0.013619804382324218,
+          "middle": 0.8849840283393859
+        },
+        "top_position_group_frac": {
+          "bos": 0.0,
+          "edge": 0.0,
+          "self": 0.0,
+          "recent_nonself": 0.0,
+          "middle": 1.0
+        },
+        "top_token_group_frac": {
+          "special/chat-marker": 0.0,
+          "punctuation/newline": 0.0,
+          "content": 1.0
+        },
+        "top_abs_position_hist": {
+          "226": 5
+        },
+        "top_query_offset_hist": {
+          "286": 1,
+          "287": 1,
+          "288": 1,
+          "289": 1,
+          "290": 1
+        },
+        "top_edge_offset_hist": {
+          "225": 1,
+          "224": 1,
+          "223": 1,
+          "222": 1,
+          "221": 1
+        },
+        "anchor_exact_overlap_mean": {
+          "bos": 0.0,
+          "edge": 0.10844320555528005,
+          "recent": 1.654564658800761,
+          "self": 0.4630119701226552,
+          "middle": 10.472858111063639
+        },
+        "anchor_exact_position_partition_mean": {
+          "bos": 0.0,
+          "edge": 0.10844320555528005,
+          "self": 0.4630119701226552,
+          "recent_nonself": 1.4338828325271606,
+          "middle": 10.472858111063639
+        },
+        "anchor_exact_position_partition_share_mean": {
+          "bos": 0.0,
+          "edge": 0.00875888545889707,
+          "self": 0.03640742638906185,
+          "recent_nonself": 0.11669851226330745,
+          "middle": 0.8381351758887337
+        },
+        "anchor_exact_token_mean": {
+          "special/chat-marker": 0.284683079769214,
+          "punctuation/newline": 1.9307887554168701,
+          "content": 5.508199294408162
+        },
+        "anchor_exact_token_share_mean": {
+          "special/chat-marker": 0.03503795291904865,
+          "punctuation/newline": 0.2599838275596395,
+          "content": 0.7049782195213119
+        }
+      },
+      "34": {
+        "query_count": 5,
+        "anchor_count": 3,
+        "pre_overlap_score_mean": {
+          "bos": 11.606434679031372,
+          "edge": 16.447448539733887,
+          "recent": 2.9046720027923585,
+          "self": 0.28321794271469114,
+          "middle": 18.47530870437622
+        },
+        "pre_position_partition_mean": {
+          "bos": 11.606434679031372,
+          "edge": 4.841014003753662,
+          "self": 0.28321794271469114,
+          "recent_nonself": 2.62145414352417,
+          "middle": 18.47530870437622
+        },
+        "pre_position_partition_share_mean": {
+          "bos": 0.2961596733402015,
+          "edge": 0.1272434727939371,
+          "self": 0.007259922955229481,
+          "recent_nonself": 0.06992844799286864,
+          "middle": 0.49940848291776324
+        },
+        "pre_token_score_mean": {
+          "special/chat-marker": 14.80454387664795,
+          "punctuation/newline": 8.31462812423706,
+          "content": 14.708256912231445
+        },
+        "pre_token_share_mean": {
+          "special/chat-marker": 0.38003739792556696,
+          "punctuation/newline": 0.21924298363546324,
+          "content": 0.40071961843896986
+        },
+        "attention_overlap_mass_mean": {
+          "bos": 0.10945281982421876,
+          "edge": 0.6177444458007812,
+          "recent": 0.041603625565767285,
+          "self": 0.003782731294631958,
+          "middle": 0.34059115648269656
+        },
+        "top_position_group_frac": {
+          "bos": 1.0,
+          "edge": 0.0,
+          "self": 0.0,
+          "recent_nonself": 0.0,
+          "middle": 0.0
+        },
+        "top_token_group_frac": {
+          "special/chat-marker": 1.0,
+          "punctuation/newline": 0.0,
+          "content": 0.0
+        },
+        "top_abs_position_hist": {
+          "0": 5
+        },
+        "top_query_offset_hist": {
+          "512": 1,
+          "513": 1,
+          "514": 1,
+          "515": 1,
+          "516": 1
+        },
+        "top_edge_offset_hist": {
+          "0": 5
+        },
+        "anchor_exact_overlap_mean": {
+          "bos": 7.406222661336263,
+          "edge": 2.7283122142155967,
+          "recent": 2.2366745471954346,
+          "self": 0.37802554418643314,
+          "middle": 8.113213380177816
+        },
+        "anchor_exact_position_partition_mean": {
+          "bos": 7.406222661336263,
+          "edge": 2.7283122142155967,
+          "self": 0.37802554418643314,
+          "recent_nonself": 2.124679207801819,
+          "middle": 8.113213380177816
+        },
+        "anchor_exact_position_partition_share_mean": {
+          "bos": 0.37851247695361273,
+          "edge": 0.12720735313472464,
+          "self": 0.02080582482422094,
+          "recent_nonself": 0.0989481498762405,
+          "middle": 0.3745261952112012
+        },
+        "anchor_exact_token_mean": {
+          "special/chat-marker": 7.517782052357991,
+          "punctuation/newline": 3.401658376057943,
+          "content": 8.189650694529215
+        },
+        "anchor_exact_token_share_mean": {
+          "special/chat-marker": 0.4157732334197816,
+          "punctuation/newline": 0.17734913114277684,
+          "content": 0.40687763543744154
+        }
+      }
+    },
+    "secondary_sinks": [
+      {
+        "sample_id": 0,
+        "source_idx": 324,
+        "stratum": "named_entity_recognition/es",
+        "layer": 1,
+        "layer_type": "sliding_attention",
+        "depth_bucket": "early_sliding",
+        "position": 286,
+        "token_piece": "model",
+        "decoded_token": "model",
+        "token_type": "content",
+        "top_fraction": 0.4,
+        "late_queries": 5
+      },
+      {
+        "sample_id": 0,
+        "source_idx": 324,
+        "stratum": "named_entity_recognition/es",
+        "layer": 2,
+        "layer_type": "sliding_attention",
+        "depth_bucket": "early_sliding",
+        "position": 288,
+        "token_piece": "[",
+        "decoded_token": "[",
+        "token_type": "punctuation/newline",
+        "top_fraction": 0.2,
+        "late_queries": 5
+      },
+      {
+        "sample_id": 0,
+        "source_idx": 324,
+        "stratum": "named_entity_recognition/es",
+        "layer": 5,
+        "layer_type": "sliding_attention",
+        "depth_bucket": "early_sliding",
+        "position": 288,
+        "token_piece": "[",
+        "decoded_token": "[",
+        "token_type": "punctuation/newline",
+        "top_fraction": 0.2,
+        "late_queries": 5
+      },
+      {
+        "sample_id": 0,
+        "source_idx": 324,
+        "stratum": "named_entity_recognition/es",
+        "layer": 9,
+        "layer_type": "full_attention",
+        "depth_bucket": "full",
+        "position": 258,
+        "token_piece": "\u2581ones",
+        "decoded_token": " ones",
+        "token_type": "content",
+        "top_fraction": 0.2,
+        "late_queries": 5
+      },
+      {
+        "sample_id": 0,
+        "source_idx": 324,
+        "stratum": "named_entity_recognition/es",
+        "layer": 11,
+        "layer_type": "sliding_attention",
+        "depth_bucket": "mid_sliding",
+        "position": 282,
+        "token_piece": ":",
+        "decoded_token": ":",
+        "token_type": "punctuation/newline",
+        "top_fraction": 0.2,
+        "late_queries": 5
+      },
+      {
+        "sample_id": 0,
+        "source_idx": 324,
+        "stratum": "named_entity_recognition/es",
+        "layer": 13,
+        "layer_type": "sliding_attention",
+        "depth_bucket": "mid_sliding",
+        "position": 286,
+        "token_piece": "model",
+        "decoded_token": "model",
+        "token_type": "content",
+        "top_fraction": 0.2,
+        "late_queries": 5
+      },
+      {
+        "sample_id": 0,
+        "source_idx": 324,
+        "stratum": "named_entity_recognition/es",
+        "layer": 14,
+        "layer_type": "full_attention",
+        "depth_bucket": "full",
+        "position": 288,
+        "token_piece": "[",
+        "decoded_token": "[",
+        "token_type": "punctuation/newline",
+        "top_fraction": 0.4,
+        "late_queries": 5
+      },
+      {
+        "sample_id": 0,
+        "source_idx": 324,
+        "stratum": "named_entity_recognition/es",
+        "layer": 15,
+        "layer_type": "sliding_attention",
+        "depth_bucket": "mid_sliding",
+        "position": 226,
+        "token_piece": "\u2581as",
+        "decoded_token": " as",
+        "token_type": "content",
+        "top_fraction": 0.8,
+        "late_queries": 5
+      },
+      {
+        "sample_id": 0,
+        "source_idx": 324,
+        "stratum": "named_entity_recognition/es",
+        "layer": 16,
+        "layer_type": "sliding_attention",
+        "depth_bucket": "mid_sliding",
+        "position": 226,
+        "token_piece": "\u2581as",
+        "decoded_token": " as",
+        "token_type": "content",
+        "top_fraction": 0.8,
+        "late_queries": 5
+      },
+      {
+        "sample_id": 0,
+        "source_idx": 324,
+        "stratum": "named_entity_recognition/es",
+        "layer": 17,
+        "layer_type": "sliding_attention",
+        "depth_bucket": "mid_sliding",
+        "position": 226,
+        "token_piece": "\u2581as",
+        "decoded_token": " as",
+        "token_type": "content",
+        "top_fraction": 0.8,
+        "late_queries": 5
+      },
+      {
+        "sample_id": 0,
+        "source_idx": 324,
+        "stratum": "named_entity_recognition/es",
+        "layer": 18,
+        "layer_type": "sliding_attention",
+        "depth_bucket": "mid_sliding",
+        "position": 226,
+        "token_piece": "\u2581as",
+        "decoded_token": " as",
+        "token_type": "content",
+        "top_fraction": 0.6,
+        "late_queries": 5
+      },
+      {
+        "sample_id": 0,
+        "source_idx": 324,
+        "stratum": "named_entity_recognition/es",
+        "layer": 19,
+        "layer_type": "full_attention",
+        "depth_bucket": "full",
+        "position": 282,
+        "token_piece": ":",
+        "decoded_token": ":",
+        "token_type": "punctuation/newline",
+        "top_fraction": 0.4,
+        "late_queries": 5
+      },
+      {
+        "sample_id": 0,
+        "source_idx": 324,
+        "stratum": "named_entity_recognition/es",
+        "layer": 20,
+        "layer_type": "sliding_attention",
+        "depth_bucket": "mid_sliding",
+        "position": 226,
+        "token_piece": "\u2581as",
+        "decoded_token": " as",
+        "token_type": "content",
+        "top_fraction": 1.0,
+        "late_queries": 5
+      },
+      {
+        "sample_id": 0,
+        "source_idx": 324,
+        "stratum": "named_entity_recognition/es",
+        "layer": 21,
+        "layer_type": "sliding_attention",
+        "depth_bucket": "mid_sliding",
+        "position": 226,
+        "token_piece": "\u2581as",
+        "decoded_token": " as",
+        "token_type": "content",
+        "top_fraction": 1.0,
+        "late_queries": 5
+      },
+      {
+        "sample_id": 0,
+        "source_idx": 324,
+        "stratum": "named_entity_recognition/es",
+        "layer": 22,
+        "layer_type": "sliding_attention",
+        "depth_bucket": "mid_sliding",
+        "position": 226,
+        "token_piece": "\u2581as",
+        "decoded_token": " as",
+        "token_type": "content",
+        "top_fraction": 1.0,
+        "late_queries": 5
+      },
+      {
+        "sample_id": 0,
+        "source_idx": 324,
+        "stratum": "named_entity_recognition/es",
+        "layer": 23,
+        "layer_type": "sliding_attention",
+        "depth_bucket": "mid_sliding",
+        "position": 226,
+        "token_piece": "\u2581as",
+        "decoded_token": " as",
+        "token_type": "content",
+        "top_fraction": 1.0,
+        "late_queries": 5
+      },
+      {
+        "sample_id": 0,
+        "source_idx": 324,
+        "stratum": "named_entity_recognition/es",
+        "layer": 24,
+        "layer_type": "full_attention",
+        "depth_bucket": "full",
+        "position": 286,
+        "token_piece": "model",
+        "decoded_token": "model",
+        "token_type": "content",
+        "top_fraction": 0.4,
+        "late_queries": 5
+      },
+      {
+        "sample_id": 0,
+        "source_idx": 324,
+        "stratum": "named_entity_recognition/es",
+        "layer": 25,
+        "layer_type": "sliding_attention",
+        "depth_bucket": "late_sliding",
+        "position": 226,
+        "token_piece": "\u2581as",
+        "decoded_token": " as",
+        "token_type": "content",
+        "top_fraction": 1.0,
+        "late_queries": 5
+      },
+      {
+        "sample_id": 0,
+        "source_idx": 324,
+        "stratum": "named_entity_recognition/es",
+        "layer": 26,
+        "layer_type": "sliding_attention",
+        "depth_bucket": "late_sliding",
+        "position": 226,
+        "token_piece": "\u2581as",
+        "decoded_token": " as",
+        "token_type": "content",
+        "top_fraction": 1.0,
+        "late_queries": 5
+      },
+      {
+        "sample_id": 0,
+        "source_idx": 324,
+        "stratum": "named_entity_recognition/es",
+        "layer": 27,
+        "layer_type": "sliding_attention",
+        "depth_bucket": "late_sliding",
+        "position": 226,
+        "token_piece": "\u2581as",
+        "decoded_token": " as",
+        "token_type": "content",
+        "top_fraction": 1.0,
+        "late_queries": 5
+      },
+      {
+        "sample_id": 0,
+        "source_idx": 324,
+        "stratum": "named_entity_recognition/es",
+        "layer": 28,
+        "layer_type": "sliding_attention",
+        "depth_bucket": "late_sliding",
+        "position": 226,
+        "token_piece": "\u2581as",
+        "decoded_token": " as",
+        "token_type": "content",
+        "top_fraction": 1.0,
+        "late_queries": 5
+      },
+      {
+        "sample_id": 0,
+        "source_idx": 324,
+        "stratum": "named_entity_recognition/es",
+        "layer": 29,
+        "layer_type": "full_attention",
+        "depth_bucket": "full",
+        "position": 278,
+        "token_piece": "\u2581O",
+        "decoded_token": " O",
+        "token_type": "content",
+        "top_fraction": 0.2,
+        "late_queries": 5
+      },
+      {
+        "sample_id": 0,
+        "source_idx": 324,
+        "stratum": "named_entity_recognition/es",
+        "layer": 30,
+        "layer_type": "sliding_attention",
+        "depth_bucket": "late_sliding",
+        "position": 226,
+        "token_piece": "\u2581as",
+        "decoded_token": " as",
+        "token_type": "content",
+        "top_fraction": 1.0,
+        "late_queries": 5
+      },
+      {
+        "sample_id": 0,
+        "source_idx": 324,
+        "stratum": "named_entity_recognition/es",
+        "layer": 31,
+        "layer_type": "sliding_attention",
+        "depth_bucket": "late_sliding",
+        "position": 226,
+        "token_piece": "\u2581as",
+        "decoded_token": " as",
+        "token_type": "content",
+        "top_fraction": 1.0,
+        "late_queries": 5
+      },
+      {
+        "sample_id": 0,
+        "source_idx": 324,
+        "stratum": "named_entity_recognition/es",
+        "layer": 32,
+        "layer_type": "sliding_attention",
+        "depth_bucket": "late_sliding",
+        "position": 226,
+        "token_piece": "\u2581as",
+        "decoded_token": " as",
+        "token_type": "content",
+        "top_fraction": 1.0,
+        "late_queries": 5
+      },
+      {
+        "sample_id": 0,
+        "source_idx": 324,
+        "stratum": "named_entity_recognition/es",
+        "layer": 33,
+        "layer_type": "sliding_attention",
+        "depth_bucket": "late_sliding",
+        "position": 226,
+        "token_piece": "\u2581as",
+        "decoded_token": " as",
+        "token_type": "content",
+        "top_fraction": 1.0,
+        "late_queries": 5
+      }
+    ]
+  }
+}
