@@ -1,0 +1,5 @@
+{"sample_id": 0, "stratum": "chat/en", "task": "chat", "lang": "en", "source_idx": 5312, "seq_len": 640, "split": "train", "dataset": "ultrachat_filtered"}
+{"sample_id": 1, "stratum": "named_entity_recognition/en", "task": "named_entity_recognition", "lang": "en", "source_idx": 3382, "seq_len": 640, "split": "dev", "dataset": "multiconer2023"}
+{"sample_id": 2, "stratum": "named_entity_recognition/es", "task": "named_entity_recognition", "lang": "es", "source_idx": 324, "seq_len": 517, "split": "dev", "dataset": "multiconer2023"}
+{"sample_id": 3, "stratum": "machine_translation/en-de", "task": "machine_translation", "lang": "en-de", "source_idx": 178040, "seq_len": 627, "split": "dev", "dataset": "gender-eval-sentences"}
+{"sample_id": 4, "stratum": "machine_translation_evaluation/zh_en", "task": "machine_translation_evaluation", "lang": "zh_en", "source_idx": 320139, "seq_len": 576, "split": "train", "dataset": "google_mqm"}
