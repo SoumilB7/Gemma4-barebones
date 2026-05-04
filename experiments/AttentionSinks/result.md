@@ -7,6 +7,10 @@
 
 ## 1. BOS is a real signal, not a no-op
 
+> **attn-overlap mass** — total softmax weight a position receives, summed across all late queries and heads  
+> **exact residual** — actual shift in the residual stream when that position's contribution is removed: `‖ RMSNorm(out) − RMSNorm(out − cₖ) ‖`  
+> **ratio** = exact residual ÷ attn-overlap mass. A true no-op would score ~1×.
+
 In full-attention layers, BOS is the most attention-efficient position in the sequence:
 
 | position | attn-overlap mass | exact residual | ratio |
@@ -40,6 +44,9 @@ The edge token in sliding layers scores **0.053 exact residual**. The same posit
 
 The 58% that lands in the middle group and the 36% in the recent group are not doing the same job. Comparing which *type* of token each group routes to:
 
+> **Content tokens** — actual words semantically relevant to the query (`Quick`, `years`, `classified`, etc.)  
+> **Structural tokens** — punctuation, newlines, format markers (`\n`, `-`, `"`, `<|turn|>`) that delimit document structure but carry no task-specific meaning
+
 | group | layer type | content share | structural share | mean exact |
 |---|---|---|---|---|
 | middle | **full-attention** | **68%** | 32% | **14.83** |
@@ -58,7 +65,7 @@ The same positional slot does different work depending on whether BOS is present
 
 ## 4. The structural takeover builds with depth
 
-Sliding layers, split by depth band — what share of score\_pre goes to structural tokens:
+Structural tokens (punctuation, `\n`, format markers) start as a minority in early layers and progressively dominate as the network goes deeper. Sliding layers, split by depth band — what share of score\_pre goes to structural tokens:
 
 | depth | structural share | structural mean score\_pre | vs content mean |
 |---|---|---|---|
