@@ -1,0 +1,1401 @@
+sample_id,stratum,key_pos,token,layer,score_pre
+0,chat/en,243,-,0,
+0,chat/en,243,-,1,
+0,chat/en,243,-,2,
+0,chat/en,243,-,3,
+0,chat/en,243,-,5,
+0,chat/en,243,-,6,
+0,chat/en,243,-,7,
+0,chat/en,243,-,8,2.549
+0,chat/en,243,-,10,2.321
+0,chat/en,243,-,11,2.474
+0,chat/en,243,-,12,2.768
+0,chat/en,243,-,13,5.909
+0,chat/en,243,-,15,2.768
+0,chat/en,243,-,16,2.651
+0,chat/en,243,-,17,1.975
+0,chat/en,243,-,18,3.043
+0,chat/en,243,-,20,5.213
+0,chat/en,243,-,21,4.018
+0,chat/en,243,-,22,5.5
+0,chat/en,243,-,23,3.351
+0,chat/en,243,-,25,2.554
+0,chat/en,243,-,26,8.342
+0,chat/en,243,-,27,17.777
+0,chat/en,243,-,28,11.016
+0,chat/en,243,-,30,12.81
+0,chat/en,243,-,31,19.936
+0,chat/en,243,-,32,10.81
+0,chat/en,243,-,33,9.766
+0,chat/en,331,Show,0,
+0,chat/en,331,Show,1,13.587
+0,chat/en,331,Show,2,
+0,chat/en,331,Show,3,6.925
+0,chat/en,331,Show,5,
+0,chat/en,331,Show,6,
+0,chat/en,331,Show,7,
+0,chat/en,331,Show,8,
+0,chat/en,331,Show,10,
+0,chat/en,331,Show,11,1.92
+0,chat/en,331,Show,12,1.774
+0,chat/en,331,Show,13,6.586
+0,chat/en,331,Show,15,
+0,chat/en,331,Show,16,
+0,chat/en,331,Show,17,
+0,chat/en,331,Show,18,
+0,chat/en,331,Show,20,
+0,chat/en,331,Show,21,
+0,chat/en,331,Show,22,
+0,chat/en,331,Show,23,
+0,chat/en,331,Show,25,
+0,chat/en,331,Show,26,
+0,chat/en,331,Show,27,
+0,chat/en,331,Show,28,
+0,chat/en,331,Show,30,
+0,chat/en,331,Show,31,
+0,chat/en,331,Show,32,
+0,chat/en,331,Show,33,
+0,chat/en,359,',0,
+0,chat/en,359,',1,
+0,chat/en,359,',2,
+0,chat/en,359,',3,
+0,chat/en,359,',5,
+0,chat/en,359,',6,
+0,chat/en,359,',7,
+0,chat/en,359,',8,1.345
+0,chat/en,359,',10,2.232
+0,chat/en,359,',11,1.815
+0,chat/en,359,',12,2.108
+0,chat/en,359,',13,3.213
+0,chat/en,359,',15,2.676
+0,chat/en,359,',16,1.86
+0,chat/en,359,',17,1.385
+0,chat/en,359,',18,2.058
+0,chat/en,359,',20,4.354
+0,chat/en,359,',21,3.263
+0,chat/en,359,',22,6.943
+0,chat/en,359,',23,3.45
+0,chat/en,359,',25,3.503
+0,chat/en,359,',26,10.937
+0,chat/en,359,',27,16.343
+0,chat/en,359,',28,12.214
+0,chat/en,359,',30,14.34
+0,chat/en,359,',31,20.412
+0,chat/en,359,',32,14.364
+0,chat/en,359,',33,11.231
+0,chat/en,498,<|turn>,0,
+0,chat/en,498,<|turn>,1,
+0,chat/en,498,<|turn>,2,
+0,chat/en,498,<|turn>,3,
+0,chat/en,498,<|turn>,5,6.431
+0,chat/en,498,<|turn>,6,
+0,chat/en,498,<|turn>,7,
+0,chat/en,498,<|turn>,8,
+0,chat/en,498,<|turn>,10,
+0,chat/en,498,<|turn>,11,
+0,chat/en,498,<|turn>,12,
+0,chat/en,498,<|turn>,13,
+0,chat/en,498,<|turn>,15,
+0,chat/en,498,<|turn>,16,
+0,chat/en,498,<|turn>,17,
+0,chat/en,498,<|turn>,18,
+0,chat/en,498,<|turn>,20,
+0,chat/en,498,<|turn>,21,
+0,chat/en,498,<|turn>,22,
+0,chat/en,498,<|turn>,23,
+0,chat/en,498,<|turn>,25,
+0,chat/en,498,<|turn>,26,
+0,chat/en,498,<|turn>,27,
+0,chat/en,498,<|turn>,28,
+0,chat/en,498,<|turn>,30,
+0,chat/en,498,<|turn>,31,
+0,chat/en,498,<|turn>,32,
+0,chat/en,498,<|turn>,33,
+0,chat/en,499,user,0,2.14
+0,chat/en,499,user,1,6.568
+0,chat/en,499,user,2,
+0,chat/en,499,user,3,7.125
+0,chat/en,499,user,5,
+0,chat/en,499,user,6,
+0,chat/en,499,user,7,
+0,chat/en,499,user,8,
+0,chat/en,499,user,10,
+0,chat/en,499,user,11,
+0,chat/en,499,user,12,
+0,chat/en,499,user,13,
+0,chat/en,499,user,15,
+0,chat/en,499,user,16,
+0,chat/en,499,user,17,
+0,chat/en,499,user,18,
+0,chat/en,499,user,20,
+0,chat/en,499,user,21,
+0,chat/en,499,user,22,
+0,chat/en,499,user,23,
+0,chat/en,499,user,25,
+0,chat/en,499,user,26,
+0,chat/en,499,user,27,
+0,chat/en,499,user,28,
+0,chat/en,499,user,30,
+0,chat/en,499,user,31,
+0,chat/en,499,user,32,
+0,chat/en,499,user,33,
+0,chat/en,511, Quick,0,36.136
+0,chat/en,511, Quick,1,30.777
+0,chat/en,511, Quick,2,49.733
+0,chat/en,511, Quick,3,29.363
+0,chat/en,511, Quick,5,16.326
+0,chat/en,511, Quick,6,22.524
+0,chat/en,511, Quick,7,16.069
+0,chat/en,511, Quick,8,9.653
+0,chat/en,511, Quick,10,12.84
+0,chat/en,511, Quick,11,8.127
+0,chat/en,511, Quick,12,12.207
+0,chat/en,511, Quick,13,18.779
+0,chat/en,511, Quick,15,3.481
+0,chat/en,511, Quick,16,3.153
+0,chat/en,511, Quick,17,3.269
+0,chat/en,511, Quick,18,5.715
+0,chat/en,511, Quick,20,8.557
+0,chat/en,511, Quick,21,4.38
+0,chat/en,511, Quick,22,7.395
+0,chat/en,511, Quick,23,9.201
+0,chat/en,511, Quick,25,6.309
+0,chat/en,511, Quick,26,7.035
+0,chat/en,511, Quick,27,3.554
+0,chat/en,511, Quick,28,4.001
+0,chat/en,511, Quick,30,2.379
+0,chat/en,511, Quick,31,4.877
+0,chat/en,511, Quick,32,2.011
+0,chat/en,511, Quick,33,2.565
+0,chat/en,541, the,0,
+0,chat/en,541, the,1,
+0,chat/en,541, the,2,
+0,chat/en,541, the,3,9.019
+0,chat/en,541, the,5,
+0,chat/en,541, the,6,
+0,chat/en,541, the,7,
+0,chat/en,541, the,8,
+0,chat/en,541, the,10,
+0,chat/en,541, the,11,
+0,chat/en,541, the,12,
+0,chat/en,541, the,13,
+0,chat/en,541, the,15,
+0,chat/en,541, the,16,
+0,chat/en,541, the,17,
+0,chat/en,541, the,18,
+0,chat/en,541, the,20,
+0,chat/en,541, the,21,
+0,chat/en,541, the,22,
+0,chat/en,541, the,23,
+0,chat/en,541, the,25,
+0,chat/en,541, the,26,
+0,chat/en,541, the,27,
+0,chat/en,541, the,28,
+0,chat/en,541, the,30,
+0,chat/en,541, the,31,
+0,chat/en,541, the,32,
+0,chat/en,541, the,33,
+0,chat/en,553, the,0,
+0,chat/en,553, the,1,
+0,chat/en,553, the,2,
+0,chat/en,553, the,3,21.411
+0,chat/en,553, the,5,
+0,chat/en,553, the,6,3.411
+0,chat/en,553, the,7,2.471
+0,chat/en,553, the,8,0.918
+0,chat/en,553, the,10,1.793
+0,chat/en,553, the,11,
+0,chat/en,553, the,12,
+0,chat/en,553, the,13,
+0,chat/en,553, the,15,
+0,chat/en,553, the,16,
+0,chat/en,553, the,17,
+0,chat/en,553, the,18,
+0,chat/en,553, the,20,
+0,chat/en,553, the,21,
+0,chat/en,553, the,22,
+0,chat/en,553, the,23,
+0,chat/en,553, the,25,
+0,chat/en,553, the,26,
+0,chat/en,553, the,27,
+0,chat/en,553, the,28,
+0,chat/en,553, the,30,
+0,chat/en,553, the,31,
+0,chat/en,553, the,32,
+0,chat/en,553, the,33,
+0,chat/en,567, To,0,6.174
+0,chat/en,567, To,1,4.471
+0,chat/en,567, To,2,4.337
+0,chat/en,567, To,3,20.971
+0,chat/en,567, To,5,
+0,chat/en,567, To,6,5.111
+0,chat/en,567, To,7,
+0,chat/en,567, To,8,
+0,chat/en,567, To,10,
+0,chat/en,567, To,11,
+0,chat/en,567, To,12,
+0,chat/en,567, To,13,2.42
+0,chat/en,567, To,15,4.767
+0,chat/en,567, To,16,
+0,chat/en,567, To,17,
+0,chat/en,567, To,18,
+0,chat/en,567, To,20,
+0,chat/en,567, To,21,
+0,chat/en,567, To,22,
+0,chat/en,567, To,23,1.405
+0,chat/en,567, To,25,
+0,chat/en,567, To,26,
+0,chat/en,567, To,27,
+0,chat/en,567, To,28,1.79
+0,chat/en,567, To,30,
+0,chat/en,567, To,31,
+0,chat/en,567, To,32,
+0,chat/en,567, To,33,
+0,chat/en,574, for,0,21.032
+0,chat/en,574, for,1,21.559
+0,chat/en,574, for,2,22.025
+0,chat/en,574, for,3,8.941
+0,chat/en,574, for,5,
+0,chat/en,574, for,6,
+0,chat/en,574, for,7,
+0,chat/en,574, for,8,
+0,chat/en,574, for,10,
+0,chat/en,574, for,11,
+0,chat/en,574, for,12,2.835
+0,chat/en,574, for,13,2.165
+0,chat/en,574, for,15,
+0,chat/en,574, for,16,2.859
+0,chat/en,574, for,17,0.781
+0,chat/en,574, for,18,1.74
+0,chat/en,574, for,20,9.029
+0,chat/en,574, for,21,2.681
+0,chat/en,574, for,22,
+0,chat/en,574, for,23,
+0,chat/en,574, for,25,
+0,chat/en,574, for,26,
+0,chat/en,574, for,27,
+0,chat/en,574, for,28,
+0,chat/en,574, for,30,
+0,chat/en,574, for,31,
+0,chat/en,574, for,32,
+0,chat/en,574, for,33,
+1,named_entity_recognition/en,259," """,0,
+1,named_entity_recognition/en,259," """,1,
+1,named_entity_recognition/en,259," """,2,
+1,named_entity_recognition/en,259," """,3,
+1,named_entity_recognition/en,259," """,5,
+1,named_entity_recognition/en,259," """,6,
+1,named_entity_recognition/en,259," """,7,
+1,named_entity_recognition/en,259," """,8,
+1,named_entity_recognition/en,259," """,10,1.886
+1,named_entity_recognition/en,259," """,11,1.924
+1,named_entity_recognition/en,259," """,12,1.413
+1,named_entity_recognition/en,259," """,13,
+1,named_entity_recognition/en,259," """,15,2.559
+1,named_entity_recognition/en,259," """,16,3.578
+1,named_entity_recognition/en,259," """,17,4.137
+1,named_entity_recognition/en,259," """,18,2.111
+1,named_entity_recognition/en,259," """,20,4.557
+1,named_entity_recognition/en,259," """,21,4.765
+1,named_entity_recognition/en,259," """,22,5.568
+1,named_entity_recognition/en,259," """,23,3.868
+1,named_entity_recognition/en,259," """,25,14.017
+1,named_entity_recognition/en,259," """,26,10.411
+1,named_entity_recognition/en,259," """,27,14.32
+1,named_entity_recognition/en,259," """,28,13.07
+1,named_entity_recognition/en,259," """,30,17.685
+1,named_entity_recognition/en,259," """,31,14.358
+1,named_entity_recognition/en,259," """,32,15.551
+1,named_entity_recognition/en,259," """,33,13.796
+1,named_entity_recognition/en,506,"""),",0,4.775
+1,named_entity_recognition/en,506,"""),",1,6.823
+1,named_entity_recognition/en,506,"""),",2,16.989
+1,named_entity_recognition/en,506,"""),",3,7.961
+1,named_entity_recognition/en,506,"""),",5,23.447
+1,named_entity_recognition/en,506,"""),",6,14.289
+1,named_entity_recognition/en,506,"""),",7,8.078
+1,named_entity_recognition/en,506,"""),",8,3.665
+1,named_entity_recognition/en,506,"""),",10,3.852
+1,named_entity_recognition/en,506,"""),",11,1.646
+1,named_entity_recognition/en,506,"""),",12,2.605
+1,named_entity_recognition/en,506,"""),",13,3.026
+1,named_entity_recognition/en,506,"""),",15,
+1,named_entity_recognition/en,506,"""),",16,
+1,named_entity_recognition/en,506,"""),",17,
+1,named_entity_recognition/en,506,"""),",18,
+1,named_entity_recognition/en,506,"""),",20,
+1,named_entity_recognition/en,506,"""),",21,
+1,named_entity_recognition/en,506,"""),",22,
+1,named_entity_recognition/en,506,"""),",23,
+1,named_entity_recognition/en,506,"""),",25,
+1,named_entity_recognition/en,506,"""),",26,
+1,named_entity_recognition/en,506,"""),",27,
+1,named_entity_recognition/en,506,"""),",28,
+1,named_entity_recognition/en,506,"""),",30,
+1,named_entity_recognition/en,506,"""),",31,
+1,named_entity_recognition/en,506,"""),",32,
+1,named_entity_recognition/en,506,"""),",33,
+1,named_entity_recognition/en,507," (""",0,10.21
+1,named_entity_recognition/en,507," (""",1,9.838
+1,named_entity_recognition/en,507," (""",2,14.997
+1,named_entity_recognition/en,507," (""",3,9.103
+1,named_entity_recognition/en,507," (""",5,3.006
+1,named_entity_recognition/en,507," (""",6,4.707
+1,named_entity_recognition/en,507," (""",7,
+1,named_entity_recognition/en,507," (""",8,
+1,named_entity_recognition/en,507," (""",10,
+1,named_entity_recognition/en,507," (""",11,1.602
+1,named_entity_recognition/en,507," (""",12,
+1,named_entity_recognition/en,507," (""",13,
+1,named_entity_recognition/en,507," (""",15,
+1,named_entity_recognition/en,507," (""",16,
+1,named_entity_recognition/en,507," (""",17,
+1,named_entity_recognition/en,507," (""",18,
+1,named_entity_recognition/en,507," (""",20,
+1,named_entity_recognition/en,507," (""",21,
+1,named_entity_recognition/en,507," (""",22,
+1,named_entity_recognition/en,507," (""",23,
+1,named_entity_recognition/en,507," (""",25,
+1,named_entity_recognition/en,507," (""",26,
+1,named_entity_recognition/en,507," (""",27,
+1,named_entity_recognition/en,507," (""",28,
+1,named_entity_recognition/en,507," (""",30,
+1,named_entity_recognition/en,507," (""",31,
+1,named_entity_recognition/en,507," (""",32,
+1,named_entity_recognition/en,507," (""",33,
+1,named_entity_recognition/en,508,described,0,
+1,named_entity_recognition/en,508,described,1,
+1,named_entity_recognition/en,508,described,2,12.076
+1,named_entity_recognition/en,508,described,3,6.254
+1,named_entity_recognition/en,508,described,5,3.504
+1,named_entity_recognition/en,508,described,6,21.804
+1,named_entity_recognition/en,508,described,7,4.498
+1,named_entity_recognition/en,508,described,8,7.977
+1,named_entity_recognition/en,508,described,10,6.795
+1,named_entity_recognition/en,508,described,11,
+1,named_entity_recognition/en,508,described,12,5.657
+1,named_entity_recognition/en,508,described,13,6.016
+1,named_entity_recognition/en,508,described,15,1.552
+1,named_entity_recognition/en,508,described,16,
+1,named_entity_recognition/en,508,described,17,1.812
+1,named_entity_recognition/en,508,described,18,4.781
+1,named_entity_recognition/en,508,described,20,3.96
+1,named_entity_recognition/en,508,described,21,
+1,named_entity_recognition/en,508,described,22,
+1,named_entity_recognition/en,508,described,23,2.981
+1,named_entity_recognition/en,508,described,25,
+1,named_entity_recognition/en,508,described,26,
+1,named_entity_recognition/en,508,described,27,
+1,named_entity_recognition/en,508,described,28,
+1,named_entity_recognition/en,508,described,30,
+1,named_entity_recognition/en,508,described,31,
+1,named_entity_recognition/en,508,described,32,
+1,named_entity_recognition/en,508,described,33,
+1,named_entity_recognition/en,510," """,0,7.493
+1,named_entity_recognition/en,510," """,1,6.984
+1,named_entity_recognition/en,510," """,2,
+1,named_entity_recognition/en,510," """,3,
+1,named_entity_recognition/en,510," """,5,
+1,named_entity_recognition/en,510," """,6,
+1,named_entity_recognition/en,510," """,7,
+1,named_entity_recognition/en,510," """,8,
+1,named_entity_recognition/en,510," """,10,
+1,named_entity_recognition/en,510," """,11,
+1,named_entity_recognition/en,510," """,12,
+1,named_entity_recognition/en,510," """,13,
+1,named_entity_recognition/en,510," """,15,
+1,named_entity_recognition/en,510," """,16,
+1,named_entity_recognition/en,510," """,17,
+1,named_entity_recognition/en,510," """,18,
+1,named_entity_recognition/en,510," """,20,
+1,named_entity_recognition/en,510," """,21,
+1,named_entity_recognition/en,510," """,22,
+1,named_entity_recognition/en,510," """,23,
+1,named_entity_recognition/en,510," """,25,
+1,named_entity_recognition/en,510," """,26,
+1,named_entity_recognition/en,510," """,27,
+1,named_entity_recognition/en,510," """,28,
+1,named_entity_recognition/en,510," """,30,
+1,named_entity_recognition/en,510," """,31,
+1,named_entity_recognition/en,510," """,32,
+1,named_entity_recognition/en,510," """,33,
+1,named_entity_recognition/en,557,split,0,
+1,named_entity_recognition/en,557,split,1,
+1,named_entity_recognition/en,557,split,2,7.665
+1,named_entity_recognition/en,557,split,3,
+1,named_entity_recognition/en,557,split,5,
+1,named_entity_recognition/en,557,split,6,
+1,named_entity_recognition/en,557,split,7,
+1,named_entity_recognition/en,557,split,8,
+1,named_entity_recognition/en,557,split,10,
+1,named_entity_recognition/en,557,split,11,
+1,named_entity_recognition/en,557,split,12,
+1,named_entity_recognition/en,557,split,13,
+1,named_entity_recognition/en,557,split,15,
+1,named_entity_recognition/en,557,split,16,
+1,named_entity_recognition/en,557,split,17,
+1,named_entity_recognition/en,557,split,18,
+1,named_entity_recognition/en,557,split,20,
+1,named_entity_recognition/en,557,split,21,
+1,named_entity_recognition/en,557,split,22,
+1,named_entity_recognition/en,557,split,23,
+1,named_entity_recognition/en,557,split,25,
+1,named_entity_recognition/en,557,split,26,
+1,named_entity_recognition/en,557,split,27,
+1,named_entity_recognition/en,557,split,28,
+1,named_entity_recognition/en,557,split,30,
+1,named_entity_recognition/en,557,split,31,
+1,named_entity_recognition/en,557,split,32,
+1,named_entity_recognition/en,557,split,33,
+1,named_entity_recognition/en,572," """,0,14.083
+1,named_entity_recognition/en,572," """,1,14.729
+1,named_entity_recognition/en,572," """,2,8.385
+1,named_entity_recognition/en,572," """,3,5.771
+1,named_entity_recognition/en,572," """,5,3.972
+1,named_entity_recognition/en,572," """,6,4.869
+1,named_entity_recognition/en,572," """,7,4.618
+1,named_entity_recognition/en,572," """,8,
+1,named_entity_recognition/en,572," """,10,
+1,named_entity_recognition/en,572," """,11,
+1,named_entity_recognition/en,572," """,12,
+1,named_entity_recognition/en,572," """,13,
+1,named_entity_recognition/en,572," """,15,
+1,named_entity_recognition/en,572," """,16,
+1,named_entity_recognition/en,572," """,17,
+1,named_entity_recognition/en,572," """,18,
+1,named_entity_recognition/en,572," """,20,
+1,named_entity_recognition/en,572," """,21,
+1,named_entity_recognition/en,572," """,22,
+1,named_entity_recognition/en,572," """,23,
+1,named_entity_recognition/en,572," """,25,
+1,named_entity_recognition/en,572," """,26,
+1,named_entity_recognition/en,572," """,27,
+1,named_entity_recognition/en,572," """,28,
+1,named_entity_recognition/en,572," """,30,
+1,named_entity_recognition/en,572," """,31,
+1,named_entity_recognition/en,572," """,32,
+1,named_entity_recognition/en,572," """,33,
+1,named_entity_recognition/en,574,ry,0,16.455
+1,named_entity_recognition/en,574,ry,1,14.603
+1,named_entity_recognition/en,574,ry,2,23.681
+1,named_entity_recognition/en,574,ry,3,18.365
+1,named_entity_recognition/en,574,ry,5,3.432
+1,named_entity_recognition/en,574,ry,6,26.225
+1,named_entity_recognition/en,574,ry,7,4.344
+1,named_entity_recognition/en,574,ry,8,8.443
+1,named_entity_recognition/en,574,ry,10,7.171
+1,named_entity_recognition/en,574,ry,11,
+1,named_entity_recognition/en,574,ry,12,9.666
+1,named_entity_recognition/en,574,ry,13,5.427
+1,named_entity_recognition/en,574,ry,15,2.132
+1,named_entity_recognition/en,574,ry,16,2.845
+1,named_entity_recognition/en,574,ry,17,1.333
+1,named_entity_recognition/en,574,ry,18,7.083
+1,named_entity_recognition/en,574,ry,20,6.816
+1,named_entity_recognition/en,574,ry,21,8.854
+1,named_entity_recognition/en,574,ry,22,2.888
+1,named_entity_recognition/en,574,ry,23,3.389
+1,named_entity_recognition/en,574,ry,25,
+1,named_entity_recognition/en,574,ry,26,1.494
+1,named_entity_recognition/en,574,ry,27,
+1,named_entity_recognition/en,574,ry,28,
+1,named_entity_recognition/en,574,ry,30,
+1,named_entity_recognition/en,574,ry,31,
+1,named_entity_recognition/en,574,ry,32,
+1,named_entity_recognition/en,574,ry,33,0.944
+1,named_entity_recognition/en,637," (""",0,19.407
+1,named_entity_recognition/en,637," (""",1,22.445
+1,named_entity_recognition/en,637," (""",2,31.216
+1,named_entity_recognition/en,637," (""",3,12.828
+1,named_entity_recognition/en,637," (""",5,7.994
+1,named_entity_recognition/en,637," (""",6,10.179
+1,named_entity_recognition/en,637," (""",7,3.356
+1,named_entity_recognition/en,637," (""",8,
+1,named_entity_recognition/en,637," (""",10,2.573
+1,named_entity_recognition/en,637," (""",11,
+1,named_entity_recognition/en,637," (""",12,1.736
+1,named_entity_recognition/en,637," (""",13,2.893
+1,named_entity_recognition/en,637," (""",15,
+1,named_entity_recognition/en,637," (""",16,
+1,named_entity_recognition/en,637," (""",17,
+1,named_entity_recognition/en,637," (""",18,
+1,named_entity_recognition/en,637," (""",20,
+1,named_entity_recognition/en,637," (""",21,
+1,named_entity_recognition/en,637," (""",22,
+1,named_entity_recognition/en,637," (""",23,2.488
+1,named_entity_recognition/en,637," (""",25,
+1,named_entity_recognition/en,637," (""",26,
+1,named_entity_recognition/en,637," (""",27,
+1,named_entity_recognition/en,637," (""",28,
+1,named_entity_recognition/en,637," (""",30,1.708
+1,named_entity_recognition/en,637," (""",31,
+1,named_entity_recognition/en,637," (""",32,
+1,named_entity_recognition/en,637," (""",33,
+1,named_entity_recognition/en,638,split,0,14.79
+1,named_entity_recognition/en,638,split,1,15.98
+1,named_entity_recognition/en,638,split,2,31.371
+1,named_entity_recognition/en,638,split,3,21.796
+1,named_entity_recognition/en,638,split,5,
+1,named_entity_recognition/en,638,split,6,33.519
+1,named_entity_recognition/en,638,split,7,4.238
+1,named_entity_recognition/en,638,split,8,9.855
+1,named_entity_recognition/en,638,split,10,7.891
+1,named_entity_recognition/en,638,split,11,
+1,named_entity_recognition/en,638,split,12,10.689
+1,named_entity_recognition/en,638,split,13,7.31
+1,named_entity_recognition/en,638,split,15,
+1,named_entity_recognition/en,638,split,16,
+1,named_entity_recognition/en,638,split,17,
+1,named_entity_recognition/en,638,split,18,3.629
+1,named_entity_recognition/en,638,split,20,1.687
+1,named_entity_recognition/en,638,split,21,2.321
+1,named_entity_recognition/en,638,split,22,
+1,named_entity_recognition/en,638,split,23,4.254
+1,named_entity_recognition/en,638,split,25,1.276
+1,named_entity_recognition/en,638,split,26,1.677
+1,named_entity_recognition/en,638,split,27,
+1,named_entity_recognition/en,638,split,28,
+1,named_entity_recognition/en,638,split,30,
+1,named_entity_recognition/en,638,split,31,
+1,named_entity_recognition/en,638,split,32,
+1,named_entity_recognition/en,638,split,33,
+2,named_entity_recognition/es,226, as,0,
+2,named_entity_recognition/es,226, as,1,
+2,named_entity_recognition/es,226, as,2,
+2,named_entity_recognition/es,226, as,3,
+2,named_entity_recognition/es,226, as,5,
+2,named_entity_recognition/es,226, as,6,
+2,named_entity_recognition/es,226, as,7,
+2,named_entity_recognition/es,226, as,8,
+2,named_entity_recognition/es,226, as,10,3.375
+2,named_entity_recognition/es,226, as,11,1.832
+2,named_entity_recognition/es,226, as,12,2.963
+2,named_entity_recognition/es,226, as,13,4.383
+2,named_entity_recognition/es,226, as,15,4.911
+2,named_entity_recognition/es,226, as,16,6.108
+2,named_entity_recognition/es,226, as,17,3.618
+2,named_entity_recognition/es,226, as,18,6.48
+2,named_entity_recognition/es,226, as,20,11.001
+2,named_entity_recognition/es,226, as,21,11.721
+2,named_entity_recognition/es,226, as,22,18.323
+2,named_entity_recognition/es,226, as,23,11.185
+2,named_entity_recognition/es,226, as,25,10.461
+2,named_entity_recognition/es,226, as,26,19.856
+2,named_entity_recognition/es,226, as,27,27.877
+2,named_entity_recognition/es,226, as,28,18.964
+2,named_entity_recognition/es,226, as,30,21.886
+2,named_entity_recognition/es,226, as,31,25.908
+2,named_entity_recognition/es,226, as,32,21.094
+2,named_entity_recognition/es,226, as,33,20.21
+2,named_entity_recognition/es,249, token,0,
+2,named_entity_recognition/es,249, token,1,
+2,named_entity_recognition/es,249, token,2,
+2,named_entity_recognition/es,249, token,3,
+2,named_entity_recognition/es,249, token,5,4.016
+2,named_entity_recognition/es,249, token,6,
+2,named_entity_recognition/es,249, token,7,
+2,named_entity_recognition/es,249, token,8,
+2,named_entity_recognition/es,249, token,10,
+2,named_entity_recognition/es,249, token,11,
+2,named_entity_recognition/es,249, token,12,
+2,named_entity_recognition/es,249, token,13,
+2,named_entity_recognition/es,249, token,15,
+2,named_entity_recognition/es,249, token,16,
+2,named_entity_recognition/es,249, token,17,
+2,named_entity_recognition/es,249, token,18,
+2,named_entity_recognition/es,249, token,20,
+2,named_entity_recognition/es,249, token,21,
+2,named_entity_recognition/es,249, token,22,
+2,named_entity_recognition/es,249, token,23,
+2,named_entity_recognition/es,249, token,25,
+2,named_entity_recognition/es,249, token,26,
+2,named_entity_recognition/es,249, token,27,
+2,named_entity_recognition/es,249, token,28,
+2,named_entity_recognition/es,249, token,30,
+2,named_entity_recognition/es,249, token,31,
+2,named_entity_recognition/es,249, token,32,
+2,named_entity_recognition/es,249, token,33,
+2,named_entity_recognition/es,286,model,0,9.513
+2,named_entity_recognition/es,286,model,1,10.937
+2,named_entity_recognition/es,286,model,2,10.289
+2,named_entity_recognition/es,286,model,3,3.873
+2,named_entity_recognition/es,286,model,5,5.966
+2,named_entity_recognition/es,286,model,6,
+2,named_entity_recognition/es,286,model,7,1.891
+2,named_entity_recognition/es,286,model,8,1.827
+2,named_entity_recognition/es,286,model,10,
+2,named_entity_recognition/es,286,model,11,
+2,named_entity_recognition/es,286,model,12,1.346
+2,named_entity_recognition/es,286,model,13,2.827
+2,named_entity_recognition/es,286,model,15,2.864
+2,named_entity_recognition/es,286,model,16,
+2,named_entity_recognition/es,286,model,17,
+2,named_entity_recognition/es,286,model,18,
+2,named_entity_recognition/es,286,model,20,2.046
+2,named_entity_recognition/es,286,model,21,2.844
+2,named_entity_recognition/es,286,model,22,1.352
+2,named_entity_recognition/es,286,model,23,3.922
+2,named_entity_recognition/es,286,model,25,5.758
+2,named_entity_recognition/es,286,model,26,1.917
+2,named_entity_recognition/es,286,model,27,6.488
+2,named_entity_recognition/es,286,model,28,6.775
+2,named_entity_recognition/es,286,model,30,2.782
+2,named_entity_recognition/es,286,model,31,7.74
+2,named_entity_recognition/es,286,model,32,1.673
+2,named_entity_recognition/es,286,model,33,0.873
+2,named_entity_recognition/es,499," """,0,
+2,named_entity_recognition/es,499," """,1,
+2,named_entity_recognition/es,499," """,2,
+2,named_entity_recognition/es,499," """,3,6.629
+2,named_entity_recognition/es,499," """,5,
+2,named_entity_recognition/es,499," """,6,
+2,named_entity_recognition/es,499," """,7,
+2,named_entity_recognition/es,499," """,8,
+2,named_entity_recognition/es,499," """,10,
+2,named_entity_recognition/es,499," """,11,
+2,named_entity_recognition/es,499," """,12,
+2,named_entity_recognition/es,499," """,13,
+2,named_entity_recognition/es,499," """,15,
+2,named_entity_recognition/es,499," """,16,
+2,named_entity_recognition/es,499," """,17,
+2,named_entity_recognition/es,499," """,18,
+2,named_entity_recognition/es,499," """,20,
+2,named_entity_recognition/es,499," """,21,
+2,named_entity_recognition/es,499," """,22,
+2,named_entity_recognition/es,499," """,23,
+2,named_entity_recognition/es,499," """,25,
+2,named_entity_recognition/es,499," """,26,
+2,named_entity_recognition/es,499," """,27,
+2,named_entity_recognition/es,499," """,28,
+2,named_entity_recognition/es,499," """,30,
+2,named_entity_recognition/es,499," """,31,
+2,named_entity_recognition/es,499," """,32,
+2,named_entity_recognition/es,499," """,33,
+2,named_entity_recognition/es,501,"""),",0,2.692
+2,named_entity_recognition/es,501,"""),",1,3.806
+2,named_entity_recognition/es,501,"""),",2,
+2,named_entity_recognition/es,501,"""),",3,
+2,named_entity_recognition/es,501,"""),",5,
+2,named_entity_recognition/es,501,"""),",6,2.393
+2,named_entity_recognition/es,501,"""),",7,5.757
+2,named_entity_recognition/es,501,"""),",8,
+2,named_entity_recognition/es,501,"""),",10,
+2,named_entity_recognition/es,501,"""),",11,
+2,named_entity_recognition/es,501,"""),",12,
+2,named_entity_recognition/es,501,"""),",13,
+2,named_entity_recognition/es,501,"""),",15,
+2,named_entity_recognition/es,501,"""),",16,
+2,named_entity_recognition/es,501,"""),",17,
+2,named_entity_recognition/es,501,"""),",18,
+2,named_entity_recognition/es,501,"""),",20,
+2,named_entity_recognition/es,501,"""),",21,
+2,named_entity_recognition/es,501,"""),",22,
+2,named_entity_recognition/es,501,"""),",23,
+2,named_entity_recognition/es,501,"""),",25,
+2,named_entity_recognition/es,501,"""),",26,
+2,named_entity_recognition/es,501,"""),",27,
+2,named_entity_recognition/es,501,"""),",28,
+2,named_entity_recognition/es,501,"""),",30,
+2,named_entity_recognition/es,501,"""),",31,
+2,named_entity_recognition/es,501,"""),",32,
+2,named_entity_recognition/es,501,"""),",33,
+2,named_entity_recognition/es,505," """,0,2.226
+2,named_entity_recognition/es,505," """,1,
+2,named_entity_recognition/es,505," """,2,
+2,named_entity_recognition/es,505," """,3,10.731
+2,named_entity_recognition/es,505," """,5,
+2,named_entity_recognition/es,505," """,6,8.744
+2,named_entity_recognition/es,505," """,7,
+2,named_entity_recognition/es,505," """,8,
+2,named_entity_recognition/es,505," """,10,
+2,named_entity_recognition/es,505," """,11,
+2,named_entity_recognition/es,505," """,12,
+2,named_entity_recognition/es,505," """,13,
+2,named_entity_recognition/es,505," """,15,
+2,named_entity_recognition/es,505," """,16,
+2,named_entity_recognition/es,505," """,17,
+2,named_entity_recognition/es,505," """,18,
+2,named_entity_recognition/es,505," """,20,
+2,named_entity_recognition/es,505," """,21,
+2,named_entity_recognition/es,505," """,22,
+2,named_entity_recognition/es,505," """,23,
+2,named_entity_recognition/es,505," """,25,
+2,named_entity_recognition/es,505," """,26,
+2,named_entity_recognition/es,505," """,27,
+2,named_entity_recognition/es,505," """,28,
+2,named_entity_recognition/es,505," """,30,
+2,named_entity_recognition/es,505," """,31,
+2,named_entity_recognition/es,505," """,32,
+2,named_entity_recognition/es,505," """,33,
+2,named_entity_recognition/es,510," ("".",0,9.848
+2,named_entity_recognition/es,510," ("".",1,6.409
+2,named_entity_recognition/es,510," ("".",2,20.048
+2,named_entity_recognition/es,510," ("".",3,14.728
+2,named_entity_recognition/es,510," ("".",5,4.879
+2,named_entity_recognition/es,510," ("".",6,10.111
+2,named_entity_recognition/es,510," ("".",7,2.689
+2,named_entity_recognition/es,510," ("".",8,5.028
+2,named_entity_recognition/es,510," ("".",10,4.951
+2,named_entity_recognition/es,510," ("".",11,
+2,named_entity_recognition/es,510," ("".",12,3.648
+2,named_entity_recognition/es,510," ("".",13,3.94
+2,named_entity_recognition/es,510," ("".",15,7.99
+2,named_entity_recognition/es,510," ("".",16,7.783
+2,named_entity_recognition/es,510," ("".",17,8.484
+2,named_entity_recognition/es,510," ("".",18,10.131
+2,named_entity_recognition/es,510," ("".",20,7.653
+2,named_entity_recognition/es,510," ("".",21,3.205
+2,named_entity_recognition/es,510," ("".",22,3.674
+2,named_entity_recognition/es,510," ("".",23,7.206
+2,named_entity_recognition/es,510," ("".",25,4.915
+2,named_entity_recognition/es,510," ("".",26,4.282
+2,named_entity_recognition/es,510," ("".",27,6.706
+2,named_entity_recognition/es,510," ("".",28,2.74
+2,named_entity_recognition/es,510," ("".",30,9.604
+2,named_entity_recognition/es,510," ("".",31,3.871
+2,named_entity_recognition/es,510," ("".",32,2.716
+2,named_entity_recognition/es,510," ("".",33,1.566
+2,named_entity_recognition/es,511,""",",0,7.705
+2,named_entity_recognition/es,511,""",",1,20.841
+2,named_entity_recognition/es,511,""",",2,24.858
+2,named_entity_recognition/es,511,""",",3,17.901
+2,named_entity_recognition/es,511,""",",5,11.128
+2,named_entity_recognition/es,511,""",",6,7.996
+2,named_entity_recognition/es,511,""",",7,
+2,named_entity_recognition/es,511,""",",8,3.636
+2,named_entity_recognition/es,511,""",",10,7.141
+2,named_entity_recognition/es,511,""",",11,
+2,named_entity_recognition/es,511,""",",12,5.174
+2,named_entity_recognition/es,511,""",",13,2.602
+2,named_entity_recognition/es,511,""",",15,5.287
+2,named_entity_recognition/es,511,""",",16,3.866
+2,named_entity_recognition/es,511,""",",17,2.065
+2,named_entity_recognition/es,511,""",",18,2.621
+2,named_entity_recognition/es,511,""",",20,7.242
+2,named_entity_recognition/es,511,""",",21,2.58
+2,named_entity_recognition/es,511,""",",22,2.162
+2,named_entity_recognition/es,511,""",",23,6.154
+2,named_entity_recognition/es,511,""",",25,1.416
+2,named_entity_recognition/es,511,""",",26,3.176
+2,named_entity_recognition/es,511,""",",27,1.973
+2,named_entity_recognition/es,511,""",",28,3.795
+2,named_entity_recognition/es,511,""",",30,2.278
+2,named_entity_recognition/es,511,""",",31,
+2,named_entity_recognition/es,511,""",",32,
+2,named_entity_recognition/es,511,""",",33,
+2,named_entity_recognition/es,513,O,0,4.933
+2,named_entity_recognition/es,513,O,1,7.37
+2,named_entity_recognition/es,513,O,2,3.585
+2,named_entity_recognition/es,513,O,3,16.009
+2,named_entity_recognition/es,513,O,5,5.074
+2,named_entity_recognition/es,513,O,6,8.529
+2,named_entity_recognition/es,513,O,7,7.87
+2,named_entity_recognition/es,513,O,8,3.687
+2,named_entity_recognition/es,513,O,10,1.993
+2,named_entity_recognition/es,513,O,11,
+2,named_entity_recognition/es,513,O,12,5.319
+2,named_entity_recognition/es,513,O,13,
+2,named_entity_recognition/es,513,O,15,
+2,named_entity_recognition/es,513,O,16,
+2,named_entity_recognition/es,513,O,17,
+2,named_entity_recognition/es,513,O,18,0.822
+2,named_entity_recognition/es,513,O,20,
+2,named_entity_recognition/es,513,O,21,
+2,named_entity_recognition/es,513,O,22,
+2,named_entity_recognition/es,513,O,23,
+2,named_entity_recognition/es,513,O,25,
+2,named_entity_recognition/es,513,O,26,0.691
+2,named_entity_recognition/es,513,O,27,
+2,named_entity_recognition/es,513,O,28,
+2,named_entity_recognition/es,513,O,30,
+2,named_entity_recognition/es,513,O,31,
+2,named_entity_recognition/es,513,O,32,
+2,named_entity_recognition/es,513,O,33,
+2,named_entity_recognition/es,515,<turn|>,0,24.867
+2,named_entity_recognition/es,515,<turn|>,1,19.159
+2,named_entity_recognition/es,515,<turn|>,2,29.136
+2,named_entity_recognition/es,515,<turn|>,3,14.834
+2,named_entity_recognition/es,515,<turn|>,5,7.075
+2,named_entity_recognition/es,515,<turn|>,6,12.388
+2,named_entity_recognition/es,515,<turn|>,7,5.75
+2,named_entity_recognition/es,515,<turn|>,8,2.529
+2,named_entity_recognition/es,515,<turn|>,10,6.759
+2,named_entity_recognition/es,515,<turn|>,11,4.824
+2,named_entity_recognition/es,515,<turn|>,12,4.8
+2,named_entity_recognition/es,515,<turn|>,13,3.803
+2,named_entity_recognition/es,515,<turn|>,15,3.329
+2,named_entity_recognition/es,515,<turn|>,16,2.194
+2,named_entity_recognition/es,515,<turn|>,17,1.326
+2,named_entity_recognition/es,515,<turn|>,18,1.222
+2,named_entity_recognition/es,515,<turn|>,20,3.746
+2,named_entity_recognition/es,515,<turn|>,21,2.781
+2,named_entity_recognition/es,515,<turn|>,22,6.744
+2,named_entity_recognition/es,515,<turn|>,23,5.618
+2,named_entity_recognition/es,515,<turn|>,25,1.438
+2,named_entity_recognition/es,515,<turn|>,26,2.457
+2,named_entity_recognition/es,515,<turn|>,27,1.334
+2,named_entity_recognition/es,515,<turn|>,28,5.261
+2,named_entity_recognition/es,515,<turn|>,30,1.625
+2,named_entity_recognition/es,515,<turn|>,31,0.522
+2,named_entity_recognition/es,515,<turn|>,32,3.561
+2,named_entity_recognition/es,515,<turn|>,33,1.807
+3,machine_translation/en-de,325, ,0,
+3,machine_translation/en-de,325, ,1,
+3,machine_translation/en-de,325, ,2,
+3,machine_translation/en-de,325, ,3,
+3,machine_translation/en-de,325, ,5,
+3,machine_translation/en-de,325, ,6,
+3,machine_translation/en-de,325, ,7,
+3,machine_translation/en-de,325, ,8,
+3,machine_translation/en-de,325, ,10,3.019
+3,machine_translation/en-de,325, ,11,3.69
+3,machine_translation/en-de,325, ,12,3.627
+3,machine_translation/en-de,325, ,13,6.623
+3,machine_translation/en-de,325, ,15,5.699
+3,machine_translation/en-de,325, ,16,6.369
+3,machine_translation/en-de,325, ,17,4.787
+3,machine_translation/en-de,325, ,18,4.28
+3,machine_translation/en-de,325, ,20,8.088
+3,machine_translation/en-de,325, ,21,8.858
+3,machine_translation/en-de,325, ,22,16.025
+3,machine_translation/en-de,325, ,23,8.95
+3,machine_translation/en-de,325, ,25,13.662
+3,machine_translation/en-de,325, ,26,20.226
+3,machine_translation/en-de,325, ,27,27.714
+3,machine_translation/en-de,325, ,28,24.894
+3,machine_translation/en-de,325, ,30,20.059
+3,machine_translation/en-de,325, ,31,39.535
+3,machine_translation/en-de,325, ,32,26.72
+3,machine_translation/en-de,325, ,33,21.581
+3,machine_translation/en-de,480,",",0,
+3,machine_translation/en-de,480,",",1,
+3,machine_translation/en-de,480,",",2,
+3,machine_translation/en-de,480,",",3,6.448
+3,machine_translation/en-de,480,",",5,
+3,machine_translation/en-de,480,",",6,
+3,machine_translation/en-de,480,",",7,
+3,machine_translation/en-de,480,",",8,
+3,machine_translation/en-de,480,",",10,
+3,machine_translation/en-de,480,",",11,
+3,machine_translation/en-de,480,",",12,
+3,machine_translation/en-de,480,",",13,
+3,machine_translation/en-de,480,",",15,
+3,machine_translation/en-de,480,",",16,
+3,machine_translation/en-de,480,",",17,
+3,machine_translation/en-de,480,",",18,
+3,machine_translation/en-de,480,",",20,
+3,machine_translation/en-de,480,",",21,
+3,machine_translation/en-de,480,",",22,
+3,machine_translation/en-de,480,",",23,
+3,machine_translation/en-de,480,",",25,
+3,machine_translation/en-de,480,",",26,
+3,machine_translation/en-de,480,",",27,
+3,machine_translation/en-de,480,",",28,
+3,machine_translation/en-de,480,",",30,
+3,machine_translation/en-de,480,",",31,
+3,machine_translation/en-de,480,",",32,
+3,machine_translation/en-de,480,",",33,
+3,machine_translation/en-de,508, damals,0,
+3,machine_translation/en-de,508, damals,1,2.192
+3,machine_translation/en-de,508, damals,2,20.08
+3,machine_translation/en-de,508, damals,3,15.249
+3,machine_translation/en-de,508, damals,5,11.017
+3,machine_translation/en-de,508, damals,6,10.48
+3,machine_translation/en-de,508, damals,7,3.888
+3,machine_translation/en-de,508, damals,8,6.248
+3,machine_translation/en-de,508, damals,10,3.718
+3,machine_translation/en-de,508, damals,11,
+3,machine_translation/en-de,508, damals,12,4.998
+3,machine_translation/en-de,508, damals,13,6.15
+3,machine_translation/en-de,508, damals,15,2.631
+3,machine_translation/en-de,508, damals,16,4.356
+3,machine_translation/en-de,508, damals,17,1.903
+3,machine_translation/en-de,508, damals,18,4.644
+3,machine_translation/en-de,508, damals,20,8.368
+3,machine_translation/en-de,508, damals,21,
+3,machine_translation/en-de,508, damals,22,2.882
+3,machine_translation/en-de,508, damals,23,6.013
+3,machine_translation/en-de,508, damals,25,
+3,machine_translation/en-de,508, damals,26,0.884
+3,machine_translation/en-de,508, damals,27,
+3,machine_translation/en-de,508, damals,28,
+3,machine_translation/en-de,508, damals,30,2.672
+3,machine_translation/en-de,508, damals,31,
+3,machine_translation/en-de,508, damals,32,
+3,machine_translation/en-de,508, damals,33,
+3,machine_translation/en-de,567, many,0,10.798
+3,machine_translation/en-de,567, many,1,6.222
+3,machine_translation/en-de,567, many,2,9.303
+3,machine_translation/en-de,567, many,3,9.052
+3,machine_translation/en-de,567, many,5,7.471
+3,machine_translation/en-de,567, many,6,9.423
+3,machine_translation/en-de,567, many,7,
+3,machine_translation/en-de,567, many,8,1.944
+3,machine_translation/en-de,567, many,10,
+3,machine_translation/en-de,567, many,11,
+3,machine_translation/en-de,567, many,12,2.572
+3,machine_translation/en-de,567, many,13,
+3,machine_translation/en-de,567, many,15,
+3,machine_translation/en-de,567, many,16,
+3,machine_translation/en-de,567, many,17,
+3,machine_translation/en-de,567, many,18,
+3,machine_translation/en-de,567, many,20,3.559
+3,machine_translation/en-de,567, many,21,
+3,machine_translation/en-de,567, many,22,
+3,machine_translation/en-de,567, many,23,
+3,machine_translation/en-de,567, many,25,
+3,machine_translation/en-de,567, many,26,
+3,machine_translation/en-de,567, many,27,
+3,machine_translation/en-de,567, many,28,
+3,machine_translation/en-de,567, many,30,
+3,machine_translation/en-de,567, many,31,0.451
+3,machine_translation/en-de,567, many,32,
+3,machine_translation/en-de,567, many,33,
+3,machine_translation/en-de,568, years,0,19.336
+3,machine_translation/en-de,568, years,1,10.168
+3,machine_translation/en-de,568, years,2,13.596
+3,machine_translation/en-de,568, years,3,19.836
+3,machine_translation/en-de,568, years,5,9.364
+3,machine_translation/en-de,568, years,6,12.519
+3,machine_translation/en-de,568, years,7,11.148
+3,machine_translation/en-de,568, years,8,8.807
+3,machine_translation/en-de,568, years,10,8.88
+3,machine_translation/en-de,568, years,11,1.191
+3,machine_translation/en-de,568, years,12,9.779
+3,machine_translation/en-de,568, years,13,6.057
+3,machine_translation/en-de,568, years,15,3.548
+3,machine_translation/en-de,568, years,16,
+3,machine_translation/en-de,568, years,17,2.535
+3,machine_translation/en-de,568, years,18,1.892
+3,machine_translation/en-de,568, years,20,6.036
+3,machine_translation/en-de,568, years,21,4.553
+3,machine_translation/en-de,568, years,22,5.927
+3,machine_translation/en-de,568, years,23,3.136
+3,machine_translation/en-de,568, years,25,
+3,machine_translation/en-de,568, years,26,
+3,machine_translation/en-de,568, years,27,1.344
+3,machine_translation/en-de,568, years,28,
+3,machine_translation/en-de,568, years,30,
+3,machine_translation/en-de,568, years,31,
+3,machine_translation/en-de,568, years,32,
+3,machine_translation/en-de,568, years,33,
+3,machine_translation/en-de,573,.,0,
+3,machine_translation/en-de,573,.,1,11.379
+3,machine_translation/en-de,573,.,2,2.525
+3,machine_translation/en-de,573,.,3,5.896
+3,machine_translation/en-de,573,.,5,
+3,machine_translation/en-de,573,.,6,
+3,machine_translation/en-de,573,.,7,
+3,machine_translation/en-de,573,.,8,
+3,machine_translation/en-de,573,.,10,
+3,machine_translation/en-de,573,.,11,
+3,machine_translation/en-de,573,.,12,
+3,machine_translation/en-de,573,.,13,
+3,machine_translation/en-de,573,.,15,
+3,machine_translation/en-de,573,.,16,
+3,machine_translation/en-de,573,.,17,
+3,machine_translation/en-de,573,.,18,
+3,machine_translation/en-de,573,.,20,
+3,machine_translation/en-de,573,.,21,
+3,machine_translation/en-de,573,.,22,
+3,machine_translation/en-de,573,.,23,
+3,machine_translation/en-de,573,.,25,
+3,machine_translation/en-de,573,.,26,
+3,machine_translation/en-de,573,.,27,
+3,machine_translation/en-de,573,.,28,
+3,machine_translation/en-de,573,.,30,
+3,machine_translation/en-de,573,.,31,
+3,machine_translation/en-de,573,.,32,
+3,machine_translation/en-de,573,.,33,
+3,machine_translation/en-de,580,model,0,9.058
+3,machine_translation/en-de,580,model,1,12.776
+3,machine_translation/en-de,580,model,2,7.327
+3,machine_translation/en-de,580,model,3,3.451
+3,machine_translation/en-de,580,model,5,
+3,machine_translation/en-de,580,model,6,
+3,machine_translation/en-de,580,model,7,
+3,machine_translation/en-de,580,model,8,
+3,machine_translation/en-de,580,model,10,
+3,machine_translation/en-de,580,model,11,
+3,machine_translation/en-de,580,model,12,
+3,machine_translation/en-de,580,model,13,2.032
+3,machine_translation/en-de,580,model,15,7.531
+3,machine_translation/en-de,580,model,16,1.392
+3,machine_translation/en-de,580,model,17,
+3,machine_translation/en-de,580,model,18,1.516
+3,machine_translation/en-de,580,model,20,6.282
+3,machine_translation/en-de,580,model,21,4.147
+3,machine_translation/en-de,580,model,22,5.16
+3,machine_translation/en-de,580,model,23,7.564
+3,machine_translation/en-de,580,model,25,12.908
+3,machine_translation/en-de,580,model,26,3.858
+3,machine_translation/en-de,580,model,27,12.224
+3,machine_translation/en-de,580,model,28,8.149
+3,machine_translation/en-de,580,model,30,7.046
+3,machine_translation/en-de,580,model,31,3.486
+3,machine_translation/en-de,580,model,32,3.593
+3,machine_translation/en-de,580,model,33,3.566
+3,machine_translation/en-de,583, letz,0,
+3,machine_translation/en-de,583, letz,1,
+3,machine_translation/en-de,583, letz,2,6.424
+3,machine_translation/en-de,583, letz,3,
+3,machine_translation/en-de,583, letz,5,
+3,machine_translation/en-de,583, letz,6,
+3,machine_translation/en-de,583, letz,7,
+3,machine_translation/en-de,583, letz,8,
+3,machine_translation/en-de,583, letz,10,
+3,machine_translation/en-de,583, letz,11,
+3,machine_translation/en-de,583, letz,12,
+3,machine_translation/en-de,583, letz,13,
+3,machine_translation/en-de,583, letz,15,
+3,machine_translation/en-de,583, letz,16,
+3,machine_translation/en-de,583, letz,17,
+3,machine_translation/en-de,583, letz,18,
+3,machine_translation/en-de,583, letz,20,
+3,machine_translation/en-de,583, letz,21,
+3,machine_translation/en-de,583, letz,22,
+3,machine_translation/en-de,583, letz,23,
+3,machine_translation/en-de,583, letz,25,
+3,machine_translation/en-de,583, letz,26,
+3,machine_translation/en-de,583, letz,27,
+3,machine_translation/en-de,583, letz,28,
+3,machine_translation/en-de,583, letz,30,
+3,machine_translation/en-de,583, letz,31,
+3,machine_translation/en-de,583, letz,32,
+3,machine_translation/en-de,583, letz,33,
+3,machine_translation/en-de,621,no,0,
+3,machine_translation/en-de,621,no,1,
+3,machine_translation/en-de,621,no,2,
+3,machine_translation/en-de,621,no,3,
+3,machine_translation/en-de,621,no,5,6.766
+3,machine_translation/en-de,621,no,6,
+3,machine_translation/en-de,621,no,7,
+3,machine_translation/en-de,621,no,8,
+3,machine_translation/en-de,621,no,10,
+3,machine_translation/en-de,621,no,11,
+3,machine_translation/en-de,621,no,12,
+3,machine_translation/en-de,621,no,13,
+3,machine_translation/en-de,621,no,15,
+3,machine_translation/en-de,621,no,16,
+3,machine_translation/en-de,621,no,17,
+3,machine_translation/en-de,621,no,18,
+3,machine_translation/en-de,621,no,20,
+3,machine_translation/en-de,621,no,21,
+3,machine_translation/en-de,621,no,22,
+3,machine_translation/en-de,621,no,23,
+3,machine_translation/en-de,621,no,25,
+3,machine_translation/en-de,621,no,26,
+3,machine_translation/en-de,621,no,27,
+3,machine_translation/en-de,621,no,28,
+3,machine_translation/en-de,621,no,30,
+3,machine_translation/en-de,621,no,31,
+3,machine_translation/en-de,621,no,32,
+3,machine_translation/en-de,621,no,33,
+3,machine_translation/en-de,625,<turn|>,0,26.076
+3,machine_translation/en-de,625,<turn|>,1,18.234
+3,machine_translation/en-de,625,<turn|>,2,21.791
+3,machine_translation/en-de,625,<turn|>,3,10.907
+3,machine_translation/en-de,625,<turn|>,5,9.914
+3,machine_translation/en-de,625,<turn|>,6,13.073
+3,machine_translation/en-de,625,<turn|>,7,4.263
+3,machine_translation/en-de,625,<turn|>,8,
+3,machine_translation/en-de,625,<turn|>,10,
+3,machine_translation/en-de,625,<turn|>,11,
+3,machine_translation/en-de,625,<turn|>,12,3.22
+3,machine_translation/en-de,625,<turn|>,13,1.799
+3,machine_translation/en-de,625,<turn|>,15,7.123
+3,machine_translation/en-de,625,<turn|>,16,3.961
+3,machine_translation/en-de,625,<turn|>,17,1.255
+3,machine_translation/en-de,625,<turn|>,18,3.573
+3,machine_translation/en-de,625,<turn|>,20,4.469
+3,machine_translation/en-de,625,<turn|>,21,6.319
+3,machine_translation/en-de,625,<turn|>,22,4.821
+3,machine_translation/en-de,625,<turn|>,23,8.459
+3,machine_translation/en-de,625,<turn|>,25,0.99
+3,machine_translation/en-de,625,<turn|>,26,4.654
+3,machine_translation/en-de,625,<turn|>,27,3.696
+3,machine_translation/en-de,625,<turn|>,28,8.914
+3,machine_translation/en-de,625,<turn|>,30,3.929
+3,machine_translation/en-de,625,<turn|>,31,3.574
+3,machine_translation/en-de,625,<turn|>,32,4.762
+3,machine_translation/en-de,625,<turn|>,33,2.298
+4,machine_translation_evaluation/zh_en,155,。,0,
+4,machine_translation_evaluation/zh_en,155,。,1,
+4,machine_translation_evaluation/zh_en,155,。,2,7.52
+4,machine_translation_evaluation/zh_en,155,。,3,
+4,machine_translation_evaluation/zh_en,155,。,5,
+4,machine_translation_evaluation/zh_en,155,。,6,
+4,machine_translation_evaluation/zh_en,155,。,7,
+4,machine_translation_evaluation/zh_en,155,。,8,
+4,machine_translation_evaluation/zh_en,155,。,10,
+4,machine_translation_evaluation/zh_en,155,。,11,
+4,machine_translation_evaluation/zh_en,155,。,12,
+4,machine_translation_evaluation/zh_en,155,。,13,
+4,machine_translation_evaluation/zh_en,155,。,15,
+4,machine_translation_evaluation/zh_en,155,。,16,
+4,machine_translation_evaluation/zh_en,155,。,17,
+4,machine_translation_evaluation/zh_en,155,。,18,
+4,machine_translation_evaluation/zh_en,155,。,20,
+4,machine_translation_evaluation/zh_en,155,。,21,
+4,machine_translation_evaluation/zh_en,155,。,22,
+4,machine_translation_evaluation/zh_en,155,。,23,
+4,machine_translation_evaluation/zh_en,155,。,25,
+4,machine_translation_evaluation/zh_en,155,。,26,
+4,machine_translation_evaluation/zh_en,155,。,27,
+4,machine_translation_evaluation/zh_en,155,。,28,
+4,machine_translation_evaluation/zh_en,155,。,30,
+4,machine_translation_evaluation/zh_en,155,。,31,
+4,machine_translation_evaluation/zh_en,155,。,32,
+4,machine_translation_evaluation/zh_en,155,。,33,
+4,machine_translation_evaluation/zh_en,163,',0,
+4,machine_translation_evaluation/zh_en,163,',1,
+4,machine_translation_evaluation/zh_en,163,',2,
+4,machine_translation_evaluation/zh_en,163,',3,
+4,machine_translation_evaluation/zh_en,163,',5,
+4,machine_translation_evaluation/zh_en,163,',6,
+4,machine_translation_evaluation/zh_en,163,',7,
+4,machine_translation_evaluation/zh_en,163,',8,1.774
+4,machine_translation_evaluation/zh_en,163,',10,2.166
+4,machine_translation_evaluation/zh_en,163,',11,1.632
+4,machine_translation_evaluation/zh_en,163,',12,2.327
+4,machine_translation_evaluation/zh_en,163,',13,5.428
+4,machine_translation_evaluation/zh_en,163,',15,3.835
+4,machine_translation_evaluation/zh_en,163,',16,6.07
+4,machine_translation_evaluation/zh_en,163,',17,2.269
+4,machine_translation_evaluation/zh_en,163,',18,3.085
+4,machine_translation_evaluation/zh_en,163,',20,8.303
+4,machine_translation_evaluation/zh_en,163,',21,6.84
+4,machine_translation_evaluation/zh_en,163,',22,11.092
+4,machine_translation_evaluation/zh_en,163,',23,5.462
+4,machine_translation_evaluation/zh_en,163,',25,14.504
+4,machine_translation_evaluation/zh_en,163,',26,17.671
+4,machine_translation_evaluation/zh_en,163,',27,21.287
+4,machine_translation_evaluation/zh_en,163,',28,15.813
+4,machine_translation_evaluation/zh_en,163,',30,20.831
+4,machine_translation_evaluation/zh_en,163,',31,26.09
+4,machine_translation_evaluation/zh_en,163,',32,17.172
+4,machine_translation_evaluation/zh_en,163,',33,17.262
+4,machine_translation_evaluation/zh_en,398,-,0,
+4,machine_translation_evaluation/zh_en,398,-,1,
+4,machine_translation_evaluation/zh_en,398,-,2,
+4,machine_translation_evaluation/zh_en,398,-,3,
+4,machine_translation_evaluation/zh_en,398,-,5,
+4,machine_translation_evaluation/zh_en,398,-,6,
+4,machine_translation_evaluation/zh_en,398,-,7,3.824
+4,machine_translation_evaluation/zh_en,398,-,8,2.456
+4,machine_translation_evaluation/zh_en,398,-,10,2.257
+4,machine_translation_evaluation/zh_en,398,-,11,1.942
+4,machine_translation_evaluation/zh_en,398,-,12,2.443
+4,machine_translation_evaluation/zh_en,398,-,13,3.96
+4,machine_translation_evaluation/zh_en,398,-,15,1.674
+4,machine_translation_evaluation/zh_en,398,-,16,2.432
+4,machine_translation_evaluation/zh_en,398,-,17,1.552
+4,machine_translation_evaluation/zh_en,398,-,18,2.281
+4,machine_translation_evaluation/zh_en,398,-,20,4.543
+4,machine_translation_evaluation/zh_en,398,-,21,4.368
+4,machine_translation_evaluation/zh_en,398,-,22,6.475
+4,machine_translation_evaluation/zh_en,398,-,23,4.31
+4,machine_translation_evaluation/zh_en,398,-,25,7.942
+4,machine_translation_evaluation/zh_en,398,-,26,7.479
+4,machine_translation_evaluation/zh_en,398,-,27,11.373
+4,machine_translation_evaluation/zh_en,398,-,28,8.661
+4,machine_translation_evaluation/zh_en,398,-,30,7.845
+4,machine_translation_evaluation/zh_en,398,-,31,11.455
+4,machine_translation_evaluation/zh_en,398,-,32,8.311
+4,machine_translation_evaluation/zh_en,398,-,33,6.631
+4,machine_translation_evaluation/zh_en,510, distance,0,6.356
+4,machine_translation_evaluation/zh_en,510, distance,1,8.039
+4,machine_translation_evaluation/zh_en,510, distance,2,26.364
+4,machine_translation_evaluation/zh_en,510, distance,3,12.236
+4,machine_translation_evaluation/zh_en,510, distance,5,11.194
+4,machine_translation_evaluation/zh_en,510, distance,6,24.055
+4,machine_translation_evaluation/zh_en,510, distance,7,4.328
+4,machine_translation_evaluation/zh_en,510, distance,8,2.392
+4,machine_translation_evaluation/zh_en,510, distance,10,7.907
+4,machine_translation_evaluation/zh_en,510, distance,11,2.354
+4,machine_translation_evaluation/zh_en,510, distance,12,2.553
+4,machine_translation_evaluation/zh_en,510, distance,13,5.073
+4,machine_translation_evaluation/zh_en,510, distance,15,
+4,machine_translation_evaluation/zh_en,510, distance,16,1.393
+4,machine_translation_evaluation/zh_en,510, distance,17,3.091
+4,machine_translation_evaluation/zh_en,510, distance,18,2.694
+4,machine_translation_evaluation/zh_en,510, distance,20,3.224
+4,machine_translation_evaluation/zh_en,510, distance,21,3.071
+4,machine_translation_evaluation/zh_en,510, distance,22,4.733
+4,machine_translation_evaluation/zh_en,510, distance,23,4.87
+4,machine_translation_evaluation/zh_en,510, distance,25,
+4,machine_translation_evaluation/zh_en,510, distance,26,1.85
+4,machine_translation_evaluation/zh_en,510, distance,27,0.741
+4,machine_translation_evaluation/zh_en,510, distance,28,
+4,machine_translation_evaluation/zh_en,510, distance,30,
+4,machine_translation_evaluation/zh_en,510, distance,31,
+4,machine_translation_evaluation/zh_en,510, distance,32,0.769
+4,machine_translation_evaluation/zh_en,510, distance,33,0.931
+4,machine_translation_evaluation/zh_en,533, yuan,0,11.96
+4,machine_translation_evaluation/zh_en,533, yuan,1,6.432
+4,machine_translation_evaluation/zh_en,533, yuan,2,
+4,machine_translation_evaluation/zh_en,533, yuan,3,
+4,machine_translation_evaluation/zh_en,533, yuan,5,3.875
+4,machine_translation_evaluation/zh_en,533, yuan,6,
+4,machine_translation_evaluation/zh_en,533, yuan,7,
+4,machine_translation_evaluation/zh_en,533, yuan,8,
+4,machine_translation_evaluation/zh_en,533, yuan,10,
+4,machine_translation_evaluation/zh_en,533, yuan,11,
+4,machine_translation_evaluation/zh_en,533, yuan,12,
+4,machine_translation_evaluation/zh_en,533, yuan,13,
+4,machine_translation_evaluation/zh_en,533, yuan,15,
+4,machine_translation_evaluation/zh_en,533, yuan,16,
+4,machine_translation_evaluation/zh_en,533, yuan,17,
+4,machine_translation_evaluation/zh_en,533, yuan,18,
+4,machine_translation_evaluation/zh_en,533, yuan,20,
+4,machine_translation_evaluation/zh_en,533, yuan,21,
+4,machine_translation_evaluation/zh_en,533, yuan,22,
+4,machine_translation_evaluation/zh_en,533, yuan,23,
+4,machine_translation_evaluation/zh_en,533, yuan,25,
+4,machine_translation_evaluation/zh_en,533, yuan,26,0.64
+4,machine_translation_evaluation/zh_en,533, yuan,27,
+4,machine_translation_evaluation/zh_en,533, yuan,28,
+4,machine_translation_evaluation/zh_en,533, yuan,30,
+4,machine_translation_evaluation/zh_en,533, yuan,31,
+4,machine_translation_evaluation/zh_en,533, yuan,32,
+4,machine_translation_evaluation/zh_en,533, yuan,33,
+4,machine_translation_evaluation/zh_en,538, yuan,0,8.309
+4,machine_translation_evaluation/zh_en,538, yuan,1,9.128
+4,machine_translation_evaluation/zh_en,538, yuan,2,20.004
+4,machine_translation_evaluation/zh_en,538, yuan,3,18.187
+4,machine_translation_evaluation/zh_en,538, yuan,5,12.824
+4,machine_translation_evaluation/zh_en,538, yuan,6,2.775
+4,machine_translation_evaluation/zh_en,538, yuan,7,
+4,machine_translation_evaluation/zh_en,538, yuan,8,
+4,machine_translation_evaluation/zh_en,538, yuan,10,
+4,machine_translation_evaluation/zh_en,538, yuan,11,
+4,machine_translation_evaluation/zh_en,538, yuan,12,
+4,machine_translation_evaluation/zh_en,538, yuan,13,
+4,machine_translation_evaluation/zh_en,538, yuan,15,
+4,machine_translation_evaluation/zh_en,538, yuan,16,
+4,machine_translation_evaluation/zh_en,538, yuan,17,
+4,machine_translation_evaluation/zh_en,538, yuan,18,
+4,machine_translation_evaluation/zh_en,538, yuan,20,
+4,machine_translation_evaluation/zh_en,538, yuan,21,
+4,machine_translation_evaluation/zh_en,538, yuan,22,
+4,machine_translation_evaluation/zh_en,538, yuan,23,
+4,machine_translation_evaluation/zh_en,538, yuan,25,
+4,machine_translation_evaluation/zh_en,538, yuan,26,
+4,machine_translation_evaluation/zh_en,538, yuan,27,
+4,machine_translation_evaluation/zh_en,538, yuan,28,
+4,machine_translation_evaluation/zh_en,538, yuan,30,
+4,machine_translation_evaluation/zh_en,538, yuan,31,
+4,machine_translation_evaluation/zh_en,538, yuan,32,
+4,machine_translation_evaluation/zh_en,538, yuan,33,
+4,machine_translation_evaluation/zh_en,539, and,0,3.088
+4,machine_translation_evaluation/zh_en,539, and,1,7.714
+4,machine_translation_evaluation/zh_en,539, and,2,3.906
+4,machine_translation_evaluation/zh_en,539, and,3,10.149
+4,machine_translation_evaluation/zh_en,539, and,5,13.45
+4,machine_translation_evaluation/zh_en,539, and,6,7.625
+4,machine_translation_evaluation/zh_en,539, and,7,3.912
+4,machine_translation_evaluation/zh_en,539, and,8,
+4,machine_translation_evaluation/zh_en,539, and,10,
+4,machine_translation_evaluation/zh_en,539, and,11,
+4,machine_translation_evaluation/zh_en,539, and,12,
+4,machine_translation_evaluation/zh_en,539, and,13,4.672
+4,machine_translation_evaluation/zh_en,539, and,15,
+4,machine_translation_evaluation/zh_en,539, and,16,
+4,machine_translation_evaluation/zh_en,539, and,17,
+4,machine_translation_evaluation/zh_en,539, and,18,
+4,machine_translation_evaluation/zh_en,539, and,20,
+4,machine_translation_evaluation/zh_en,539, and,21,
+4,machine_translation_evaluation/zh_en,539, and,22,
+4,machine_translation_evaluation/zh_en,539, and,23,3.554
+4,machine_translation_evaluation/zh_en,539, and,25,
+4,machine_translation_evaluation/zh_en,539, and,26,1.018
+4,machine_translation_evaluation/zh_en,539, and,27,
+4,machine_translation_evaluation/zh_en,539, and,28,
+4,machine_translation_evaluation/zh_en,539, and,30,
+4,machine_translation_evaluation/zh_en,539, and,31,
+4,machine_translation_evaluation/zh_en,539, and,32,
+4,machine_translation_evaluation/zh_en,539, and,33,
+4,machine_translation_evaluation/zh_en,542,5,0,14.152
+4,machine_translation_evaluation/zh_en,542,5,1,9.424
+4,machine_translation_evaluation/zh_en,542,5,2,23.228
+4,machine_translation_evaluation/zh_en,542,5,3,16.745
+4,machine_translation_evaluation/zh_en,542,5,5,5.151
+4,machine_translation_evaluation/zh_en,542,5,6,12.698
+4,machine_translation_evaluation/zh_en,542,5,7,
+4,machine_translation_evaluation/zh_en,542,5,8,3.884
+4,machine_translation_evaluation/zh_en,542,5,10,
+4,machine_translation_evaluation/zh_en,542,5,11,
+4,machine_translation_evaluation/zh_en,542,5,12,2.981
+4,machine_translation_evaluation/zh_en,542,5,13,3.179
+4,machine_translation_evaluation/zh_en,542,5,15,
+4,machine_translation_evaluation/zh_en,542,5,16,
+4,machine_translation_evaluation/zh_en,542,5,17,
+4,machine_translation_evaluation/zh_en,542,5,18,
+4,machine_translation_evaluation/zh_en,542,5,20,
+4,machine_translation_evaluation/zh_en,542,5,21,
+4,machine_translation_evaluation/zh_en,542,5,22,
+4,machine_translation_evaluation/zh_en,542,5,23,2.547
+4,machine_translation_evaluation/zh_en,542,5,25,
+4,machine_translation_evaluation/zh_en,542,5,26,0.685
+4,machine_translation_evaluation/zh_en,542,5,27,
+4,machine_translation_evaluation/zh_en,542,5,28,1.033
+4,machine_translation_evaluation/zh_en,542,5,30,
+4,machine_translation_evaluation/zh_en,542,5,31,
+4,machine_translation_evaluation/zh_en,542,5,32,
+4,machine_translation_evaluation/zh_en,542,5,33,
+4,machine_translation_evaluation/zh_en,544,.,0,
+4,machine_translation_evaluation/zh_en,544,.,1,12.003
+4,machine_translation_evaluation/zh_en,544,.,2,6.792
+4,machine_translation_evaluation/zh_en,544,.,3,8.204
+4,machine_translation_evaluation/zh_en,544,.,5,
+4,machine_translation_evaluation/zh_en,544,.,6,2.679
+4,machine_translation_evaluation/zh_en,544,.,7,
+4,machine_translation_evaluation/zh_en,544,.,8,
+4,machine_translation_evaluation/zh_en,544,.,10,
+4,machine_translation_evaluation/zh_en,544,.,11,
+4,machine_translation_evaluation/zh_en,544,.,12,
+4,machine_translation_evaluation/zh_en,544,.,13,
+4,machine_translation_evaluation/zh_en,544,.,15,
+4,machine_translation_evaluation/zh_en,544,.,16,
+4,machine_translation_evaluation/zh_en,544,.,17,
+4,machine_translation_evaluation/zh_en,544,.,18,
+4,machine_translation_evaluation/zh_en,544,.,20,
+4,machine_translation_evaluation/zh_en,544,.,21,
+4,machine_translation_evaluation/zh_en,544,.,22,
+4,machine_translation_evaluation/zh_en,544,.,23,
+4,machine_translation_evaluation/zh_en,544,.,25,
+4,machine_translation_evaluation/zh_en,544,.,26,
+4,machine_translation_evaluation/zh_en,544,.,27,
+4,machine_translation_evaluation/zh_en,544,.,28,
+4,machine_translation_evaluation/zh_en,544,.,30,
+4,machine_translation_evaluation/zh_en,544,.,31,
+4,machine_translation_evaluation/zh_en,544,.,32,
+4,machine_translation_evaluation/zh_en,544,.,33,
+4,machine_translation_evaluation/zh_en,574,<turn|>,0,27.069
+4,machine_translation_evaluation/zh_en,574,<turn|>,1,19.266
+4,machine_translation_evaluation/zh_en,574,<turn|>,2,25.866
+4,machine_translation_evaluation/zh_en,574,<turn|>,3,19.734
+4,machine_translation_evaluation/zh_en,574,<turn|>,5,8.256
+4,machine_translation_evaluation/zh_en,574,<turn|>,6,18.812
+4,machine_translation_evaluation/zh_en,574,<turn|>,7,3.087
+4,machine_translation_evaluation/zh_en,574,<turn|>,8,
+4,machine_translation_evaluation/zh_en,574,<turn|>,10,
+4,machine_translation_evaluation/zh_en,574,<turn|>,11,1.164
+4,machine_translation_evaluation/zh_en,574,<turn|>,12,3.926
+4,machine_translation_evaluation/zh_en,574,<turn|>,13,2.908
+4,machine_translation_evaluation/zh_en,574,<turn|>,15,3.223
+4,machine_translation_evaluation/zh_en,574,<turn|>,16,2.531
+4,machine_translation_evaluation/zh_en,574,<turn|>,17,
+4,machine_translation_evaluation/zh_en,574,<turn|>,18,1.442
+4,machine_translation_evaluation/zh_en,574,<turn|>,20,2.84
+4,machine_translation_evaluation/zh_en,574,<turn|>,21,3.631
+4,machine_translation_evaluation/zh_en,574,<turn|>,22,2.182
+4,machine_translation_evaluation/zh_en,574,<turn|>,23,3.638
+4,machine_translation_evaluation/zh_en,574,<turn|>,25,
+4,machine_translation_evaluation/zh_en,574,<turn|>,26,3.481
+4,machine_translation_evaluation/zh_en,574,<turn|>,27,0.86
+4,machine_translation_evaluation/zh_en,574,<turn|>,28,5.615
+4,machine_translation_evaluation/zh_en,574,<turn|>,30,1.107
+4,machine_translation_evaluation/zh_en,574,<turn|>,31,
+4,machine_translation_evaluation/zh_en,574,<turn|>,32,2.111
+4,machine_translation_evaluation/zh_en,574,<turn|>,33,1.758

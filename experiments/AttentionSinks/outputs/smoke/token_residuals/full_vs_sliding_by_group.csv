@@ -1,0 +1,10 @@
+layer_type,position_group,content_share,structural_share,mean_pre,mean_exact
+full,bos,0.0,1.0,5.583,8.909
+full,edge,0.4624,0.5376,3.687,7.119
+sliding,edge,0.6277,0.3723,0.055,0.053
+full,middle,0.6818,0.3182,4.043,14.826
+sliding,middle,0.3591,0.6409,4.391,3.222
+full,recent,0.7145,0.2855,3.722,29.887
+sliding,recent,0.6063,0.3937,4.589,9.256
+full,self,0.4807,0.5193,2.123,15.648
+sliding,self,0.6292,0.3708,2.607,3.329

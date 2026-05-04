@@ -1,0 +1,15 @@
+layer,token_class,share,mean_score_pre
+4,content,0.6371,7.351
+4,structural,0.3629,8.86
+9,content,0.4687,2.955
+9,structural,0.5313,4.043
+14,content,0.4711,3.441
+14,structural,0.5289,3.536
+19,content,0.4975,3.116
+19,structural,0.5025,3.348
+24,content,0.6001,3.262
+24,structural,0.3999,2.979
+29,content,0.4567,3.047
+29,structural,0.5433,4.592
+34,content,0.3115,1.255
+34,structural,0.6885,3.273

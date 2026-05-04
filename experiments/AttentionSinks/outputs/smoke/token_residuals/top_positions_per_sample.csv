@@ -1,0 +1,76 @@
+sample_id,stratum,key_pos,token,mean_score_pre,layers_seen
+0,chat/en,511, Quick,10.582,28
+0,chat/en,541, the,9.019,1
+0,chat/en,574, for,8.695,11
+0,chat/en,243,-,7.326,21
+0,chat/en,359,',6.912,21
+0,chat/en,498,<|turn>,6.431,1
+0,chat/en,331,Show,6.158,5
+0,chat/en,553, the,6.001,5
+0,chat/en,499,user,5.905,3
+0,chat/en,567, To,5.716,9
+0,chat/en,638, ',5.53,22
+0,chat/en,512, Shop,5.467,28
+0,chat/en,447,ify,5.282,2
+0,chat/en,570, this,5.133,7
+0,chat/en,572, is,5.018,4
+1,named_entity_recognition/en,638,split,10.768,16
+1,named_entity_recognition/en,637," (""",9.902,12
+1,named_entity_recognition/en,259," """,8.621,19
+1,named_entity_recognition/en,574,ry,8.361,21
+1,named_entity_recognition/en,506,"""),",8.096,12
+1,named_entity_recognition/en,572," """,8.061,7
+1,named_entity_recognition/en,557,split,7.665,1
+1,named_entity_recognition/en,507," (""",7.638,7
+1,named_entity_recognition/en,510," """,7.239,2
+1,named_entity_recognition/en,508,described,6.405,14
+1,named_entity_recognition/en,571,""",",6.126,23
+1,named_entity_recognition/en,511,O,5.828,21
+1,named_entity_recognition/en,631,""",",4.922,13
+1,named_entity_recognition/en,550," [""",4.855,14
+1,named_entity_recognition/en,573,found,4.502,16
+2,named_entity_recognition/es,226, as,12.608,20
+2,named_entity_recognition/es,505," """,7.234,3
+2,named_entity_recognition/es,510," ("".",6.9,27
+2,named_entity_recognition/es,511,""",",6.667,23
+2,named_entity_recognition/es,499," """,6.629,1
+2,named_entity_recognition/es,515,<turn|>,6.46,28
+2,named_entity_recognition/es,513,O,5.49,12
+2,named_entity_recognition/es,286,model,4.526,22
+2,named_entity_recognition/es,501,"""),",4.035,4
+2,named_entity_recognition/es,249, token,4.016,1
+2,named_entity_recognition/es,473," """,3.812,1
+2,named_entity_recognition/es,284,\n,3.513,4
+2,named_entity_recognition/es,21,""",",3.451,1
+2,named_entity_recognition/es,509,"""),",3.426,22
+2,named_entity_recognition/es,136,"]"".",3.297,2
+3,machine_translation/en-de,325, ,13.841,20
+3,machine_translation/en-de,568, years,7.983,20
+3,machine_translation/en-de,625,<turn|>,7.283,25
+3,machine_translation/en-de,621,no,6.766,1
+3,machine_translation/en-de,573,.,6.6,3
+3,machine_translation/en-de,480,",",6.448,1
+3,machine_translation/en-de,583, letz,6.424,1
+3,machine_translation/en-de,508, damals,6.23,19
+3,machine_translation/en-de,580,model,6.153,20
+3,machine_translation/en-de,567, many,6.08,10
+3,machine_translation/en-de,511, hätte,5.917,26
+3,machine_translation/en-de,565, classified,5.88,27
+3,machine_translation/en-de,160,.,5.82,1
+3,machine_translation/en-de,120,.,5.749,2
+3,machine_translation/en-de,564, being,5.372,26
+4,machine_translation_evaluation/zh_en,538, yuan,11.871,6
+4,machine_translation_evaluation/zh_en,163,',10.441,21
+4,machine_translation_evaluation/zh_en,542,5,7.976,12
+4,machine_translation_evaluation/zh_en,155,。,7.52,1
+4,machine_translation_evaluation/zh_en,544,.,7.42,4
+4,machine_translation_evaluation/zh_en,574,<turn|>,7.152,23
+4,machine_translation_evaluation/zh_en,510, distance,6.096,23
+4,machine_translation_evaluation/zh_en,539, and,5.909,10
+4,machine_translation_evaluation/zh_en,533, yuan,5.727,4
+4,machine_translation_evaluation/zh_en,398,-,5.41,22
+4,machine_translation_evaluation/zh_en,511, is,5.326,20
+4,machine_translation_evaluation/zh_en,252, limited,5.315,10
+4,machine_translation_evaluation/zh_en,541,3,5.004,5
+4,machine_translation_evaluation/zh_en,284,.,4.645,5
+4,machine_translation_evaluation/zh_en,512, limited,4.526,28

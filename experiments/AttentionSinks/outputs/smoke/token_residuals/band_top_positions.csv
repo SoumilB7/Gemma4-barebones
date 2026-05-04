@@ -1,0 +1,101 @@
+sample_id,stratum,band,rank,key_pos,token,mean_score_pre
+0,chat/en,early  (L 0-4) ,1,511, Quick,36.502
+0,chat/en,early  (L 0-4) ,2,553, the,21.411
+0,chat/en,early  (L 0-4) ,3,574, for,18.389
+0,chat/en,early  (L 0-4) ,4,638, ',12.744
+0,chat/en,early  (L 0-4) ,5,331,Show,10.256
+0,chat/en,mid    (L 5-14),1,511, Quick,14.566
+0,chat/en,mid    (L 5-14),2,568, check,7.596
+0,chat/en,mid    (L 5-14),3,512, Shop,7.531
+0,chat/en,mid    (L 5-14),4,498,<|turn>,6.431
+0,chat/en,mid    (L 5-14),5,447,ify,6.31
+0,chat/en,deep   (L15-24),1,639,Show,6.684
+0,chat/en,deep   (L15-24),2,512, Shop,6.449
+0,chat/en,deep   (L15-24),3,511, Quick,5.644
+0,chat/en,deep   (L15-24),4,568, check,4.033
+0,chat/en,deep   (L15-24),5,243,-,3.679
+0,chat/en,latest (L25-34),1,359,',12.918
+0,chat/en,latest (L25-34),2,243,-,11.626
+0,chat/en,latest (L25-34),3,602, the,7.071
+0,chat/en,latest (L25-34),4,512, Shop,4.227
+0,chat/en,latest (L25-34),5,511, Quick,3.723
+1,named_entity_recognition/en,early  (L 0-4) ,1,637," (""",21.474
+1,named_entity_recognition/en,early  (L 0-4) ,2,638,split,20.984
+1,named_entity_recognition/en,early  (L 0-4) ,3,574,ry,18.276
+1,named_entity_recognition/en,early  (L 0-4) ,4,494, [,14.065
+1,named_entity_recognition/en,early  (L 0-4) ,5,571,""",",11.669
+1,named_entity_recognition/en,mid    (L 5-14),1,638,split,12.25
+1,named_entity_recognition/en,mid    (L 5-14),2,574,ry,9.244
+1,named_entity_recognition/en,mid    (L 5-14),3,571,""",",8.417
+1,named_entity_recognition/en,mid    (L 5-14),4,508,described,8.036
+1,named_entity_recognition/en,mid    (L 5-14),5,506,"""),",7.576
+1,named_entity_recognition/en,deep   (L15-24),1,639,""",",7.689
+1,named_entity_recognition/en,deep   (L15-24),2,566,between,4.745
+1,named_entity_recognition/en,deep   (L15-24),3,574,ry,4.418
+1,named_entity_recognition/en,deep   (L15-24),4,259," """,3.946
+1,named_entity_recognition/en,deep   (L15-24),5,553," """,3.737
+1,named_entity_recognition/en,latest (L25-34),1,259," """,14.151
+1,named_entity_recognition/en,latest (L25-34),2,550," [""",4.846
+1,named_entity_recognition/en,latest (L25-34),3,375,-,4.715
+1,named_entity_recognition/en,latest (L25-34),4,621,"(""",4.325
+1,named_entity_recognition/en,latest (L25-34),5,265," """,4.298
+2,named_entity_recognition/es,early  (L 0-4) ,1,515,<turn|>,21.999
+2,named_entity_recognition/es,early  (L 0-4) ,2,511,""",",14.453
+2,named_entity_recognition/es,early  (L 0-4) ,3,510," ("".",11.832
+2,named_entity_recognition/es,early  (L 0-4) ,4,288,[,10.344
+2,named_entity_recognition/es,early  (L 0-4) ,5,286,model,8.622
+2,named_entity_recognition/es,mid    (L 5-14),1,505," """,8.744
+2,named_entity_recognition/es,mid    (L 5-14),2,511,""",",6.28
+2,named_entity_recognition/es,mid    (L 5-14),3,515,<turn|>,5.991
+2,named_entity_recognition/es,mid    (L 5-14),4,513,O,5.412
+2,named_entity_recognition/es,mid    (L 5-14),5,514,""")]",5.14
+2,named_entity_recognition/es,deep   (L15-24),1,226, as,9.168
+2,named_entity_recognition/es,deep   (L15-24),2,510," ("".",7.016
+2,named_entity_recognition/es,deep   (L15-24),3,511,""",",3.997
+2,named_entity_recognition/es,deep   (L15-24),4,293,O,3.387
+2,named_entity_recognition/es,deep   (L15-24),5,515,<turn|>,3.37
+2,named_entity_recognition/es,latest (L25-34),1,226, as,20.782
+2,named_entity_recognition/es,latest (L25-34),2,286,model,4.399
+2,named_entity_recognition/es,latest (L25-34),3,510," ("".",4.218
+2,named_entity_recognition/es,latest (L25-34),4,312," """,3.324
+2,named_entity_recognition/es,latest (L25-34),5,293,O,2.568
+3,machine_translation/en-de,early  (L 0-4) ,1,625,<turn|>,19.252
+3,machine_translation/en-de,early  (L 0-4) ,2,568, years,15.734
+3,machine_translation/en-de,early  (L 0-4) ,3,565, classified,14.554
+3,machine_translation/en-de,early  (L 0-4) ,4,511, hätte,14.446
+3,machine_translation/en-de,early  (L 0-4) ,5,508, damals,12.507
+3,machine_translation/en-de,mid    (L 5-14),1,568, years,8.468
+3,machine_translation/en-de,mid    (L 5-14),2,557, which,7.491
+3,machine_translation/en-de,mid    (L 5-14),3,564, being,7.197
+3,machine_translation/en-de,mid    (L 5-14),4,507, schon,7.063
+3,machine_translation/en-de,mid    (L 5-14),5,621,no,6.766
+3,machine_translation/en-de,deep   (L15-24),1,325, ,7.882
+3,machine_translation/en-de,deep   (L15-24),2,564, being,6.405
+3,machine_translation/en-de,deep   (L15-24),3,509, gew,5.445
+3,machine_translation/en-de,deep   (L15-24),4,302, die,5.318
+3,machine_translation/en-de,deep   (L15-24),5,625,<turn|>,4.997
+3,machine_translation/en-de,latest (L25-34),1,325, ,24.299
+3,machine_translation/en-de,latest (L25-34),2,580,model,6.854
+3,machine_translation/en-de,latest (L25-34),3,463, ,4.624
+3,machine_translation/en-de,latest (L25-34),4,625,<turn|>,4.102
+3,machine_translation/en-de,latest (L25-34),5,509, gew,3.445
+4,machine_translation_evaluation/zh_en,early  (L 0-4) ,1,574,<turn|>,22.984
+4,machine_translation_evaluation/zh_en,early  (L 0-4) ,2,542,5,15.887
+4,machine_translation_evaluation/zh_en,early  (L 0-4) ,3,538, yuan,13.907
+4,machine_translation_evaluation/zh_en,early  (L 0-4) ,4,252, limited,13.762
+4,machine_translation_evaluation/zh_en,early  (L 0-4) ,5,511, is,13.527
+4,machine_translation_evaluation/zh_en,mid    (L 5-14),1,538, yuan,7.799
+4,machine_translation_evaluation/zh_en,mid    (L 5-14),2,510, distance,7.482
+4,machine_translation_evaluation/zh_en,mid    (L 5-14),3,539, and,7.415
+4,machine_translation_evaluation/zh_en,mid    (L 5-14),4,574,<turn|>,6.359
+4,machine_translation_evaluation/zh_en,mid    (L 5-14),5,573,.,6.317
+4,machine_translation_evaluation/zh_en,deep   (L15-24),1,512, limited,6.526
+4,machine_translation_evaluation/zh_en,deep   (L15-24),2,163,',5.869
+4,machine_translation_evaluation/zh_en,deep   (L15-24),3,497,;,4.771
+4,machine_translation_evaluation/zh_en,deep   (L15-24),4,539, and,3.554
+4,machine_translation_evaluation/zh_en,deep   (L15-24),5,398,-,3.496
+4,machine_translation_evaluation/zh_en,latest (L25-34),1,163,',18.829
+4,machine_translation_evaluation/zh_en,latest (L25-34),2,398,-,8.712
+4,machine_translation_evaluation/zh_en,latest (L25-34),3,469, <,3.383
+4,machine_translation_evaluation/zh_en,latest (L25-34),4,512, limited,3.103
+4,machine_translation_evaluation/zh_en,latest (L25-34),5,411,model,2.963

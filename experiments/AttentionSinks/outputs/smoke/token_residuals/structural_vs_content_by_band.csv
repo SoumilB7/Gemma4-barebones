@@ -1,0 +1,9 @@
+band,token_class,share,mean_score_pre
+early  (L 0-4) ,content,0.6156,6.404
+early  (L 0-4) ,structural,0.3844,6.321
+mid    (L 5-14),content,0.5952,3.465
+mid    (L 5-14),structural,0.4048,3.202
+deep   (L15-24),content,0.5207,2.622
+deep   (L15-24),structural,0.4793,2.919
+latest (L25-34),content,0.3138,2.524
+latest (L25-34),structural,0.6862,5.588
